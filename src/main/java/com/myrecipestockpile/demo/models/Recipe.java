@@ -139,4 +139,44 @@ public class Recipe {
     public void setPrivateRecipe(boolean privateRecipe) {
         this.privateRecipe = privateRecipe;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Recipe getParentRecipe() {
+        return parentRecipe;
+    }
+
+    public void setParentRecipe(Recipe parentRecipe) {
+        this.parentRecipe = parentRecipe;
+    }
+
+    public List<Instruction> getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(List<Instruction> instructions) {
+        this.instructions = instructions;
+    }
+
+    public List<Stockpile> getStockpiles() {
+        return stockpiles;
+    }
+
+    public void setStockpiles(List<Stockpile> stockpiles) {
+        this.stockpiles = stockpiles;
+    }
+
+    public List<User> getHeartedUsers() {
+        return heartedUsers;
+    }
+
+    public void setHeartedUsers(List<User> heartedUsers) {
+        this.heartedUsers = heartedUsers;
+    }
 }
