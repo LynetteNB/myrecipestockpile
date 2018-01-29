@@ -1,4 +1,4 @@
-package com.myrecipestockpile.demo.Models;
+package com.myrecipestockpile.demo.models;
 
 import javax.persistence.*;
 import java.util.Date;
