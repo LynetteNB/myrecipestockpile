@@ -1,4 +1,4 @@
-package com.myrecipestockpile.demo.Controllers;
+package com.myrecipestockpile.demo.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HomeController {
 
     @GetMapping("/")
-    @ResponseBody
+//    @ResponseBody
     public String index() {
-        return "<h1>This is our index page</h1>";
+        return "index";
     }
 }
 
