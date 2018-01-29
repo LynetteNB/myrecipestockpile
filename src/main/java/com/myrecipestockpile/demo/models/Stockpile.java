@@ -72,11 +72,11 @@ public class Stockpile {
         this.owner = owner;
     }
 
-    public List<Recipe> getstockpileRecipes() {
+    public List<Recipe> getStockpileRecipes() {
         return stockpileRecipes;
     }
 
-    public void setstockpileRecipes(List<Recipe> stockpileRecipes) {
+    public void setStockpileRecipes(List<Recipe> stockpileRecipes) {
         this.stockpileRecipes = stockpileRecipes;
     }
 }
