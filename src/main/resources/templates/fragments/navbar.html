@@ -22,6 +22,14 @@
                     <a class="buff" href="/">See all Recipes</a>
                 </li>
             </ul>
+            <form action="/" method="GET" id="shrinkable-search" class="navbar-form navbar-left">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Search for a recipe"/>
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-success buff"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Go</button>
+                    </span>
+                </div>
+            </form>
             <ul class="nav navbar-nav navbar-right">
                 <li class="buff" sec:authorize="!isAuthenticated()">
                     <a href="/login">Login</a>
