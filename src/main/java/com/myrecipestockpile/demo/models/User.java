@@ -50,6 +50,15 @@ public class User {
         this.password = password;
     }
 
+    // FOR TESTING, REMOVE LATER
+    public User(long id, String username, String email, String password) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+
     // ------------------------------------------
     // Getters / Setters
     // ------------------------------------------

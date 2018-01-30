@@ -75,6 +75,37 @@ public class Recipe {
     public Recipe() {
     }
 
+    //INSERT TEST CONSTRUCTOR
+    public Recipe(String title, String description, int cookTime, int prepTime, int servings boolean privateRecipe, User user, Recipe parentRecipe, List<RecipeIngredient> recipeIngredients, List<Instruction> instructions, List<Stockpile> stockpiles, List<User> heartedUsers) {
+        this.title = title;
+        this.description = description;
+        this.cookTime = cookTime;
+        this.prepTime = prepTime;
+        this.servings = servings;
+//        this.dateCreated = dateCreated;
+        this.privateRecipe = privateRecipe;
+        this.user = user;
+        this.parentRecipe = parentRecipe;
+        this.recipeIngredients = recipeIngredients;
+        this.instructions = instructions;
+        this.stockpiles = stockpiles;
+        this.heartedUsers = heartedUsers;
+    }
+
+
+    // for recipe test
+    public Recipe(String title, String description, int cookTime, int prepTime, int servings, Date dateCreated, boolean privateRecipe, User user, Recipe parentRecipe) {
+        this.title = title;
+        this.description = description;
+        this.cookTime = cookTime;
+        this.prepTime = prepTime;
+        this.servings = servings;
+        this.dateCreated = dateCreated;
+        this.privateRecipe = privateRecipe;
+        this.user = user;
+        this.parentRecipe = parentRecipe;
+    }
+
     // ------------------------------------------
     // Getters / Setters
     // ------------------------------------------

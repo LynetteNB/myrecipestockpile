@@ -23,6 +23,10 @@ public class Instruction {
     public Instruction() {
     }
 
+    public Instruction(String instruction) {
+        this.instruction = instruction;
+    }
+
     // ------------------------------------------
     // Getters / Setters
     // ------------------------------------------
