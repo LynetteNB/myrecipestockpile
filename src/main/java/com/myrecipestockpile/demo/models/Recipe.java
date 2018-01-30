@@ -76,7 +76,7 @@ public class Recipe {
     }
 
     //INSERT TEST CONSTRUCTOR
-    public Recipe(String title, String description, int cookTime, int prepTime, int servings boolean privateRecipe, User user, Recipe parentRecipe, List<RecipeIngredient> recipeIngredients, List<Instruction> instructions, List<Stockpile> stockpiles, List<User> heartedUsers) {
+    public Recipe(String title, String description, int cookTime, int prepTime, int servings, boolean privateRecipe, User user, Recipe parentRecipe, List<RecipeIngredient> recipeIngredients, List<Instruction> instructions, List<Stockpile> stockpiles, List<User> heartedUsers) {
         this.title = title;
         this.description = description;
         this.cookTime = cookTime;

@@ -19,6 +19,10 @@ public class Ingredient {
     public Ingredient() {
     }
 
+    public Ingredient(String ingredient) {
+        this.ingredient = ingredient;
+    }
+
     // ------------------------------------------
     // Getters / Setters
     // ------------------------------------------
