@@ -23,7 +23,8 @@ public class Instruction {
     public Instruction() {
     }
 
-    public Instruction(String instruction) {
+    public Instruction(String instruction, Recipe recipe) {
+        this.recipe = recipe;
         this.instruction = instruction;
     }
 

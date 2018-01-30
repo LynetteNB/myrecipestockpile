@@ -1,9 +1,6 @@
 package com.myrecipestockpile.demo.controllers;
 
-import com.myrecipestockpile.demo.models.Ingredient;
-import com.myrecipestockpile.demo.models.Instruction;
-import com.myrecipestockpile.demo.models.Recipe;
-import com.myrecipestockpile.demo.models.User;
+import com.myrecipestockpile.demo.models.*;
 import com.myrecipestockpile.demo.repositories.IngredientRepository;
 import com.myrecipestockpile.demo.repositories.InstructionRepository;
 import com.myrecipestockpile.demo.repositories.RecipeRepository;
@@ -49,10 +46,17 @@ public class RecipeController {
 
         // HARD CODED TEST
         ingredientRepository.save(new Ingredient("peaches"));
-        usersRepository.save(new User(1, "steveveve", "steve@steve", "password"));
+        ingredientRepository.save(new Ingredient("eggs"));
+        ingredientRepository.save(new Ingredient("lemons"));
 
+        // Inserting and using a TEST User
+        usersRepository.save(new User("steveveve", "steve@steve", "password"));
         User user = usersRepository.findOne((long) 1);
 
+//        System.out.println(usersRepository.findByUsernameLike("ev").getUsername());
+
+
+        // Primary fields needed from Recipe form to insert into Recipe table.
         Recipe newRecipe = new Recipe(
                 "recipe name",
                 "description",
@@ -67,18 +71,41 @@ public class RecipeController {
 
         newRecipe = recipeRepository.save(newRecipe);
 
+        // An empty Array to capture multiple inputs from form.
+        List<String> rawInstructions = new ArrayList<>();
 
-        List<Instruction> instructions = new ArrayList<>();
+        // Simulated array from form.
+        rawInstructions.add("step 1");
+        rawInstructions.add("step 2");
+        rawInstructions.add("step 3");
+        rawInstructions.add("step 4");
+        rawInstructions.add("step 5");
 
-        instructions.add(new Instruction("step 1"));
-        instructions.add(new Instruction("step 2"));
-        instructions.add(new Instruction("step 3"));
-        instructions.add(new Instruction("step 4"));
-
-        for (Instruction instruction : instructions) {
-            instruction.setRecipe(newRecipe);
-            instructionRepository.save(instruction);
+        // Integrating over that array to create Instruction objects with each and saving them with the newRecipe object so they have ownership attached to them.
+        for (String instruction : rawInstructions) {
+            instructionRepository.save(new Instruction(instruction, newRecipe));
         }
+
+
+        List<String> rawQuanitities = new ArrayList<>();
+        List<String> rawIngredients = new ArrayList<>();
+
+        rawQuanitities.add("2");
+        rawQuanitities.add("6");
+        rawQuanitities.add("11");
+
+        rawIngredients.add("peaches");
+        rawIngredients.add("lemons");
+        rawIngredients.add("peaches");
+
+        for (String quantity : rawQuanitities) {
+
+        }
+//
+        for (String ingredient : rawIngredients) {
+            if (ingredientRepository.findA)
+        }
+
 
 
 
