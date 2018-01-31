@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: main-head(create)"></head>
+<body>
+<div th:replace="fragments/navbar :: mainNavbar"></div>
+<h1>Create Recipe</h1>
+
+<form action="/recipe/create" method="post" th:object="${recipe}">
+    <label>Title:
+        <input id="title" th:field="*{title}"/>
+    </label>
+    <br/>
+
+    <label>Description:
+        <textarea id="description" th:field="*{description}" rows="6"></textarea>
+    </label>
+    <br/>
+
+    <label>Prep Time:
+        <input th:field="*{prepTime}" placeholder="Enter in minutes"/>
+    </label>
+    <br/>
+
+    <label> Cook Time:
+        <input th:field="*{cookTime}" placeholder="Enter in minutes"/>
+    </label>
+    <br/>
+
+    <label>Servings:
+        <input th:field="*{servings}"/>
+    </label>
+    <br/>
+
+    <label>Instructions
+        <input type="text" name="instructions"/>
+    </label>
+    <label>Instructions
+        <input type="text" name="instructions"/>
+    </label>
+    <label>Instructions
+        <input type="text" name="instructions"/>
+    </label>
+    <label>Ingredient
+        <input type="text" name="ingredients"/>
+    </label>
+    <label>Quantity
+        <input type="number" name="quantity"/>
+    </label>
+    <label>Ingredient
+        <input type="text" name="ingredients"/>
+    </label>
+    <label>Quantity
+        <input type="number" name="quantity"/>
+    </label>
+    <label>Ingredient
+        <input type="text" name="ingredients"/>
+    </label>
+    <label>Quantity
+        <input type="number" name="quantity"/>
+    </label>
+
+    <input type="submit"/>
+</form>
+
+<footer th:include="fragments/footer :: footer"></footer>
+<div th:replace="fragments/scripts :: scripts"></div>
+</body>
+</html>
