@@ -1,5 +1,6 @@
 package com.myrecipestockpile.demo.services;
 
+import com.myrecipestockpile.demo.models.Instruction;
 import com.myrecipestockpile.demo.models.Recipe;
 import com.myrecipestockpile.demo.repositories.IngredientsRepository;
 import com.myrecipestockpile.demo.repositories.RecipeIngredientsRepository;
@@ -30,6 +31,24 @@ public class RecipeService {
                                 String[] instuctionsArray,
                                 String[] ingredientNameArray,
                                 String[] ingredientQuantityArray) {
+
+        // Saving new Recipe to 'recipes' table.
+        recipeRepository.save(recipe);
+
+        // Saving each new Recipe's instruction to 'instructions' table.
+        for (String instruction : instuctionsArray) {
+            recipeInstructionsRepository.save(new Instruction(instruction, recipe));
+        }
+
+        // Saving ingredients.
+
+        //Check if ingrednet exists. If yes, then at. if not, save and then get id
+//        for (int i = 0; i < ingredientNameArray.length && i < ingredientQuantityArray.length; i += 0) {
+//            if (ing)
+//        }
+
+
+
         return 1;
     }
 
