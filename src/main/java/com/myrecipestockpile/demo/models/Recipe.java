@@ -45,7 +45,7 @@ public class Recipe {
     private Recipe parentRecipe;
 
     // Connects to recipe_ingredient table. It will hold a list of all the recipe ingredients connected to this recipe.
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     private List<RecipeIngredient> recipeIngredients;
 
     // Connects to instructions table, to show which instructions belong to it. Instructions sorted by primary key will show proper order.
@@ -73,6 +73,30 @@ public class Recipe {
     // ------------------------------------------
 
     public Recipe() {
+    }
+
+    public Recipe(String title, String description, int cookTime, int prepTime, int servings, boolean privateRecipe, User user) {
+        this.title = title;
+        this.description = description;
+        this.cookTime = cookTime;
+        this.prepTime = prepTime;
+        this.servings = servings;
+        this.privateRecipe = privateRecipe;
+        this.user = user;
+    }
+
+    public Recipe(Recipe copy) {
+        this.title = copy.title;
+        this.description = copy.description;
+        this.cookTime = copy.cookTime;
+        this.prepTime = copy.prepTime;
+        this.servings = copy.servings;
+        this.dateCreated = copy.dateCreated;
+        this.privateRecipe = copy.privateRecipe;
+        this.user = copy.user;
+        this.parentRecipe = copy.parentRecipe;
+        this.recipeIngredients = copy.recipeIngredients;
+        this.instructions = copy.instructions;
     }
 
     // ------------------------------------------

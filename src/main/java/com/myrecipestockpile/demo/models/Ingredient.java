@@ -1,6 +1,7 @@
 package com.myrecipestockpile.demo.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ingredients")
@@ -12,11 +13,18 @@ public class Ingredient {
     @Column(nullable = false, unique = true)
     private String ingredient;
 
+    @OneToMany(mappedBy = "ingredient")
+    private List<RecipeIngredient> recipeIngredients;
+
     // ------------------------------------------
     // Constructors
     // ------------------------------------------
 
     public Ingredient() {
+    }
+
+    public Ingredient(String ingredient) {
+        this.ingredient = ingredient;
     }
 
     // ------------------------------------------
@@ -37,5 +45,13 @@ public class Ingredient {
 
     public void setIngredient(String ingredient) {
         this.ingredient = ingredient;
+    }
+
+    public List<RecipeIngredient> getRecipeIngredients() {
+        return recipeIngredients;
+    }
+
+    public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
     }
 }
