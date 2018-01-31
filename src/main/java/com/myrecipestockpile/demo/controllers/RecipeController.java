@@ -46,10 +46,12 @@ public class RecipeController {
                           @RequestParam(name="quantity") String[] quantity,
                           @ModelAttribute Recipe recipe){
         //***hard coded user- remove later***
-    User user = new User("abby", "abby@gmail.com", "abby1");
-    usersRepository.save(user);
-        System.out.println(recipe.isPrivateRecipe());
-    recipe.setUser(user);
+        User user = usersRepository.findOne(1L);
+        recipe.setUser(user);
+//        User user = new User("abby", "abby@gmail.com", "abby1");
+//    usersRepository.save(user);
+//        System.out.println(recipe.isPrivateRecipe());
+//    recipe.setUser(user);
     recipeService.createNewRecipe(recipe, instructions, ingredients, quantity);
         return"index";
     }
