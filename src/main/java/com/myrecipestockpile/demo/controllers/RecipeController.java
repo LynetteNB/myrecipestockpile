@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class RecipeController {
@@ -25,6 +26,13 @@ public class RecipeController {
     @GetMapping("/recipe/search/")
     public String index(){
         return "recipe/index";
+    }
+
+    @GetMapping("/recipes")
+    public String allRecipes(Model vModel) {
+        Iterable<Recipe> allRecipes = recipeService.getAllRecipes();
+        vModel.addAttribute("recipes", allRecipes);
+        return "/index";
     }
 
     @GetMapping("/recipe/showRecipe")
