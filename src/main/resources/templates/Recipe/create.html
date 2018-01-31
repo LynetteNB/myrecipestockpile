@@ -17,46 +17,49 @@
     <br/>
 
     <label>Prep Time:
-        <input th:field="*{prepTime}" placeholder="Enter in minutes"/>
+        <input th:field="*{prepTime}" type="number" placeholder="Enter in minutes"/>
     </label>
     <br/>
 
     <label> Cook Time:
-        <input th:field="*{cookTime}" placeholder="Enter in minutes"/>
+        <input th:field="*{cookTime}" type="number" placeholder="Enter in minutes"/>
     </label>
     <br/>
 
     <label>Servings:
-        <input th:field="*{servings}"/>
+        <input th:field="*{servings}" type="number"/>
     </label>
     <br/>
 
     <label>Instructions
-        <input type="text" name="instructions"/>
+        <input type="text" name="instructions_text"/>
     </label>
     <label>Instructions
-        <input type="text" name="instructions"/>
+        <input type="text" name="instructions_text"/>
     </label>
     <label>Instructions
-        <input type="text" name="instructions"/>
+        <input type="text" name="instructions_text"/>
     </label>
     <label>Ingredient
         <input type="text" name="ingredients"/>
     </label>
     <label>Quantity
-        <input type="number" name="quantity"/>
+        <input type="text" name="quantity"/>
     </label>
     <label>Ingredient
         <input type="text" name="ingredients"/>
     </label>
     <label>Quantity
-        <input type="number" name="quantity"/>
+        <input type="text" name="quantity"/>
     </label>
     <label>Ingredient
         <input type="text" name="ingredients"/>
     </label>
     <label>Quantity
-        <input type="number" name="quantity"/>
+        <input type="text" name="quantity"/>
+    </label>
+    <label>Make my recipe private?
+    <input th:field="*{privateRecipe}" type="checkbox" />
     </label>
 
     <input type="submit"/>

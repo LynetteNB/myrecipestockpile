@@ -1,17 +1,25 @@
 package com.myrecipestockpile.demo.controllers;
 
 import com.myrecipestockpile.demo.models.Recipe;
+import com.myrecipestockpile.demo.models.User;
+import com.myrecipestockpile.demo.repositories.UsersRepository;
+import com.myrecipestockpile.demo.services.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 
 @Controller
 public class RecipeController {
+    private RecipeService recipeService;
+    private UsersRepository usersRepository;
+
+    //This is the service dependency injection
+    public RecipeController( RecipeService recipeService, UsersRepository usersRepository ) {
+        this.recipeService = recipeService;
+        this.usersRepository = usersRepository;
+    }
 
     // Inject dependency when Repository is ready
     @GetMapping("/recipe/search/")
@@ -32,11 +40,22 @@ public class RecipeController {
     }
 
     @PostMapping("/recipe/create")
-    public String create( Model vModel, @RequestParam(name="instructions") String[] instructions){
-        System.out.println(Arrays.toString(instructions));
-
-        return"recipe/create";
+    public String create( Model vModel,
+                          @RequestParam(name="instructions_text") String[] instructions,
+                          @RequestParam(name="ingredients") String[] ingredients,
+                          @RequestParam(name="quantity") String[] quantity,
+                          @ModelAttribute Recipe recipe){
+        //***hard coded user- remove later***
+    User user = new User("abby", "abby@gmail.com", "abby1");
+    usersRepository.save(user);
+        System.out.println(recipe.isPrivateRecipe());
+    recipe.setUser(user);
+    recipeService.createNewRecipe(recipe, instructions, ingredients, quantity);
+        return"index";
     }
+
+
+
 
 
 
