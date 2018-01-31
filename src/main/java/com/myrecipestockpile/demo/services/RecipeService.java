@@ -84,8 +84,8 @@ public class RecipeService {
 
     // This method will get a full recipe with by id. It will include ingredients, quantities, and instructions in the Recipe object.
     public Recipe getFullRecipe(long id) {
+        return recipeRepository.findOne(id);
 
-        return new Recipe();
     }
 
     // This method will take in a an edited recipe and update it in the database.
