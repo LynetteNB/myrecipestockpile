@@ -1,7 +1,9 @@
 package com.myrecipestockpile.demo.services;
 
+import com.myrecipestockpile.demo.models.Ingredient;
 import com.myrecipestockpile.demo.models.Instruction;
 import com.myrecipestockpile.demo.models.Recipe;
+import com.myrecipestockpile.demo.models.RecipeIngredient;
 import com.myrecipestockpile.demo.repositories.IngredientsRepository;
 import com.myrecipestockpile.demo.repositories.RecipeIngredientsRepository;
 import com.myrecipestockpile.demo.repositories.RecipeInstructionsRepository;
@@ -42,11 +44,33 @@ public class RecipeService {
 
         // Saving ingredients.
 
-        //Check if ingrednet exists. If yes, then at. if not, save and then get id
-//        for (int i = 0; i < ingredientNameArray.length && i < ingredientQuantityArray.length; i += 0) {
-//            if (ing)
-//        }
+        //Check if ingredient exists. If yes, then at. if not, save and then get id
+        for (int i = 0; i < ingredientNameArray.length && i < ingredientQuantityArray.length; i += 0) {
+            String newIngredient = ingredientNameArray[i];
+            String newQuantity = ingredientQuantityArray[i];
 
+            // Query for new Ingredient. Unknown at moment if it already exists on 'ingredients' table.
+            Ingredient existingIngredient = ingredientsRepository.findByIngredient(newIngredient);
+
+            // TESTING SOUTS
+            System.out.println(existingIngredient);
+            System.out.println(existingIngredient.getIngredient());
+
+            // Checking if Query returned an existing Ingredient that matches the user's String input.
+            // Creates the new Ingredient if none is found.
+            if (!existingIngredient.getIngredient().equalsIgnoreCase(newIngredient)) {
+                ingredientsRepository.save(new Ingredient(newIngredient));
+            }
+
+            // Grabbing a valid Ingredient from table to be certain.
+            Ingredient readyIngredient = ingredientsRepository.findByIngredient(newIngredient);
+
+            // Saving final RecipeIngredient to 'recipe_ingredients' table.
+            recipeIngredientsRepository.save(new RecipeIngredient(recipe, newQuantity, readyIngredient));
+
+
+
+        }
 
 
         return 1;
@@ -66,7 +90,6 @@ public class RecipeService {
 
         return 1;
     }
-
 
 
 }
