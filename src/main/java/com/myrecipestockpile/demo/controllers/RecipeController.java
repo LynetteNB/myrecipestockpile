@@ -23,9 +23,9 @@ public class RecipeController {
     }
 
     // Inject dependency when Repository is ready
-    @GetMapping("/recipe/search/")
+    @GetMapping("/recipes/search/")
     public String index(){
-        return "recipe/index";
+        return "recipes/index";
     }
 
     @GetMapping("/recipes")
@@ -35,20 +35,20 @@ public class RecipeController {
         return "/index";
     }
 
-    @GetMapping("/recipe/showRecipe")
+    @GetMapping("/recipes/show")
     public String show(Model vModel){
         vModel.addAttribute(recipeService.getFullRecipe(1L));
-        return "recipe/showRecipe";
+        return "recipes/show";
     }
 
 
-    @GetMapping("/recipe/create")
+    @GetMapping("/recipes/create")
     public String showCreateRecipeForm(Model vModel){
         vModel.addAttribute("recipe", new Recipe());
-        return "recipe/create";
+        return "recipes/create";
     }
 
-    @PostMapping("/recipe/create")
+    @PostMapping("/recipes/create")
     public String create( Model vModel,
                           @RequestParam(name="instructions_text") String[] instructions,
                           @RequestParam(name="ingredients") String[] ingredients,
