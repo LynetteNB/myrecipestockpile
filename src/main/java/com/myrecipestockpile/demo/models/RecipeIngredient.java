@@ -29,6 +29,12 @@ public class RecipeIngredient {
     public RecipeIngredient() {
     }
 
+    public RecipeIngredient(Recipe recipe, String quantity, Ingredient ingredient) {
+        this.recipe = recipe;
+        this.quantity = quantity;
+        this.ingredient = ingredient;
+    }
+
     // ------------------------------------------
     // Getters / Setters
     // ------------------------------------------
