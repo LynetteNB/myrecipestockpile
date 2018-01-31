@@ -28,7 +28,8 @@ public class RecipeController {
     }
 
     @GetMapping("/recipe/showRecipe")
-    public String show(){
+    public String show(Model vModel){
+        vModel.addAttribute(recipeService.getFullRecipe(1L));
         return "recipe/showRecipe";
     }
 

@@ -5,6 +5,21 @@
     <div th:replace="fragments/navbar :: mainNavbar"></div>
     <h1>This page shows individual recipe</h1>
 
+    <h1 th:text="${recipe.title}"></h1>
+    <p th:text="${recipe.description}"></p>
+    <p th:text="${recipe.cookTime}"></p>
+    <p th:text="${recipe.prepTime}"></p>
+    <p th:text="${recipe.servings}"></p>
+    <p>Is Private<span th:object="${privateRecipe}"></span></p>
+
+    <!--//loop over the instruction and ingredients (nested)-->
+    <div th:each="instruction : ${instructions}">
+    </div>
+
+    <div th:each="ingredient : ${recipeIngredients}">
+        <p th:text="${recipe.ingredient}"></p>
+    </div>
+
     <footer th:include="fragments/footer :: footer"></footer>
     <div th:replace="fragments/scripts :: scripts"></div>
 </body>
