@@ -13,11 +13,13 @@
     <p>Is Private<span th:object="${privateRecipe}"></span></p>
 
     <!--//loop over the instruction and ingredients (nested)-->
-    <div th:each="instruction : ${instructions}">
+    <div th:each="instruction : ${recipe.instructions}">
+        <p th:text="${instruction.instruction}"></p>
     </div>
 
-    <div th:each="ingredient : ${recipeIngredients}">
-        <p th:text="${recipe.ingredient}"></p>
+    <div th:each="ingredient : ${recipe.recipeIngredients}">
+        <p th:text="${ingredient.quantity}"></p>
+        <p th:text="${ingredient.ingredient.ingredient}"></p>
     </div>
 
     <footer th:include="fragments/footer :: footer"></footer>
