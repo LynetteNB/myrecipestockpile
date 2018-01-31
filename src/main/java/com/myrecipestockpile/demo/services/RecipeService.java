@@ -32,6 +32,12 @@ public class RecipeService {
 
 //    --------------------------- Empty method skeletons. Bodies will be added in next update.
 
+    // Find all recipes.
+    public Iterable<Recipe> getAllRecipes() {
+        return recipeRepository.findAll();
+    }
+
+
     // This method will insert a new recipe into database and return the id of that recipe.
     public long createNewRecipe(Recipe recipe,
                                 String[] instructionsArray,
