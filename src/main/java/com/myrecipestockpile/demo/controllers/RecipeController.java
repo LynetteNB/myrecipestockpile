@@ -98,13 +98,15 @@ public class RecipeController {
         rawIngredients.add("lemons");
         rawIngredients.add("peaches");
 
-        for (String quantity : rawQuanitities) {
-
-        }
+//        for (String quantity : rawQuanitities) {
+//            ingredientRepository.
+//        }
+////
+//        recipeRepository.findByTitleOrDescription("search term", "search term");
 //
-        for (String ingredient : rawIngredients) {
-            if (ingredientRepository.findA)
-        }
+//        for (String ingredient : rawIngredients) {
+//            if (ingredientRepository.findA)
+//        }
 
 
 
