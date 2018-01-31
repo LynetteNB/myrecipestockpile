@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: main-head(create-stockpile)"></head>
+<body>
+
+<div th:replace="fragments/navbar :: mainNavbar"></div>
+
+<h1>Create a Stockpile</h1>
+
+<form th:action="@{/stockpile/create}" method="post" th:object="${stockpile}">
+    <label>Name:
+        <input id="title" th:field="*{name}"/>
+    </label>
+    <br/>
+    <label>Do you want this stockpile to be private (only visible to you)?
+        <input type="checkbox" th:field="*{privateStockpile}"/>
+    </label>
+    <br/>
+    <input type="submit"/>
+</form>
+
+<footer th:include="fragments/footer :: footer"></footer>
+<div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>

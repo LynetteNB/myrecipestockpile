@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: main-head(Stockpile)"></head>
+<body>
+
+<div th:replace="fragments/navbar :: mainNavbar"></div>
+
+<h1 th:text="${stockpile.name}"></h1>
+
+<a href="/stockpile/{id}/edit">Edit This Stockpile</a>
+
+<footer th:include="fragments/footer :: footer"></footer>
+<div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>
