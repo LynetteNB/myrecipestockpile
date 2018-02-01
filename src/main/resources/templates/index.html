@@ -8,7 +8,7 @@
 <h1>This is our index page</h1>
 
 <div th:each="recipe : ${recipes}">
-    <h1 th:text="${recipe.title}"></h1>
+    <a th:href="@{'/recipes/show/'} + ${recipe.id}"><h1 th:text="${recipe.title}"></h1></a>
     <p th:text="${recipe.description}"></p>
     <p th:text="${recipe.user.username}"></p>
 </div>

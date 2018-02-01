@@ -38,7 +38,7 @@ public class RecipeController {
         return "/index";
     }
 
-    @GetMapping("/recipes/show{id}")
+    @GetMapping("/recipes/show/{id}")
     public String show(@PathVariable long id, Model vModel){
         vModel.addAttribute(recipeService.getFullRecipe(id));
         return "recipes/show";
