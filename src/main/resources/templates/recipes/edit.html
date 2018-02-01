@@ -5,7 +5,7 @@
     <div th:replace="fragments/navbar :: mainNavbar"></div>
     <h1>Edit Recipe</h1>
 
-    <form action="/recipes/edit" method="post" th:object="${recipe}">
+    <form th:action="@{/recipes/edit}" method="post" th:object="${recipe}">
         <input th:field="*{id}" type="hidden"/>
         <label>Title:
             <input id="title" th:field="*{title}"/>
@@ -54,7 +54,7 @@
         <input type="submit" value="Update"/>
     </form>
 
-    <form action="/recipes/delete" method="post" th:object="${recipe}">
+    <form th:action="@{/recipes/delete}" method="post" th:object="${recipe}">
         <input type="hidden" th:field="*{id}" />
         <label>Would you like to delete this recipe?
             <input type="checkbox" value="Delete" th:object="${recipe}"/> Yes, delete this recipe.

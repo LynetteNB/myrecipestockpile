@@ -38,9 +38,9 @@ public class RecipeController {
         return "/index";
     }
 
-    @GetMapping("/recipes/show")
-    public String show(Model vModel){
-        vModel.addAttribute(recipeService.getFullRecipe(1L));
+    @GetMapping("/recipes/show{id}")
+    public String show(@PathVariable long id, Model vModel){
+        vModel.addAttribute(recipeService.getFullRecipe(id));
         return "recipes/show";
     }
 
@@ -57,23 +57,15 @@ public class RecipeController {
                           @RequestParam(name="ingredients") String[] ingredients,
                           @RequestParam(name="quantity") String[] quantity,
                           @ModelAttribute Recipe recipe){
-        //***hard coded user- remove later***
-//        User user = usersRepository.findOne(1L);
-//        recipe.setUser(user);
-//        User user = new User("abby", "abby@gmail.com", "abby1");
-//    usersRepository.save(user);
-//        System.out.println(recipe.isPrivateRecipe());
-//    recipe.setUser(user);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         recipe.setUser(usersRepository.findOne(user.getId()));
     recipeService.createNewRecipe(recipe, instructions, ingredients, quantity);
         return "index";
     }
 
-    @GetMapping("/recipes/edit")
-    public String showEditRecipeForm(Model vModel){
-        vModel.addAttribute(recipeService.getFullRecipe(10L));
-        System.out.println(recipeService.getFullRecipe(10L).getTitle());
+    @GetMapping("/recipes/edit/{id}")
+    public String showEditRecipeForm(@PathVariable long id, Model vModel){
+        vModel.addAttribute(recipeService.getFullRecipe(id));
         return "recipes/edit";
     }
 
@@ -93,7 +85,7 @@ public class RecipeController {
     public String delete( Model vModel,
                           @ModelAttribute Recipe recipe){
         recipeService.deleteRecipe(recipe);
-        return "/recipes/show";
+        return "redirect:/";
     }
 
 
