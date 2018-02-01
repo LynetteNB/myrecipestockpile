@@ -22,9 +22,9 @@
                     <a class="buff" href="/recipes">See all Recipes</a>
                 </li>
             </ul>
-            <form action="/" method="GET" id="shrinkable-search" class="navbar-form navbar-left">
+            <form th:action="@{/recipes/search}" method="POST" id="shrinkable-search" class="navbar-form navbar-left">
                 <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search for a recipe"/>
+                    <input type="text" name="term" class="form-control" placeholder="Search for a recipe"/>
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-success buff"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Go</button>
                     </span>
