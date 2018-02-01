@@ -28,6 +28,11 @@ public class Instruction {
         this.recipe = recipe;
     }
 
+    public Instruction(Long id, String instruction, Recipe recipe) {
+        this.instruction = instruction;
+        this.recipe = recipe;
+    }
+
     // ------------------------------------------
     // Getters / Setters
     // ------------------------------------------

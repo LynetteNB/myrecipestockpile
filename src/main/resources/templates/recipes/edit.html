@@ -5,7 +5,8 @@
     <div th:replace="fragments/navbar :: mainNavbar"></div>
     <h1>Edit Recipe</h1>
 
-    <form action="/recipes/create" method="post" th:object="${recipe}">
+    <form action="/recipes/edit" method="post" th:object="${recipe}">
+        <input th:field="*{id}" type="hidden"/>
         <label>Title:
             <input id="title" th:field="*{title}"/>
         </label>
@@ -45,6 +46,10 @@
                 <input type="text" th:value="${recipeIngredient.quantity}" name="ingredients"/>
             </label>
         </div>
+
+        <label>Make my recipe private?
+            <input th:field="*{privateRecipe}" type="checkbox" />
+        </label>
 
         <input type="submit" value="Update"/>
     </form>

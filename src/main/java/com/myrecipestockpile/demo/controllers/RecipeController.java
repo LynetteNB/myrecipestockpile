@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+
 @Controller
 public class RecipeController {
     private RecipeService recipeService;
@@ -67,8 +69,8 @@ public class RecipeController {
 
     @GetMapping("/recipes/edit")
     public String showEditRecipeForm(Model vModel){
-        vModel.addAttribute(recipeService.getFullRecipe(2L));
-        System.out.println(recipeService.getFullRecipe(2L).getTitle());
+        vModel.addAttribute(recipeService.getFullRecipe(9L));
+        System.out.println(recipeService.getFullRecipe(9L).getTitle());
         return "recipes/edit";
     }
 
@@ -78,6 +80,7 @@ public class RecipeController {
                           @RequestParam(name="ingredients") String[] ingredients,
                           @RequestParam(name="quantity") String[] quantity,
                           @ModelAttribute Recipe recipe){
+//        System.out.println(recipe.getId() + " is the id of updated rec");
         recipeService.editRecipe(recipe, instructions, ingredients, quantity);
         return "index";
     }
