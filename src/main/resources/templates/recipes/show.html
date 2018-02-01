@@ -5,10 +5,15 @@
     <div th:replace="fragments/navbar :: mainNavbar"></div>
     <h1>This page shows individual recipe</h1>
 
+
     <h1 th:text="${recipe.title}"></h1>
+    <h5>Description: </h5>
     <p th:text="${recipe.description}"></p>
+    <h5>Cook Time: </h5>
     <p th:text="${recipe.cookTime}"></p>
+    <h5>Prep Time: </h5>
     <p th:text="${recipe.prepTime}"></p>
+    <h5>Servings: </h5>
     <p th:text="${recipe.servings}"></p>
     <p>Is Private<span th:object="${privateRecipe}"></span></p>
 
