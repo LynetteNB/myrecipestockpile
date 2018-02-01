@@ -90,13 +90,59 @@ public class RecipeService {
 
     // This method will take in a an edited recipe and update it in the database.
     public long editRecipe(Recipe recipe,
-                           String[] instuctionsArray,
+                           String[] instructionsArray,
                            String[] ingredientNameArray,
                            String[] ingredientQuantityArray) {
+
+        Recipe oldrecipe = recipeRepository.findOne(recipe.getId());
+        recipe.setDateCreated(recipeRepository.findOne(recipe.getId()).getDateCreated());
+
+        List<Instruction> instructions = new ArrayList<>();
+//
+        // Saving ingredients.
+
+        // Check if each ingredient exists before adding it to database with quantity.
+        List<RecipeIngredient> oldRecipeIngredients = recipeIngredientsRepository.findByRecipe(recipe);
+        recipeIngredientsRepository.delete(oldRecipeIngredients);
+        for (int i = 0; i < ingredientNameArray.length && i < ingredientQuantityArray.length; i += 1) {
+            String newIngredient = ingredientNameArray[i];
+            String newQuantity = ingredientQuantityArray[i];
+
+            // Query for new Ingredient. Unknown at moment if it already exists on 'ingredients' table.
+            Ingredient existingIngredient = ingredientsRepository.findByIngredient(newIngredient);
+
+            // Checking if Query returned an existing Ingredient that matches the user's String input.
+            if (existingIngredient == null) {
+                // Creates the new Ingredient if none is found.
+                ingredientsRepository.save(new Ingredient(newIngredient));
+            }
+
+            // Grabbing a valid Ingredient from table to be certain for recipe.
+            Ingredient readyIngredient = ingredientsRepository.findByIngredient(newIngredient);
+
+            // Saving final RecipeIngredient to 'recipe_ingredients' table.
+            recipeIngredientsRepository.save(new RecipeIngredient(recipe, newQuantity, readyIngredient));
+        }
+
+        // Creates List of new Instruction objects to set to Recipe.
+        List<Instruction> OldInstructions = recipeInstructionsRepository.findByRecipe(recipe);
+        for (int i = 0; i < OldInstructions.size(); i++) {
+            OldInstructions.get(i).setInstruction(instructionsArray[i]);
+        }
+        recipe.setInstructions(OldInstructions);
+
+        // Final save. Updates the recipe, but adding data to dependent tables.
+        recipeRepository.save(recipe);
+
 
         return 1;
     }
 
+    //This method will delete a recipe by id
+    public void deleteRecipe(Recipe recipe) {
+        recipeRepository.delete(recipe.getId());
+
+    }
 
 
 }
