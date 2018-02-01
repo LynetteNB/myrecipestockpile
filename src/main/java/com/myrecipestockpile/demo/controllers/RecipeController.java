@@ -2,6 +2,7 @@ package com.myrecipestockpile.demo.controllers;
 
 import com.myrecipestockpile.demo.models.Recipe;
 import com.myrecipestockpile.demo.models.User;
+import com.myrecipestockpile.demo.repositories.RecipeRepository;
 import com.myrecipestockpile.demo.repositories.UsersRepository;
 import com.myrecipestockpile.demo.services.RecipeService;
 import org.springframework.stereotype.Controller;
@@ -15,11 +16,13 @@ import java.util.List;
 public class RecipeController {
     private RecipeService recipeService;
     private UsersRepository usersRepository;
+    private RecipeRepository recipeRepository;
 
     //This is the service dependency injection
-    public RecipeController( RecipeService recipeService, UsersRepository usersRepository ) {
+    public RecipeController( RecipeService recipeService, UsersRepository usersRepository, RecipeRepository recipeRepository ) {
         this.recipeService = recipeService;
         this.usersRepository = usersRepository;
+        this.recipeRepository = recipeRepository;
     }
 
     // Inject dependency when Repository is ready
@@ -65,9 +68,10 @@ public class RecipeController {
         return"index";
     }
 
-
-
-
-
-
+    @PostMapping("/recipes/search")
+    public String search(@RequestParam(name = "term") String term, Model vModel){
+        term = "%"+term+"%";
+        vModel.addAttribute("recipes", recipeRepository.findByDescriptionIsLikeOrTitleIsLike(term, term));
+        return "recipes/results";
+    }
 }
