@@ -15,12 +15,12 @@
     You have been logged out.
 </div>
 
-<form action="/login" method="post" th:object="${user}">
+<form th:action="@{/login}" method="post">
     <label for="username">Username</label>
-    <input id="username" th:field="*{username}" type="text"/>
+    <input id="username" name="username" type="text" />
     <label for="password">Password</label>
-    <input id="password" th:field="*{password}" type="password"/>
-    <input type="submit" value="Log In"/>
+    <input id="password" name="password" type="password" />
+    <input type="submit" value="Log In" />
 </form>
 
 <footer th:include="fragments/footer :: footer"></footer>

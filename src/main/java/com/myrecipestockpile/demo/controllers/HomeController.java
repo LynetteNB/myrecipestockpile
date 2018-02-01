@@ -25,42 +25,42 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/login")
-    public String loginForm(Model vModel) {
-        vModel.addAttribute("user", new User());
-        return "login";
-    }
+//    @GetMapping("/login")
+//    public String loginForm(Model vModel) {
+//        vModel.addAttribute("user", new User());
+//        return "login";
+//    }
 
-    @PostMapping("/login")
-    public String loginSumbmission() {
-        return "index";
-    }
-
-    // temporary until security implementation
-    @PostMapping("/logout")
-    public String logout() {
-        return "index";
-    }
-
-    @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user) {
-        // this is a simple check for existing users by username and email to avoid errors.
-        User userCheck = usersRepository.findByUsernameOrEmail(user.getUsername(), user.getEmail());
-        if (userCheck == null) {
-            usersRepository.save(user);
-            return "login";
-        } else {
-            System.out.println("already entity");
-            return "login";
-        }
-    }
-
-    @GetMapping("/sign-up")
-    public String showSignUpForm(Model vModel) {
-        vModel.addAttribute("user", new User());
-        return "signup";
-
-    }
+//    @PostMapping("/login")
+//    public String loginSumbmission() {
+//        return "index";
+//    }
+//
+//    // temporary until security implementation
+//    @PostMapping("/logout")
+//    public String logout() {
+//        return "index";
+//    }
+//
+//    @PostMapping("/sign-up")
+//    public String saveUser(@ModelAttribute User user) {
+//        // this is a simple check for existing users by username and email to avoid errors.
+//        User userCheck = usersRepository.findByUsername(user.getUsername());
+//        if (userCheck == null) {
+//            usersRepository.save(user);
+//            return "login";
+//        } else {
+//            System.out.println("already entity");
+//            return "login";
+//        }
+//    }
+//
+//    @GetMapping("/sign-up")
+//    public String showSignUpForm(Model vModel) {
+//        vModel.addAttribute("user", new User());
+//        return "signup";
+//
+//    }
 }
 
 

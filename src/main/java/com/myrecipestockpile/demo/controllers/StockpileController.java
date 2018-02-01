@@ -45,7 +45,7 @@ public class StockpileController {
         User user = usersRepository.findOne(1L);
         stockpile.setOwner(user);
         stockpileService.save(stockpile);
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     @GetMapping("/stockpile/{id}/edit")
