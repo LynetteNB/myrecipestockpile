@@ -5,6 +5,7 @@ import com.myrecipestockpile.demo.models.User;
 import com.myrecipestockpile.demo.repositories.RecipeRepository;
 import com.myrecipestockpile.demo.repositories.UsersRepository;
 import com.myrecipestockpile.demo.services.RecipeService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,10 +27,10 @@ public class RecipeController {
     }
 
     // Inject dependency when Repository is ready
-    @GetMapping("/recipes/search/")
-    public String index(){
-        return "recipes/index";
-    }
+//    @GetMapping("/recipes/search/")
+//    public String index(){
+//        return "recipes/index";
+//    }
 
     @GetMapping("/recipes")
     public String allRecipes(Model vModel) {
@@ -58,12 +59,14 @@ public class RecipeController {
                           @RequestParam(name="quantity") String[] quantity,
                           @ModelAttribute Recipe recipe){
         //***hard coded user- remove later***
-        User user = usersRepository.findOne(1L);
-        recipe.setUser(user);
+//        User user = usersRepository.findOne(1L);
+//        recipe.setUser(user);
 //        User user = new User("abby", "abby@gmail.com", "abby1");
 //    usersRepository.save(user);
 //        System.out.println(recipe.isPrivateRecipe());
 //    recipe.setUser(user);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        recipe.setUser(usersRepository.findOne(user.getId()));
     recipeService.createNewRecipe(recipe, instructions, ingredients, quantity);
         return"index";
     }
