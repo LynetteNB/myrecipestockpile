@@ -68,6 +68,7 @@ public class RecipeController {
     @GetMapping("/recipes/edit")
     public String showEditRecipeForm(Model vModel){
         vModel.addAttribute(recipeService.getFullRecipe(1L));
+        System.out.println(recipeService.getFullRecipe(1L).getTitle());
         return "recipes/edit";
     }
 

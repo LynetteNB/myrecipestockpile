@@ -31,28 +31,22 @@
         </label>
         <br/>
 
-        <label> Instructions:
-            <input th:field="*{instructions}"/>
-        </label>
-
         <div th:each="instruction : ${recipe.instructions}">
-        <p th:text="${instruction.instruction}"></p>
+            <label> Instructions:
+                <input type="text" th:value="${instruction.instruction}" name="instructions_text"/>
+            </label>
         </div>
 
-        <label>Ingredients:
-            <input th:field="*{ingredients}"/>
-        </label>
-
-        <label>Quantity:
-            <input th:field="*{quantity}"/>
-        </label>
-
-        <div th:each="ingredient : ${recipe.recipeIngredients}">
-            <p th:text="${ingredient.quantity}"></p>
-            <p th:text="${ingredient.ingredient.ingredient}"></p>
+        <div th:each="recipeIngredient : ${recipe.recipeIngredients}">
+            <label> Ingredients:
+                <input type="text" th:value="${recipeIngredient.ingredient.ingredient}" name="quantity"/>
+            </label>
+            <label> Quantity:
+                <input type="text" th:value="${recipeIngredient.quantity}" name="ingredients"/>
+            </label>
         </div>
-
-        <input type="submit"/>
+        
+        <input type="button"/>Update
     </form>
 
     <footer th:include="fragments/footer :: footer"></footer>
