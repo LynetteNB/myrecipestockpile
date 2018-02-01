@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Controller
 public class RecipeController {
@@ -68,8 +67,35 @@ public class RecipeController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         recipe.setUser(usersRepository.findOne(user.getId()));
     recipeService.createNewRecipe(recipe, instructions, ingredients, quantity);
-        return"index";
+        return "index";
     }
+
+    @GetMapping("/recipes/edit")
+    public String showEditRecipeForm(Model vModel){
+        vModel.addAttribute(recipeService.getFullRecipe(10L));
+        System.out.println(recipeService.getFullRecipe(10L).getTitle());
+        return "recipes/edit";
+    }
+
+    @PostMapping("/recipes/edit")
+    public String updatePost( Model vModel,
+                          @RequestParam(name="instructions_text") String[] instructions,
+                          @RequestParam(name="ingredients") String[] ingredients,
+                          @RequestParam(name="quantity") String[] quantity,
+                          @ModelAttribute Recipe recipe){
+//        System.out.println(recipe.getId() + " is the id of updated rec");
+        recipeService.editRecipe(recipe, instructions, ingredients, quantity);
+        return "index";
+    }
+
+
+    @PostMapping("/recipes/delete")
+    public String delete( Model vModel,
+                          @ModelAttribute Recipe recipe){
+        recipeService.deleteRecipe(recipe);
+        return "/recipes/show";
+    }
+
 
     @PostMapping("/recipes/search")
     public String search(@RequestParam(name = "term") String term, Model vModel){
@@ -77,4 +103,5 @@ public class RecipeController {
         vModel.addAttribute("recipes", recipeRepository.findByDescriptionIsLikeOrTitleIsLike(term, term));
         return "recipes/results";
     }
+
 }
