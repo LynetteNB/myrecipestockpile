@@ -8,9 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Controller
 public class RecipeController {
     private RecipeService recipeService;
@@ -80,6 +77,13 @@ public class RecipeController {
                           @ModelAttribute Recipe recipe){
         recipeService.editRecipe(recipe, instructions, ingredients, quantity);
         return "index";
+    }
+
+    @PostMapping("/recipes/delete")
+    public String delete( Model vModel,
+                          @ModelAttribute Recipe recipe){
+        recipeService.deleteRecipe(recipe);
+        return "/recipes/show";
     }
 
 

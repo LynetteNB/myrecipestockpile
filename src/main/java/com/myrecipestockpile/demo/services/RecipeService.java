@@ -90,12 +90,17 @@ public class RecipeService {
 
     // This method will take in a an edited recipe and update it in the database.
     public long editRecipe(Recipe recipe,
-                           String[] instuctionsArray,
+                           String[] instructionsArray,
                            String[] ingredientNameArray,
                            String[] ingredientQuantityArray) {
 
         return 1;
     }
 
+    //This method will delete a recipe from the database
+    public void deleteRecipe(Recipe recipe) {
+        recipeRepository.delete(recipe.getId());
+
+    }
 
 }
