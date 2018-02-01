@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head></head>
+<body>
+
+<footer th:fragment="footer" class="footer">
+    <footer class="footer">
+        <span class="text-muted">My Recipe Stockpile &copy; <span th:text="${#dates.year(#dates.createNow())}"></span></span>
+    </footer>
+</footer>
+
+</body>
+</html>

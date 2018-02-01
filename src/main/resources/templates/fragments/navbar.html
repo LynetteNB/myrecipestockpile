@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+        xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+
+<nav id="my-nav" class="navbar navbar-default navbar-static-top" th:fragment="mainNavbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand buff" href="/">myrecstkpl</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a class="buff" href="/recipes">See all Recipes</a>
+                </li>
+            </ul>
+            <form th:action="@{/recipes/search}" method="POST" id="shrinkable-search" class="navbar-form navbar-left">
+                <div class="input-group">
+                    <input type="text" name="term" class="form-control" placeholder="Search for a recipe"/>
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-success buff"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Go</button>
+                    </span>
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="buff">
+                    <a href="/login">Login</a>
+                </li>
+                <li class="buff">
+                    <a href="/sign-up">Register</a>
+                </li>
+                <li class="buff">
+                    <form action="/logout" method="post">
+                        <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+                    </form>
+                </li>
+                <li id="user-label" sec:authorize="isAuthenticated()">
+                    <!--th:text="${#authentication.principal.username}">-->
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>

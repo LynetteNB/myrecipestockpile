@@ -23,6 +23,11 @@ public class Instruction {
     public Instruction() {
     }
 
+    public Instruction(String instruction, Recipe recipe) {
+        this.instruction = instruction;
+        this.recipe = recipe;
+    }
+
     // ------------------------------------------
     // Getters / Setters
     // ------------------------------------------

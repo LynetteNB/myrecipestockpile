@@ -6,7 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsersRepository extends CrudRepository<User, Long> {
-    // Long is the data type for the primary key
-
-    User findByUsername(String username);
+    public User findByUsernameOrEmail(String username, String email);
 }
