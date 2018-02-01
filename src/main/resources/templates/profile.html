@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: main-head(All-Recipes)"></head>
+<body>
+
+<div th:replace="fragments/navbar :: mainNavbar"></div>
+
+<h1>Hello, <span th:text="${user.username}"></span>This your profile page</h1>
+
+<h3>here you will see you list of stockpiles</h3>
+
+<footer th:include="fragments/footer :: footer"></footer>
+<div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>
