@@ -40,10 +40,10 @@
 
         <div th:each="recipeIngredient : ${recipe.recipeIngredients}">
             <label> Ingredients:
-                <input type="text" th:value="${recipeIngredient.ingredient.ingredient}" name="quantity"/>
+                <input type="text" th:value="${recipeIngredient.ingredient.ingredient}" name="ingredients"/>
             </label>
             <label> Quantity:
-                <input type="text" th:value="${recipeIngredient.quantity}" name="ingredients"/>
+                <input type="text" th:value="${recipeIngredient.quantity}" name="quantity"/>
             </label>
         </div>
 

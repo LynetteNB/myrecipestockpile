@@ -102,6 +102,8 @@ public class RecipeService {
         // Saving ingredients.
 
         // Check if each ingredient exists before adding it to database with quantity.
+        List<RecipeIngredient> oldRecipeIngredients = recipeIngredientsRepository.findByRecipe(recipe);
+        recipeIngredientsRepository.delete(oldRecipeIngredients);
         for (int i = 0; i < ingredientNameArray.length && i < ingredientQuantityArray.length; i += 1) {
             String newIngredient = ingredientNameArray[i];
             String newQuantity = ingredientQuantityArray[i];
