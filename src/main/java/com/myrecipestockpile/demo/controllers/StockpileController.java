@@ -5,6 +5,7 @@ import com.myrecipestockpile.demo.models.User;
 import com.myrecipestockpile.demo.repositories.UsersRepository;
 import com.myrecipestockpile.demo.services.StockpileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,10 +41,10 @@ public class StockpileController {
     //Uncomment the code in this method when authentication is implemented and delete the hardcoded user owner
     @PostMapping("/stockpile/create")
     public String createStockpile(@ModelAttribute Stockpile stockpile) {
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        stockpile.setUser(usersRepository.findOne(user.getId()));
-        User user = usersRepository.findOne(1L);
-        stockpile.setOwner(user);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        stockpile.setOwner(usersRepository.findOne(user.getId()));
+//        User user = usersRepository.findOne(1L);
+//        stockpile.setOwner(user);
         stockpileService.save(stockpile);
         return "redirect:/";
     }
