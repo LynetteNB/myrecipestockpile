@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class RecipeController {
@@ -22,35 +23,44 @@ public class RecipeController {
     }
 
     // Inject dependency when Repository is ready
-    @GetMapping("/recipe/search/")
+    @GetMapping("/recipes/search/")
     public String index(){
-        return "recipe/index";
+        return "recipes/index";
     }
 
-    @GetMapping("/recipe/showRecipe")
+    @GetMapping("/recipes")
+    public String allRecipes(Model vModel) {
+        Iterable<Recipe> allRecipes = recipeService.getAllRecipes();
+        vModel.addAttribute("recipes", allRecipes);
+        return "/index";
+    }
+
+    @GetMapping("/recipes/show")
     public String show(Model vModel){
         vModel.addAttribute(recipeService.getFullRecipe(1L));
-        return "recipe/showRecipe";
+        return "recipes/show";
     }
 
 
-    @GetMapping("/recipe/create")
+    @GetMapping("/recipes/create")
     public String showCreateRecipeForm(Model vModel){
         vModel.addAttribute("recipe", new Recipe());
-        return "recipe/create";
+        return "recipes/create";
     }
 
-    @PostMapping("/recipe/create")
+    @PostMapping("/recipes/create")
     public String create( Model vModel,
                           @RequestParam(name="instructions_text") String[] instructions,
                           @RequestParam(name="ingredients") String[] ingredients,
                           @RequestParam(name="quantity") String[] quantity,
                           @ModelAttribute Recipe recipe){
         //***hard coded user- remove later***
-    User user = new User("abby", "abby@gmail.com", "abby1");
-    usersRepository.save(user);
-        System.out.println(recipe.isPrivateRecipe());
-    recipe.setUser(user);
+        User user = usersRepository.findOne(1L);
+        recipe.setUser(user);
+//        User user = new User("abby", "abby@gmail.com", "abby1");
+//    usersRepository.save(user);
+//        System.out.println(recipe.isPrivateRecipe());
+//    recipe.setUser(user);
     recipeService.createNewRecipe(recipe, instructions, ingredients, quantity);
         return "index";
     }
