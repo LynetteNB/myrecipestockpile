@@ -52,9 +52,24 @@ public class RecipeController {
         System.out.println(recipe.isPrivateRecipe());
     recipe.setUser(user);
     recipeService.createNewRecipe(recipe, instructions, ingredients, quantity);
-        return"index";
+        return "index";
     }
 
+    @GetMapping("/recipes/edit")
+    public String showEditRecipeForm(Model vModel){
+        vModel.addAttribute(recipeService.getFullRecipe(1L));
+        return "recipes/edit";
+    }
+
+    @PostMapping("/recipes/edit")
+    public String updatePost( Model vModel,
+                          @RequestParam(name="instructions_text") String[] instructions,
+                          @RequestParam(name="ingredients") String[] ingredients,
+                          @RequestParam(name="quantity") String[] quantity,
+                          @ModelAttribute Recipe recipe){
+        recipeService.editRecipe(recipe, instructions, ingredients, quantity);
+        return "index";
+    }
 
 
 
