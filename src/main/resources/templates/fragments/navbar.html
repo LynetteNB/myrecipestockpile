@@ -31,14 +31,14 @@
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li class="buff" sec:authorize="!isAuthenticated()">
+                <li class="buff">
                     <a href="/login">Login</a>
                 </li>
-                <li class="buff" sec:authorize="!isAuthenticated()">
+                <li class="buff">
                     <a href="/sign-up">Register</a>
                 </li>
-                <li class="buff" sec:authorize="isAuthenticated()">
-                    <form th:action="@{/logout}" th:method="post">
+                <li class="buff">
+                    <form action="/logout" method="post">
                         <button class="btn-link btn" style="margin-top: 8px">Logout</button>
                     </form>
                 </li>
