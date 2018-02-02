@@ -75,7 +75,9 @@ public class RecipeService {
         recipe.setInstructions(instructions);
 
         // Final save. Updates the recipe, but adding data to dependent tables.
+        System.out.println(recipe.getId() + " before save");
         recipeRepository.save(recipe);
+        System.out.println(recipe.getId() + " after save");
         return recipe.getId();
     }
 

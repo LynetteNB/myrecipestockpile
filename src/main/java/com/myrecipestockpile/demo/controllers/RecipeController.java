@@ -42,7 +42,7 @@ public class RecipeController {
     }
 
 
-    @GetMapping("/recipes/show{id}")
+    @GetMapping("/recipes/show/{id}")
     public String show(@PathVariable long id, Model vModel) {
         vModel.addAttribute(recipeService.getFullRecipe(id));
         return "recipes/show";
@@ -83,6 +83,8 @@ public class RecipeController {
                              @RequestParam(name = "ingredients") String[] ingredients,
                              @RequestParam(name = "quantity") String[] quantity,
                              @ModelAttribute Recipe recipe) {
+        User user = recipeService.getFullRecipe(recipe.getId()).getUser();
+        recipe.setUser(user);
 //        System.out.println(recipe.getId() + " is the id of updated rec");
         recipeService.editRecipe(recipe, instructions, ingredients, quantity);
         return "index";
@@ -102,6 +104,39 @@ public class RecipeController {
         term = "%" + term + "%";
         vModel.addAttribute("recipes", recipeRepository.findByDescriptionIsLikeOrTitleIsLike(term, term));
         return "recipes/results";
+    }
+
+    @GetMapping("/recipes/variation/{id}")
+    public String showVariationForm(@PathVariable long id, Model vModel) {
+        Recipe recipe = recipeService.getFullRecipe(id);
+        vModel.addAttribute("recipe", recipe);
+        return "recipes/variation";
+    }
+
+    @PostMapping("/recipes/create-variation")
+    public String createRecipeVariation(Model vModel,
+                                        @RequestParam(name = "instructions_text") String[] instructions,
+                                        @RequestParam(name = "ingredients") String[] ingredients,
+                                        @RequestParam(name = "quantity") String[] quantity,
+                                        @ModelAttribute Recipe recipe) {
+        Recipe newVariant = new Recipe(
+                recipe.getTitle(),
+                recipe.getDescription(),
+                recipe.getCookTime(),
+                recipe.getPrepTime(),
+                recipe.getServings(),
+                recipe.isPrivateRecipe(),
+                recipe.getUser(),
+                recipe
+        );
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        newVariant.setUser(user);
+
+        recipe.setParentRecipe(recipeRepository.findOne(recipe.getId()));
+        long id = recipeService.createNewRecipe(newVariant, instructions, ingredients, quantity);
+
+
+        return "redirect:/recipes/show/" + id;
     }
 
 }

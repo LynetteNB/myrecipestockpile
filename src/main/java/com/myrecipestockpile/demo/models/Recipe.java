@@ -85,6 +85,18 @@ public class Recipe {
         this.user = user;
     }
 
+    // Used for creating a variant recipe
+    public Recipe(String title, String description, int cookTime, int prepTime, int servings, boolean privateRecipe, User user, Recipe parentRecipe) {
+        this.title = title;
+        this.description = description;
+        this.cookTime = cookTime;
+        this.prepTime = prepTime;
+        this.servings = servings;
+        this.privateRecipe = privateRecipe;
+        this.user = user;
+        this.parentRecipe = parentRecipe;
+    }
+
     public Recipe(Recipe copy) {
         this.title = copy.title;
         this.description = copy.description;
