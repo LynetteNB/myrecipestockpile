@@ -42,7 +42,7 @@ public class RecipeController {
     }
 
 
-    @GetMapping("/recipes/show{id}")
+    @GetMapping("/recipes/show/{id}")
     public String show(@PathVariable long id, Model vModel) {
         vModel.addAttribute(recipeService.getFullRecipe(id));
         return "recipes/show";
@@ -83,6 +83,8 @@ public class RecipeController {
                              @RequestParam(name = "ingredients") String[] ingredients,
                              @RequestParam(name = "quantity") String[] quantity,
                              @ModelAttribute Recipe recipe) {
+        User user = recipeService.getFullRecipe(recipe.getId()).getUser();
+        recipe.setUser(user);
 //        System.out.println(recipe.getId() + " is the id of updated rec");
         recipeService.editRecipe(recipe, instructions, ingredients, quantity);
         return "index";

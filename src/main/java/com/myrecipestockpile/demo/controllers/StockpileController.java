@@ -4,6 +4,7 @@ import com.myrecipestockpile.demo.models.Stockpile;
 import com.myrecipestockpile.demo.models.User;
 import com.myrecipestockpile.demo.repositories.UsersRepository;
 import com.myrecipestockpile.demo.services.StockpileService;
+import com.myrecipestockpile.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,10 +19,12 @@ public class StockpileController {
 
     private StockpileService stockpileService;
     private UsersRepository usersRepository;
+    private UserService userService;
 
-    public StockpileController(StockpileService stockpileService, UsersRepository usersRepository) {
+    public StockpileController(StockpileService stockpileService, UsersRepository usersRepository, UserService userService) {
         this.stockpileService = stockpileService;
         this.usersRepository = usersRepository;
+        this.userService = userService;
     }
 
     @GetMapping("/stockpile/{id}")
@@ -53,6 +56,10 @@ public class StockpileController {
     @GetMapping("/stockpile/{id}/edit")
     public String showEditStockpileForm(Model vModel, @PathVariable long id) {
         Stockpile stockpileToEdit = stockpileService.findOne(id);
+//        Stockpile stockpile = stockpileService.findOne(id);
+        if (!userService.isOwner(stockpileToEdit.getOwner())) {
+            return "redirect:/";
+        }
         vModel.addAttribute("stockpile", stockpileToEdit);
         return "stockpile/edit";
     }
