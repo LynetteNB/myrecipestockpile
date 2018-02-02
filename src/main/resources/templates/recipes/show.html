@@ -27,6 +27,18 @@
         <p th:text="${ingredient.ingredient.ingredient}"></p>
     </div>
 
+    <div class='middle-wrapper'>
+        <div class='like-wrapper'>
+            <a class='like-button'>
+      <span class='like-icon'>
+        <div class='heart-animation-1'></div>
+        <div class='heart-animation-2'></div>
+      </span>
+                Love
+            </a>
+        </div>
+    </div>
+
     <footer th:include="fragments/footer :: footer"></footer>
     <div th:replace="fragments/scripts :: scripts"></div>
 </body>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: main-head(About)"></head>
+
+<body>
+<div th:replace="fragments/navbar :: mainNavbar"></div>
+<h1>About Us</h1>
+
+<div class="container">
+    <div class="row" text="center">
+        <h2>Development Team</h2>
+
+    </div>
+    <div class="row">
+                <img src="/images/steve_profile.jpeg" class="about-me-pic"/>
+                <div class="text-center">
+                    <h3>Stephen Cisler</h3>
+                    <p>Summary about me</p>
+                    <a href="mailto:stephencisler@gmail.com"><p><div class="fa fa-envelope fa-md icon"></div>stephencisler@gmail.com</p></a>
+                    <a href="https://github.com/stephen-cisler" target="_blank"><p><div class="fa fa-github fa-md icon" aria-hidden="false"></div>stephen-cisler</p></a>
+                </div>
+    </div>
+    <div class="row">
+            <img src="/images/abby_profile.jpeg" class="about-me-pic"/>
+            <div class="text-center">
+                <h3>Abby Perez</h3>
+                <p>Summary about me</p>
+                <a href="mailto:abbyperez28@gmail.com"><p><div class="fa fa-envelope fa-md icon"></div>abbyperez28
+                    @gmail.com</p></a>
+                <a href="https://github.com/abbyperez28" target="_blank"><p><div class="fa fa-github fa-md icon" aria-hidden="false"></div>abbyperez28</p></a>
+            </div>
+    </div>
+
+    <div class="row">
+            <img src="/images/luke_profile.jpeg" class="about-me-pic"/>
+            <div class="text-center">
+                <h3>Luke Saavedra</h3>
+                <p>Summary about me</p>
+                <a href="mailto:luke.w.saavedra@gmail.com"><p><div class="fa fa-envelope fa-md icon"></div>luke.w.saavedra@gmail.com</p></a>
+                <a href="https://github.com/lukesaav" target="_blank"><p><div class="fa fa-github fa-md icon"
+                                                                       aria-hidden="false"></div>lukesaav</p></a>
+            </div>
+    </div>
+</div>
+
+<footer th:include="fragments/footer :: footer"></footer>
+<div th:replace="fragments/scripts :: scripts"></div>
+</body>
+</html>
