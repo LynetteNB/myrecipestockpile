@@ -56,7 +56,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/recipes/create", // only authenticated users can create recipes
                         "/recipes/edit/{id}", // only authenticated users can edit recipes
                         "/stockpile/new",
-                        "/stockpile/{id}/edit"
+                        "/stockpile/{id}/edit",
+                        "/profile",
+                        "/profile/{username}"
                 )
                 .authenticated()
         ;

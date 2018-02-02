@@ -41,12 +41,13 @@ public class StockpileController {
     //Uncomment the code in this method when authentication is implemented and delete the hardcoded user owner
     @PostMapping("/stockpile/create")
     public String createStockpile(@ModelAttribute Stockpile stockpile) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        stockpile.setOwner(usersRepository.findOne(user.getId()));
-//        User user = usersRepository.findOne(1L);
-//        stockpile.setOwner(user);
+
+        // THIS IS NOT WORKING
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User owner = usersRepository.findOne(currentUser.getId());
+        stockpile.setOwner(currentUser);
         stockpileService.save(stockpile);
-        return "redirect:/";
+        return "redirect:/profile/" + stockpile.getOwner().getUsername();
     }
 
     @GetMapping("/stockpile/{id}/edit")
@@ -58,8 +59,15 @@ public class StockpileController {
 
     @PostMapping("/stockpile/edit")
     public String updateStockpile(@ModelAttribute Stockpile stockpile) {
+
+        // Stockpile is loosing its owner when form is submitted. This is Hotfix.
+        User owner = stockpileService.findOne(stockpile.getId()).getOwner();
+        stockpile.setOwner(owner);
+
         stockpileService.save(stockpile);
-        return "redirect:/";
+        String url = "redirect:/stockpile/" + stockpile.getId();
+        System.out.println(url);
+        return url;
     }
 
     @PostMapping("stockpile/{id}/delete")

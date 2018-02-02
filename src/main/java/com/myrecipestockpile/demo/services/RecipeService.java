@@ -1,9 +1,6 @@
 package com.myrecipestockpile.demo.services;
 
-import com.myrecipestockpile.demo.models.Ingredient;
-import com.myrecipestockpile.demo.models.Instruction;
-import com.myrecipestockpile.demo.models.Recipe;
-import com.myrecipestockpile.demo.models.RecipeIngredient;
+import com.myrecipestockpile.demo.models.*;
 import com.myrecipestockpile.demo.repositories.IngredientsRepository;
 import com.myrecipestockpile.demo.repositories.RecipeIngredientsRepository;
 import com.myrecipestockpile.demo.repositories.RecipeInstructionsRepository;

@@ -2,6 +2,8 @@ package com.myrecipestockpile.demo.controllers;
 
 import com.myrecipestockpile.demo.models.User;
 import com.myrecipestockpile.demo.services.ProfileService;
+import com.myrecipestockpile.demo.services.RecipeService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,15 +23,19 @@ public class ProfileController {
 
         User requestedUser = profileService.findUsername(username);
 
-        // If requested
+        // If requested is null or empty
         if (username.equalsIgnoreCase("") || requestedUser == null) {
             return "redirect:/";
         } else {
-
-            System.out.println(requestedUser.getUsername());
             vModel.addAttribute("user", requestedUser);
             return "profile";
         }
+    }
+
+    @GetMapping("/profile")
+    public String showCurrentUserProfile() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return "redirect:/profile/" + user.getUsername();
     }
 
 }
