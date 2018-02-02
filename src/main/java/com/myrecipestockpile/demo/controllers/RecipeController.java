@@ -5,6 +5,7 @@ import com.myrecipestockpile.demo.models.User;
 import com.myrecipestockpile.demo.repositories.RecipeRepository;
 import com.myrecipestockpile.demo.repositories.UsersRepository;
 import com.myrecipestockpile.demo.services.RecipeService;
+import com.myrecipestockpile.demo.services.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +18,14 @@ public class RecipeController {
     private RecipeService recipeService;
     private UsersRepository usersRepository;
     private RecipeRepository recipeRepository;
+    private UserService userService;
 
     //This is the service dependency injection
-    public RecipeController(RecipeService recipeService, UsersRepository usersRepository, RecipeRepository recipeRepository) {
+    public RecipeController(RecipeService recipeService, UsersRepository usersRepository, RecipeRepository recipeRepository, UserService userService) {
         this.recipeService = recipeService;
         this.usersRepository = usersRepository;
         this.recipeRepository = recipeRepository;
+        this.userService = userService;
     }
 
     // Inject dependency when Repository is ready
@@ -66,7 +69,11 @@ public class RecipeController {
 
     @GetMapping("/recipes/edit/{id}")
     public String showEditRecipeForm(@PathVariable long id, Model vModel) {
-        vModel.addAttribute(recipeService.getFullRecipe(id));
+        Recipe recipe = recipeService.getFullRecipe(id);
+        if (!userService.isOwner(recipe.getUser())) {
+            return "redirect:/";
+        }
+        vModel.addAttribute(recipe);
         return "recipes/edit";
     }
 
