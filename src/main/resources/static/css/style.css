@@ -1,9 +1,5 @@
 /* Sticky footer styles
 -------------------------------------------------- */
-* {
-    color: midnightblue;
-}
-
 html {
     position: relative;
     min-height: 100%;
