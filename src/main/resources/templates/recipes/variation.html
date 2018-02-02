@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: main-head(create)"></head>
+<body>
+<div th:replace="fragments/navbar :: mainNavbar"></div>
+<h1>Edit Recipe</h1>
+
+<form th:action="@{/recipes/create-variation}" method="post" th:object="${recipe}">
+    <input th:field="*{id}" type="hidden"/>
+    <label>Title:
+        <input id="title" th:field="*{title}"/>
+    </label>
+    <br/>
+
+    <label>Description:
+        <textarea id="description" th:field="*{description}" rows="6"></textarea>
+    </label>
+    <br/>
+
+    <label>Prep Time:
+        <input th:field="*{prepTime}" type="number" placeholder="Enter in minutes"/>
+    </label>
+    <br/>
+
+    <label> Cook Time:
+        <input th:field="*{cookTime}" type="number" placeholder="Enter in minutes"/>
+    </label>
+    <br/>
+
+    <label>Servings:
+        <input th:field="*{servings}" type="number"/>
+    </label>
+    <br/>
+
+    <div th:each="instruction : ${recipe.instructions}">
+        <label> Instructions:
+            <input type="text" th:value="${instruction.instruction}" name="instructions_text"/>
+        </label>
+    </div>
+
+    <div th:each="recipeIngredient : ${recipe.recipeIngredients}">
+        <label> Ingredients:
+            <input type="text" th:value="${recipeIngredient.ingredient.ingredient}" name="ingredients"/>
+        </label>
+        <label> Quantity:
+            <input type="text" th:value="${recipeIngredient.quantity}" name="quantity"/>
+        </label>
+    </div>
+
+    <label>Make my recipe private?
+        <input th:field="*{privateRecipe}" type="checkbox" />
+    </label>
+
+    <input type="submit" value="Create Variation!"/>
+</form>
+
+<!--<form th:action="@{/recipes/delete}" method="post" th:object="${recipe}">-->
+    <!--<input type="hidden" th:field="*{id}" />-->
+    <!--<label>Would you like to delete this recipe?-->
+        <!--<input type="checkbox" value="Delete" th:object="${recipe}"/> Yes, delete this recipe.-->
+    <!--</label>-->
+
+    <!--<input type="submit" value="Make Variation"/>-->
+<!--</form>-->
+
+<footer th:include="fragments/footer :: footer"></footer>
+<div th:replace="fragments/scripts :: scripts"></div>
+</body>
+</html>

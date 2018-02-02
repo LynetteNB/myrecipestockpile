@@ -58,7 +58,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/stockpile/new",
                         "/stockpile/{id}/edit",
                         "/profile",
-                        "/profile/{username}"
+                        "/profile/{username}",
+                        "/recipe/variation/{id}"
                 )
                 .authenticated()
         ;
