@@ -1,5 +1,9 @@
 /* Sticky footer styles
 -------------------------------------------------- */
+* {
+    color: midnightblue;
+}
+
 html {
     position: relative;
     min-height: 100%;
@@ -17,9 +21,12 @@ body {
 }
 
 .about-me-pic {
-    max-width:100%;
+    display: block;
+    width:50%;
     height: auto;
-
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
 }
 
 
