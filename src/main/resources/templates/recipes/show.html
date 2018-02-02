@@ -28,6 +28,12 @@
         <p th:text="${ingredient.ingredient.ingredient}"></p>
     </div>
 
+    <!--<div sec:authorize="isAuthenticated()">-->
+        <div th:if="${#authentication.principal.id} == ${recipe.user.id}">
+            <h3><a th:href="@{'/recipes/edit/'} + ${recipe.id}">Edit This Recipe</a></h3>
+        </div>
+    <!--</div>-->
+
     <div sec:authorize="isAuthenticated()">
         <h3><a th:href="@{'/recipes/variation/'} + ${recipe.id}">Make a Variation!</a></h3>
     </div>

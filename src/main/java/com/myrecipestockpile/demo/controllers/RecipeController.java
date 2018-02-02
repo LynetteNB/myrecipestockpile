@@ -87,7 +87,7 @@ public class RecipeController {
         recipe.setUser(user);
 //        System.out.println(recipe.getId() + " is the id of updated rec");
         recipeService.editRecipe(recipe, instructions, ingredients, quantity);
-        return "index";
+        return "redirect:/recipes/show/" + recipe.getId();
     }
 
 
