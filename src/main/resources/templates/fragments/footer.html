@@ -5,7 +5,9 @@
 
 <footer th:fragment="footer" class="footer">
     <footer class="footer">
-        <span class="text-muted">My Recipe Stockpile &copy; <span th:text="${#dates.year(#dates.createNow())}"></span></span>
+        <span class="text-muted">My Recipe Stockpile &copy; <span th:text="${#dates.year(#dates.createNow())}"></span><a
+                th:href="${'/about'}"><h5>About Us</h5></a><span></span>
+        </span>
     </footer>
 </footer>
 
