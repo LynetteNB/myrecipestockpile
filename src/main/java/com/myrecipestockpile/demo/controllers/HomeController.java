@@ -62,6 +62,10 @@ public class HomeController {
 //        return "signup";
 //
 //    }
+    @GetMapping ("/about")
+    public String about(){
+        return "about";
+    }
 }
 
 
