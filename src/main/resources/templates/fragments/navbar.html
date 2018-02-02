@@ -43,9 +43,9 @@
                     <a href="/recipes/create">Create</a>
                 </li>
 
-                <!--<li class="buff" sec:authorize="isAuthenticated()">-->
-                    <!--<a th:href="@{'/profile/'} + ${#authentication.principal.username}"></a>-->
-                <!--</li>-->
+                <li class="buff" sec:authorize="isAuthenticated()">
+                    <a href="/profile">Profile</a>
+                </li>
 
                 <li class="buff" sec:authorize="isAuthenticated()">
                     <form th:action="@{/logout}" th:method="post">

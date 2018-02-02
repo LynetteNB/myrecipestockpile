@@ -6,8 +6,9 @@
 <div th:replace="fragments/navbar :: mainNavbar"></div>
 
 <h1 th:text="${stockpile.name}"></h1>
+<h4>Owner: <a th:href="@{'/profile/'} + ${stockpile.owner.username}" th:text="${stockpile.owner.username}"></a></h4>
 
-<a href="/stockpile/{id}/edit">Edit This Stockpile</a>
+<a th:href="${'/stockpile/'} + ${id} + ${'/edit'}">Edit This Stockpile</a>
 
 <footer th:include="fragments/footer :: footer"></footer>
 <div th:replace="fragments/scripts :: scripts"></div>
