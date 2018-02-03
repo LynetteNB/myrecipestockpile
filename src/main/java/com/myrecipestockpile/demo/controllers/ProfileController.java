@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class ProfileController {
 
     private ProfileService profileService;
+    private RecipeService recipeService;
 
-    public ProfileController(ProfileService profileService) {
+    public ProfileController(ProfileService profileService, RecipeService recipeService) {
         this.profileService = profileService;
+        this.recipeService = recipeService;
     }
 
     @GetMapping("/profile/{username}")
@@ -27,6 +29,7 @@ public class ProfileController {
         if (username.equalsIgnoreCase("") || requestedUser == null) {
             return "redirect:/";
         } else {
+            vModel.addAttribute("recipes", recipeService.showUsersFourMostRecent(requestedUser));
             vModel.addAttribute("user", requestedUser);
             return "profile";
         }

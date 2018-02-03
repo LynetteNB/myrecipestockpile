@@ -34,6 +34,14 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
 
+    public Iterable<Recipe> getRecentSix() {
+        return recipeRepository.findFirst6ByOrderByDateCreatedDesc();
+    }
+
+    public Iterable<Recipe> showUsersFourMostRecent(User user) {
+        return recipeRepository.findFirst4ByUserOrderByDateCreated(user);
+    }
+
 
     // This method will insert a new recipe into database and return the id of that recipe.
     public long createNewRecipe(Recipe recipe,

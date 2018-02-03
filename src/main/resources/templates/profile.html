@@ -8,6 +8,12 @@
 <h1>Hello, <span th:text="${user.username}"></span>. This your profile page</h1>
 
 <!-- Make a recently added Recipe section -->
+<h2>Here are their most recent recipes:</h2>
+<div th:each="recipe : ${recipes}">
+    <a th:href="@{'/recipes/show/'} + ${recipe.id}"><h1 th:text="${recipe.title}"></h1></a>
+    <p th:text="${recipe.description}"></p>
+    <p th:text="${recipe.user.username}"></p>
+</div>
 
 <h4>Stockpiles offer a way to organize your recipes</h4>
 <div><h3><a href="/stockpile/new">New Stockpile</a></h3></div>

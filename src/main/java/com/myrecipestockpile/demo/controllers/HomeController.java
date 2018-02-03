@@ -2,6 +2,7 @@ package com.myrecipestockpile.demo.controllers;
 
 import com.myrecipestockpile.demo.models.User;
 import com.myrecipestockpile.demo.repositories.UsersRepository;
+import com.myrecipestockpile.demo.services.RecipeService;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,14 +15,16 @@ import javax.validation.ConstraintViolationException;
 
 @Controller
 public class HomeController {
-    private UsersRepository usersRepository;
+    private RecipeService recipeService;
 
-    public HomeController(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
+    public HomeController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model vModel) {
+        vModel.addAttribute("recipes", recipeService.getRecentSix());
+
         return "index";
     }
 
