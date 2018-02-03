@@ -10,5 +10,6 @@ public interface RecipeRepository extends CrudRepository<Recipe, Long> {
 
     Recipe findByUser(User user);
     List<Recipe> findByDescriptionIsLikeOrTitleIsLike(String term, String term2);
-
+    List<Recipe> findFirst6ByOrderByDateCreatedDesc();
+    List<Recipe> findFirst4ByUserOrderByDateCreated(User user);
 }
