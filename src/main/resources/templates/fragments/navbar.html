@@ -5,59 +5,48 @@
 <head></head>
 <body>
 
-<nav id="my-nav" class="navbar navbar-default navbar-static-top" th:fragment="mainNavbar">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand buff" href="/">myrecstkpl</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a class="buff" href="/recipes">See all Recipes</a>
-                </li>
-            </ul>
-            <form th:action="@{/recipes/search}" method="POST" id="shrinkable-search" class="navbar-form navbar-left">
-                <div class="input-group">
-                    <input type="text" name="term" class="form-control" placeholder="Search for a recipe"/>
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn btn-success buff"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Go</button>
-                    </span>
-                </div>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="buff" sec:authorize="!isAuthenticated()">
-                    <a href="/login">Login</a>
-                </li>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="mainNavbar">
+    <a class="navbar-brand" href="/">My Recipe Stockpile</a>
+    <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-                <li class="buff" sec:authorize="isAnonymous()">
-                    <a href="/sign-up">Register</a>
-                </li>
-
-                <li class="buff" sec:authorize="isAuthenticated()">
-                    <a href="/recipes/create">Create</a>
-                </li>
-
-                <li class="buff" sec:authorize="isAuthenticated()">
-                    <a href="/profile">Profile</a>
-                </li>
-
-                <li class="buff" sec:authorize="isAuthenticated()">
-                    <form th:action="@{/logout}" th:method="post">
-                        <button class="btn-link btn" style="margin-top: 8px">Logout</button>
-                    </form>
-                </li>
-
-                <li sec:authorize="isAuthenticated()"
-                    th:text="${#authentication.principal.username}">
-                </li>
-            </ul>
-        </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li sec:authorize="isAuthenticated()">
+                <a class="nav-link" href="/profile" th:text="${#authentication.principal.username}"></a>
+            </li>
+            <li>
+                <a class="nav-link" href="/recipes">See all Recipes</a>
+            </li>
+            <li sec:authorize="!isAuthenticated()">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li sec:authorize="isAnonymous()">
+                <a class="nav-link" href="/sign-up">Register</a>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <a class="nav-link" href="/recipes/create">Create Recipe</a>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <a class="nav-link" href="/profile">Profile</a>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" th:method="post">
+                    <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+                </form>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/recipes/search}" method="GET">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search Recipes" aria-label="Search"/>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
     </div>
 </nav>
 
