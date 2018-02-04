@@ -19,11 +19,15 @@ body {
 .about-me-pic {
     display: block;
     width:50%;
-    height: auto;
+    height: 50%;
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px;
 }
+
+/* Recipe Form */
+
+
 
 
 /****Like Button****/
