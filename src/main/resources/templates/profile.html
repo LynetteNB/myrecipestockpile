@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/head :: main-head(Profile)"></head>
 <body>
 
@@ -16,10 +16,14 @@
 </div>
 
 <h4>Stockpiles offer a way to organize your recipes</h4>
-<div><h3><a href="/stockpile/new">New Stockpile</a></h3></div>
+<div sec:authorize="isAuthenticated()">
+    <div th:if="${#authentication.principal.id} == ${user.id}">
+        <h3><a th:href="@{'/stockpile/new'}">New Stockpile</a></h3>
+    </div>
+</div>
 <hr/>
-<h2>here you will see you list of stockpile</h2>
 
+<h2>here you will see you list of stockpile</h2>
 
 <div th:each="stockpile : ${user.stockpiles}">
     <hr/>
