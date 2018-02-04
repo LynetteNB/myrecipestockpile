@@ -10,75 +10,136 @@
         <legend class="center-text">Create New Recipe</legend>
 
         <form th:action="@{/recipes/create}" method="post" th:object="${recipe}">
+            <div class="list-group list-group-flush row">
 
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <label>Title:
+                <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label">Title</label>
+                    <div class="col-sm-10">
                         <input id="title" th:field="*{title}"/>
-                    </label>
+                    </div>
                 </div>
-            </div>
 
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <label>Description:
+                <div class="form-group row">
+                    <label for="description" class="col-sm-2 col-form-label">Description</label>
+                    <div class="col-sm-10">
                         <textarea id="description" th:field="*{description}" rows="6"></textarea>
-                    </label>
+                    </div>
                 </div>
 
-            </div>
+                <div class="form-group row">
+                    <label for="prepTime" class="col-sm-2 col-form-label">Prep Time</label>
+                    <div class="col-sm-10">
+                        <input id="prepTime" th:field="*{prepTime}" type="number" placeholder="Enter in minutes"/>
+                    </div>
+                </div>
 
-            <br/>
+                <div class="form-group row">
+                    <label for="cookTime" class="col-sm-2 col-form-label">Cook Time</label>
+                    <div class="col-sm-10">
+                        <input id="cookTime" th:field="*{cookTime}" type="number" placeholder="Enter in minutes"/>
+                    </div>
+                </div>
 
-            <label>Prep Time:
-                <input th:field="*{prepTime}" type="number" placeholder="Enter in minutes"/>
-            </label>
-            <br/>
+                <div class="form-group row">
+                    <label for="servings" class="col-sm-2 col-form-label">Servings</label>
+                    <div class="col-sm-10">
+                        <input id="servings" th:field="*{servings}" type="number"/>
+                    </div>
+                </div>
 
-            <label> Cook Time:
-                <input th:field="*{cookTime}" type="number" placeholder="Enter in minutes"/>
-            </label>
-            <br/>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Instructions</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="instructions_text"/>
+                    </div>
+                </div>
 
-            <label>Servings:
-                <input th:field="*{servings}" type="number"/>
-            </label>
-            <br/>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Ingredient</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="ingredients"/>
+                    </div>
+                </div>
 
-            <label>Instructions
-                <input type="text" name="instructions_text"/>
-            </label>
-            <label>Instructions
-                <input type="text" name="instructions_text"/>
-            </label>
-            <label>Instructions
-                <input type="text" name="instructions_text"/>
-            </label>
-            <label>Ingredient
-                <input type="text" name="ingredients"/>
-            </label>
-            <label>Quantity
-                <input type="text" name="quantity"/>
-            </label>
-            <label>Ingredient
-                <input type="text" name="ingredients"/>
-            </label>
-            <label>Quantity
-                <input type="text" name="quantity"/>
-            </label>
-            <label>Ingredient
-                <input type="text" name="ingredients"/>
-            </label>
-            <label>Quantity
-                <input type="text" name="quantity"/>
-            </label>
-            <label>Make my recipe private?
-                <input th:field="*{privateRecipe}" type="checkbox"/>
-            </label>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Amount</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="quantity"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="privateRecipe" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <input id="privateRecipe" th:field="*{privateRecipe}" type="checkbox"/>
+                    </div>
+                </div>
+
+
+
+                <!--<div class="col-sm-12 form-group">-->
+                <!--<div class="list-group-item list-group-item-action flex-column align-items-start">-->
+                    <!--<label for="title" class="col-sm-2 col-form-label">Recipe Name</label>-->
+                        <!--<input id="title" th:field="*{title}"/>-->
+                <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="col-sm-12 form-group">-->
+                <!--<div class="list-group-item list-group-item-action flex-column align-items-start"></div>-->
+                    <!--<label for="description" class="col-sm-2 col-form-label">Description</label>-->
+                <!--</div>-->
+
+
+                <!--<div class="col-sm-12 form-group">-->
+                <!--<div class="list-group-item list-group-item-action flex-column align-items-start"></div>-->
+                    <!--<label for="prepTime" class="col-sm-2 col-form-label">Prep Time</label>-->
+
+                <!--</div>-->
+
+
+                <!--<div class="col-sm-12 form-group">-->
+                <!--<div class="list-group-item list-group-item-action flex-column align-items-start"></div>-->
+                    <!--<label for="cookTime" class="col-sm-2 col-form-label"> Cook Time</label>-->
+
+
+            <!--</div>-->
+
+                <!--<div class="col-sm-12 form-group">-->
+                <!--<div class="list-group-item list-group-item-action flex-column align-items-start"></div>-->
+                    <!--<label for="servings" class="col-sm-2 col-form-label">Servings</label>-->
+                <!--</div>-->
+
+
+                <!--<div class="col-sm-12 form-group">-->
+                <!--<div class="list-group-item list-group-item-action flex-column align-items-start"></div>-->
+                    <!--<label class="col-sm-2 col-form-label">Instructions-->
+                    <!--</label>-->
+                <!--</div>-->
+
+
+                <!--<div class="col-sm-12 form-group">-->
+                <!--<div class="list-group-item list-group-item-action flex-column align-items-start"></div>-->
+                    <!--<label class="col-sm-2 col-form-label">Ingredient-->
+                    <!--</label>-->
+                <!--</div>-->
+
+
+                <!--<div class="col-sm-12 form-group">-->
+                <!--<div class="list-group-item list-group-item-action flex-column align-items-start"></div>-->
+                    <!--<label class="col-sm-2 col-form-label">Quantity-->
+                    <!--</label>-->
+                <!--</div>-->
+
+                <!--<div class="col-sm-12 form-group">-->
+                <!--<div class="list-group-item list-group-item-action flex-column align-items-start"></div>-->
+                    <!--<label class="col-sm-2 col-form-label">Make my recipe private?-->
+                    <!--</label>-->
+
+                <!--</div>-->
 
             <input type="submit"/>
+            </div>
         </form>
     </fieldset>
 </main>
