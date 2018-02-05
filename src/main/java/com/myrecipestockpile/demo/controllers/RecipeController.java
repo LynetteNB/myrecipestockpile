@@ -28,12 +28,6 @@ public class RecipeController {
         this.userService = userService;
     }
 
-    // Inject dependency when Repository is ready
-//    @GetMapping("/recipes/search/")
-//    public String index(){
-//        return "recipes/index";
-//    }
-
     @GetMapping("/recipes")
     public String allRecipes(Model vModel) {
         Iterable<Recipe> allRecipes = recipeService.getAllRecipes();
@@ -85,7 +79,6 @@ public class RecipeController {
                              @ModelAttribute Recipe recipe) {
         User user = recipeService.getFullRecipe(recipe.getId()).getUser();
         recipe.setUser(user);
-//        System.out.println(recipe.getId() + " is the id of updated rec");
         recipeService.editRecipe(recipe, instructions, ingredients, quantity);
         return "redirect:/recipes/show/" + recipe.getId();
     }
@@ -119,6 +112,7 @@ public class RecipeController {
                                         @RequestParam(name = "ingredients") String[] ingredients,
                                         @RequestParam(name = "quantity") String[] quantity,
                                         @ModelAttribute Recipe recipe) {
+        Recipe parentRecipe = recipeRepository.findOne(recipe.getId());
         Recipe newVariant = new Recipe(
                 recipe.getTitle(),
                 recipe.getDescription(),
@@ -127,7 +121,7 @@ public class RecipeController {
                 recipe.getServings(),
                 recipe.isPrivateRecipe(),
                 recipe.getUser(),
-                recipe
+                parentRecipe
         );
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         newVariant.setUser(user);

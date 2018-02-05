@@ -3,67 +3,140 @@
 <head th:replace="fragments/head :: main-head(create)"></head>
 <body>
 <div th:replace="fragments/navbar :: mainNavbar"></div>
-<h1>Create Recipe</h1>
 
-<form th:action="@{/recipes/create}" method="post" th:object="${recipe}">
-    <label>Title:
-        <input id="title" th:field="*{title}"/>
-    </label>
-    <br/>
+<main class="container">
 
-    <label>Description:
-        <textarea id="description" th:field="*{description}" rows="6"></textarea>
-    </label>
-    <br/>
+    <fieldset>
+        <legend class="center-text">Create New Recipe</legend>
 
-    <label>Prep Time:
-        <input th:field="*{prepTime}" type="number" placeholder="Enter in minutes"/>
-    </label>
-    <br/>
+        <form th:action="@{/recipes/create}" method="post" th:object="${recipe}">
+            <div class="list-group row">
 
-    <label> Cook Time:
-        <input th:field="*{cookTime}" type="number" placeholder="Enter in minutes"/>
-    </label>
-    <br/>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label for="title">Title</label>
+                        <input class="form-control" id="title" th:field="*{title}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label for="description">Description</label>
+                        <textarea class="form-control"
+                                  id="description"
+                                  th:field="*{description}"
+                                  rows="6"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="prepTime">Prep Time</label>
+                                <input class="form-control"
+                                       id="prepTime"
+                                       th:field="*{prepTime}"
+                                       type="number"/>
 
-    <label>Servings:
-        <input th:field="*{servings}" type="number"/>
-    </label>
-    <br/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="cookTime">Cook Time</label>
+                                <input class="form-control"
+                                       id="cookTime"
+                                       th:field="*{cookTime}"
+                                       type="number"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="servings">Servings</label>
+                                <input class="form-control"
+                                       id="servings"
+                                       th:field="*{servings}"
+                                       type="number"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <label>Instructions
-        <input type="text" name="instructions_text"/>
-    </label>
-    <label>Instructions
-        <input type="text" name="instructions_text"/>
-    </label>
-    <label>Instructions
-        <input type="text" name="instructions_text"/>
-    </label>
-    <label>Ingredient
-        <input type="text" name="ingredients"/>
-    </label>
-    <label>Quantity
-        <input type="text" name="quantity"/>
-    </label>
-    <label>Ingredient
-        <input type="text" name="ingredients"/>
-    </label>
-    <label>Quantity
-        <input type="text" name="quantity"/>
-    </label>
-    <label>Ingredient
-        <input type="text" name="ingredients"/>
-    </label>
-    <label>Quantity
-        <input type="text" name="quantity"/>
-    </label>
-    <label>Make my recipe private?
-    <input th:field="*{privateRecipe}" type="checkbox" />
-    </label>
+                <div class="col-sm-12">
+                    <div class="row" id="instructionList">
 
-    <input type="submit"/>
-</form>
+                        <div class="col-sm-10 offset-sm-2">
+                            <label>Instructions</label>
+                        </div>
+
+                        <!-- Single instruction -->
+                        <div class="col-sm-12 instructionItem">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <button type="button"
+                                            class="btn btn-outline-danger btn-block rmvInstructButton">&#8998;
+                                    </button>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" name="instructions_text"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 offset-sm-3">
+                            <button type="button" id="addInstruction" class="btn btn-outline-success btn-block">&#65291;Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="row" id="ingredientList">
+
+                        <!-- Section Labels -->
+                        <div class="col-sm-2"><label>Ingredients</label></div>
+                        <div class="col-sm-2">
+                            <label>Quantity</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <label>Item</label>
+                        </div>
+
+                        <!-- Single ingredient entry -->
+                        <div class="col-sm-12 ingredientItem">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <button type="button"
+                                            class="btn btn-outline-danger btn-block rmvIngButton">&#8998;</button>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input class="form-control" type="text" name="quantity"/>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" name="ingredients"/>
+                                </div>
+                            </div>
+                        </div>
+                        <!---->
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 offset-sm-3">
+                            <button type="button" id="addIngredient" class="btn btn-outline-success btn-block">&#65291;Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="privateRecipe" class="col-sm-2 col-form-label">Make This Recipe Private?</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="privateRecipe" th:field="*{privateRecipe}" type="checkbox"/>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create!</button>
+            </div>
+        </form>
+    </fieldset>
+</main>
+
 
 <footer th:include="fragments/footer :: footer"></footer>
 <div th:replace="fragments/scripts :: scripts"></div>
