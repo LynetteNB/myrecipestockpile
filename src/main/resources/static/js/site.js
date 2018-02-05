@@ -7,7 +7,6 @@ $(document).ready(function () {
 
 // Recipe Creation JS
 
-
     // Function to add on additional Quantity/Ingredient fields
     $('#addIngredient').click(function () {
         addIngredient();
@@ -30,8 +29,10 @@ $(document).ready(function () {
 
 
     function addIngredient() {
+        var item = $('.ingredientItem').length + 1;
         var html = "<div class=\"col-sm-12 ingredientItem\" style=\"display: none\">\n" +
             "<div class=\"row\">\n" +
+            "<div class=\"col-sm-2\"><p>" + item + ")</p></div>" +
             "<div class=\"col-sm-2\">\n" +
             "<input class=\"form-control\" type=\"text\" name=\"quantity\"/>\n" +
             "</div>\n" +
