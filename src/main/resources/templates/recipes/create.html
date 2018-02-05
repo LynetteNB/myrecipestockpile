@@ -73,8 +73,8 @@
                 </div>
 
 
-                <div class="ingredientsList col-sm-12">
-                    <div class="row" id="ingredientSec">
+                <div class="col-sm-12">
+                    <div class="row" id="ingredientList">
 
                         <!-- Section Labels -->
                         <div class="col-sm-2"><label>Ingredients</label></div>
@@ -85,28 +85,33 @@
                             <label>Item</label>
                         </div>
 
+                                <!--<div class="col-sm-2">-->
+                                    <!--<button type="button" class="btn btn-outline-primary remove">Remove-->
+                                    <!--</button>-->
+                                <!--</div>-->
                         <!-- Single ingredient entry -->
-
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-outline-primary" id="removeIng1">Remove</button>
+                        <div class="col-sm-12 ingredientItem">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <input class="form-control" type="text" name="quantity"/>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" name="ingredients"/>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-sm-2">
-                            <input class="form-control" type="text" name="quantity"/>
-                        </div>
-                        <div class="col-sm-8">
-                            <input class="form-control" type="text" name="ingredients"/>
-                        </div>
-
-
-
-
+                        <!---->
 
 
                     </div>
-                        <div class="col-sm-12">
-                            <button type="button" id="addIngredient">Add Another</button>
+                    <div class="col-sm-12">
+                        <button type="button" id="removeIngredient">Remove one</button>
 
-                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <button type="button" id="addIngredient">Add Another</button>
+
+                    </div>
 
                 </div>
 
