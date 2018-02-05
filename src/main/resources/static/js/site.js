@@ -1,11 +1,16 @@
 $(document).ready(function () {
 
+
     $('a.like-button').on('click', function () {
         $(this).toggleClass('liked');
     });
 
 
     // - Recipe Form Input HTML Injections -
+    // These 2 functions place id's and listeners on respective sections.
+    // Without running these, some inputs might not have ids.
+    remakeIngredientIdsAndListeners();
+    remakeInstructionIdsAndListeners();
 
     // --- To and and remove items in the ingredients section ---
     $('#addIngredient').click(function () {
@@ -17,7 +22,7 @@ $(document).ready(function () {
     function addIngredient() {
         var html = '<div class="col-sm-12 ingredientItem" style="display: none">' +
             '<div class="row">' +
-            '<div class="col-sm-2"><button type="button" class="btn btn-outline-danger btn-block rmvIngButton">Remove</button></div>' +
+            '<div class="col-sm-2"><button type="button" class="btn btn-outline-danger btn-block rmvIngButton">&#8998;</button></div>' +
             '<div class="col-sm-2">' +
             '<input class="form-control" type="text" name="quantity"/>' +
             '</div>' +
@@ -65,7 +70,7 @@ $(document).ready(function () {
         var html = '<div class="col-sm-12 instructionItem" id="instructId0" style="display: none">' +
             '<div class="row">' +
             '<div class="col-sm-2">' +
-            '<button type="button" class="btn btn-outline-danger btn-block rmvInstructButton" id="removeInstruct0">Remove' +
+            '<button type="button" class="btn btn-outline-danger btn-block rmvInstructButton" id="removeInstruct0">&#8998;' +
             '</button>' +
             '</div>' +
             '<div class="col-sm-10">' +
@@ -98,5 +103,14 @@ $(document).ready(function () {
             })
         });
     }
+
+    // Delete check. If checkbox isn't checked, it's submit button is disabled
+    $('#deleteBox').click(function () {
+        if ($('#deleteBox').is(':checked')) {
+            $('#deleteButton').removeAttr('disabled');
+        } else {
+            $('#deleteButton').attr('disabled', 'disabled');
+        }
+    });
 
 });

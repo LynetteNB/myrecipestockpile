@@ -83,9 +83,9 @@ public class RecipeService {
         recipe.setInstructions(instructions);
 
         // Final save. Updates the recipe, but adding data to dependent tables.
-        System.out.println(recipe.getId() + " before save");
+//        System.out.println(recipe.getId() + " before save");
         recipeRepository.save(recipe);
-        System.out.println(recipe.getId() + " after save");
+//        System.out.println(recipe.getId() + " after save");
         return recipe.getId();
     }
 
@@ -104,7 +104,7 @@ public class RecipeService {
         Recipe oldrecipe = recipeRepository.findOne(recipe.getId());
         recipe.setDateCreated(recipeRepository.findOne(recipe.getId()).getDateCreated());
 
-        List<Instruction> instructions = new ArrayList<>();
+
 //
         // Saving ingredients.
 
@@ -132,11 +132,15 @@ public class RecipeService {
         }
 
         // Creates List of new Instruction objects to set to Recipe.
-        List<Instruction> OldInstructions = recipeInstructionsRepository.findByRecipe(recipe);
-        for (int i = 0; i < OldInstructions.size(); i++) {
-            OldInstructions.get(i).setInstruction(instructionsArray[i]);
+        List<Instruction> instructions = new ArrayList<>();
+        List<Instruction> oldInstructions = recipeInstructionsRepository.findByRecipe(recipe);
+        recipeInstructionsRepository.delete(oldInstructions);
+
+        for (int i = 0; i < instructionsArray.length; i++) {
+            Instruction newInstruction = new Instruction(instructionsArray[i], recipe);
+            instructions.add(newInstruction);
         }
-        recipe.setInstructions(OldInstructions);
+        recipe.setInstructions(instructions);
 
         // Final save. Updates the recipe, but adding data to dependent tables.
         recipeRepository.save(recipe);
