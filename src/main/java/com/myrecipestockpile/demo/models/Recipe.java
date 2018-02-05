@@ -228,3 +228,5 @@ public class Recipe {
         this.recipeIngredients = recipeIngredients;
     }
 }
+
+// STRING THAT KEEPS URL THAT COMES BACK FROM FILESTACK

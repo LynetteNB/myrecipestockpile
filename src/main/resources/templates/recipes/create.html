@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: main-head(create)"></head>
+<head th:replace="fragments/head :: main-head(create)">
+</head>
 <body>
 <div th:replace="fragments/navbar :: mainNavbar"></div>
 <h1>Create Recipe</h1>
@@ -62,7 +63,24 @@
     <input th:field="*{privateRecipe}" type="checkbox" />
     </label>
 
+    <!--HIDDEN INPUT TYPE WHERE NAME OF IMG- TAKES VALUE OF URL THAT RETURNS FROM FILESTACK-->
+    <!--USE JQUERY TO UPDATE VALUE-->
+    <script>
+        //Instantiating dialog with Filestack
+        var client = filestack.init("AZvuYvrkS2GRaOBsg61tvz");
+        client.upload();
+        function pickMark() {
+            console.log("Upload Picture");
+        }
+
+        //Filestack API method 'pick()' that opens the file picker
+        client.pick({});
+    </script>
+
+    <input type="BUTTON" value="Upload Picture" id="uploadpicture" onclick="pickMark()"/>
+
     <input type="submit"/>
+
 </form>
 
 <footer th:include="fragments/footer :: footer"></footer>

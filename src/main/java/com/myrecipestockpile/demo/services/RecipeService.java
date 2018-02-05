@@ -151,5 +151,9 @@ public class RecipeService {
 
     }
 
+//    ***Hearted Recipe***
+    public void heartedRecipes(Recipe heartedRecipes) {
+        recipeRepository.save(heartedRecipes);
+    }
 
 }

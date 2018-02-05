@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class RecipeController {
@@ -137,6 +138,19 @@ public class RecipeController {
 
 
         return "redirect:/recipes/show/" + id;
+    }
+
+//    ***Hearted Recipes****
+    @GetMapping("/recipes/{id}/like")
+    public String heartedRecipes(@PathVariable long id,  Model vModel){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Recipe recipe = recipeRepository.findOne(id);
+        user = usersRepository.findOne(user.getId());
+        List<Recipe> heartedRecipes = user.getHeartedRecipes();
+        heartedRecipes.add(recipe);
+        user.setHeartedRecipes(heartedRecipes);
+        usersRepository.save(user);
+        return "redirect:/recipes";
     }
 
 }
