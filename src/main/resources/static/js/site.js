@@ -14,13 +14,23 @@ $(document).ready(function () {
     });
 
     $('#removeIngredient').click(function () {
-        console.log("remove");
-       $('.ingredientItem').filter(':last').remove();
+        hideIng();
+        setTimeout(function () {
+            $('.ingredientItem').filter(':last').remove();
+        }, 600);
     });
+    
+    function removeIng() {
+        $('.ingredientItem').filter(':last').remove();
+    }
+
+    function hideIng() {
+       $('.ingredientItem').filter(':last').hide('slow');
+    }
 
 
     function addIngredient() {
-        var html = "<div class=\"col-sm-12 ingredientItem\">\n" +
+        var html = "<div class=\"col-sm-12 ingredientItem\" style=\"display: none\">\n" +
             "<div class=\"row\">\n" +
             "<div class=\"col-sm-2\">\n" +
             "<input class=\"form-control\" type=\"text\" name=\"quantity\"/>\n" +
@@ -31,6 +41,7 @@ $(document).ready(function () {
             "</div>\n" +
             "</div>"
         $('#ingredientList').append(html);
+        $('.ingredientItem').filter(':last').toggle('slow');
     }
 
 
