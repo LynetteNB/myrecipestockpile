@@ -5,65 +5,98 @@ $(document).ready(function () {
     });
 
 
-// Recipe Creation JS
+    // - Recipe Form Input HTML Injections -
 
-    // Function to add on additional Quantity/Ingredient fields
+    // --- To and and remove items in the ingredients section ---
     $('#addIngredient').click(function () {
         addIngredient();
-        addRemoveListeners();
+        remakeIngredientIdsAndListeners();
     });
 
-    // $('#removeIngredient').click(function () {
-    //     hideIng();
-    //     setTimeout(function () {
-    //         $('.ingredientItem').filter(':last').remove();
-    //     }, 600);
-    // });
-
-    function addRemoveListeners() {
-        for (var i = 1; i <= $('.ingredientItem').length; i++) {
-            // var string = "#removeIng"
-            $('#removeIng' + i).off('click');
-            $('#removeIng' + i).click(function () {
-                var id = $(this).attr('id');
-                var index = id.substring(id.length - 1);
-                $('#ingId' + index).hide('slow');
-                setTimeout(function () {
-                    $('#ingId' + index).remove();
-                }, 600);
-            })
-        }
-    }
-
-
-    
-    // function removeIng() {
-    //     $('.ingredientItem').filter(':last').remove();
-    // }
-    //
-    //
-    //
-    // function hideIng() {
-    //    $('.ingredientItem').filter(':last').hide('slow');
-    // }
-    //
-
+    // Injects new Ingredient html for inputs at bottom of the list with a fade in animation
     function addIngredient() {
-        var itemNum = $('.ingredientItem').length + 1;
-        var html = "<div class=\"col-sm-12 ingredientItem\" style=\"display: none\" id=\"ingId" + itemNum + "\">" +
-            "<div class=\"row\">\n" +
-            "<div class=\"col-sm-2\"><button type=\"button\" class=\"btn btn-outline-success btn-block\" id=\"removeIng" + itemNum + "\">Remove</button></div>" +
-            "<div class=\"col-sm-2\">\n" +
-            "<input class=\"form-control\" type=\"text\" name=\"quantity\"/>\n" +
-            "</div>\n" +
-            "<div class=\"col-sm-8\">\n" +
-            "<input class=\"form-control\" type=\"text\" name=\"ingredients\"/>\n" +
-            "</div>\n" +
-            "</div>\n" +
-            "</div>"
+        var html = '<div class="col-sm-12 ingredientItem" style="display: none">' +
+            '<div class="row">' +
+            '<div class="col-sm-2"><button type="button" class="btn btn-outline-danger btn-block rmvIngButton">Remove</button></div>' +
+            '<div class="col-sm-2">' +
+            '<input class="form-control" type="text" name="quantity"/>' +
+            '</div>' +
+            '<div class="col-sm-8">' +
+            '<input class="form-control" type="text" name="ingredients"/>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
         $('#ingredientList').append(html);
         $('.ingredientItem').filter(':last').show('slow');
     }
 
+    // Recreates the the ids on ingredientItems and each of their delete buttons
+    // Refreshed the click listeners on the delete buttons
+    function remakeIngredientIdsAndListeners() {
+        $('.ingredientItem').each(function (index) {
+            console.log(index + 'is the index');
+            var idx = 'ingId' + index;
+            $(this).attr('id', idx);
+        });
+        $('.rmvIngButton').each(function (index) {
+            var idx2 = 'removeIng' + index;
+            $(this).attr('id', idx2);
+            $(this).off('click');
+            $(this).click(function () {
+                var ingredientItem = $(this).closest('.ingredientItem');
+                ingredientItem.hide('slow');
+                setTimeout(function () {
+                    ingredientItem.remove();
+                }, 600);
+
+            })
+        });
+    }
+
+    // --- To add and remove items in the instructions section ---
+
+    $('#addInstruction').click(function () {
+        addInstruction();
+        remakeInstructionIdsAndListeners();
+    });
+
+    // Injects new Instruction html for inputs at bottom of the list with a fade in animation
+    function addInstruction() {
+        var html = '<div class="col-sm-12 instructionItem" id="instructId0" style="display: none">' +
+            '<div class="row">' +
+            '<div class="col-sm-2">' +
+            '<button type="button" class="btn btn-outline-danger btn-block rmvInstructButton" id="removeInstruct0">Remove' +
+            '</button>' +
+            '</div>' +
+            '<div class="col-sm-10">' +
+            '<input class="form-control" type="text" name="instructions_text"/>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+        $('#instructionList').append(html);
+        $('.instructionItem').filter(':last').show('slow');
+    }
+
+    // Recreates the the ids on instructionItems and each of their delete buttons
+    // Refreshed the click listeners on the delete buttons
+    function remakeInstructionIdsAndListeners() {
+        $('.instructionItem').each(function (index) {
+            console.log(index + 'is the index');
+            var idx = 'instructId' + index;
+            $(this).attr('id', idx);
+        });
+        $('.rmvInstructButton').each(function (index) {
+            var idx2 = 'removeInstruct' + index;
+            $(this).attr('id', idx2);
+            $(this).off('click');
+            $(this).click(function () {
+                var instructionItem = $(this).closest('.instructionItem');
+                instructionItem.hide('slow');
+                setTimeout(function () {
+                    instructionItem.remove();
+                }, 600);
+            })
+        });
+    }
 
 });

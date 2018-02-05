@@ -56,22 +56,37 @@
                     </div>
                 </div>
 
+                <div class="col-sm-12">
+                    <div class="row" id="instructionList">
 
-                <div class="instructionList">
+                        <div class="col-sm-10 offset-sm-2">
+                            <label>Instructions</label>
+                        </div>
 
-                    <div class="col-sm-12">
-                        <label>List the Instructions</label>
+                        <!-- Single instruction -->
+                        <div class="col-sm-12 instructionItem" id="instructId0">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <button type="button"
+                                            class="btn btn-outline-danger btn-block rmvInstructButton"
+                                            id="removeInstruct0">&#8998;
+                                    </button>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" name="instructions_text"/>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <input class="form-control" type="text" name="instructions_text"/>
+                    <div class="row">
+                        <div class="col-sm-3 offset-sm-3">
+                            <button type="button" id="addInstruction" class="btn btn-outline-success btn-block">&#65291;Add
+                            </button>
                         </div>
                     </div>
-                    <div class="add-instruction"></div>
-                    <button type="button">Next Step</button>
                 </div>
-
 
                 <div class="col-sm-12">
                     <div class="row" id="ingredientList">
@@ -87,10 +102,13 @@
 
 
                         <!-- Single ingredient entry -->
-                        <div class="col-sm-12 ingredientItem" id="ingId1">
+                        <div class="col-sm-12 ingredientItem" id="ingId0">
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <button type="button" class="btn btn-outline-success btn-block" id="removeIng1">Remove</button>
+                                    <button type="button"
+                                            class="btn btn-outline-danger btn-block rmvIngButton"
+                                            id="removeIng0">&#8998;
+                                    </button>
                                 </div>
                                 <div class="col-sm-2">
                                     <input class="form-control" type="text" name="quantity"/>
@@ -106,17 +124,10 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-3 offset-sm-3">
-                            <button type="button" id="addIngredient" class="btn btn-outline-success btn-block">Add
+                            <button type="button" id="addIngredient" class="btn btn-outline-success btn-block">&#65291;Add
                             </button>
-
-                        </div>
-                        <div class="col-sm-3">
-                            <button type="button" id="removeIngredient" class="btn btn-outline-success btn-block">Remove
-                            </button>
-
                         </div>
                     </div>
-
                 </div>
 
                 <div class="form-group">
@@ -128,7 +139,6 @@
 
 
                 <!-- TODO Form field help texts -->
-                <!-- TODO jquery for repeating inputs-->
 
                 <button type="submit" class="btn btn-primary">Create!</button>
             </div>

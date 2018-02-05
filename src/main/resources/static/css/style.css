@@ -27,7 +27,7 @@ body {
 
 /*  Recipe Form  */
 
-.ingredientItem {
+.ingredientItem, .instructionItem {
     margin-bottom: 10px;
 }
 
