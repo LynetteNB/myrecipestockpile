@@ -132,6 +132,12 @@
                     </div>
                 </div>
 
+                <input type="BUTTON" value="Upload Picture" id="uploadpicture" onclick="pickMark()"/>
+                <div id="imagePlaceholder"></div>
+                <!-- This input carries the image url to the controller side -->
+                <input type="hidden" name="image" id="imageInput"/>
+                <input type="submit"/>
+
                 <button type="submit" class="btn btn-primary">Create!</button>
             </div>
         </form>
