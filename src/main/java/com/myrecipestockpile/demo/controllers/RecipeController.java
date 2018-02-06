@@ -133,4 +133,9 @@ public class RecipeController {
         return "redirect:/recipes/show/" + id;
     }
 
+    @PostMapping("/heart-update")
+    public void updateHeartedStatus() {
+
+    }
+
 }
