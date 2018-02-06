@@ -38,7 +38,20 @@ public class RecipeController {
 
     @GetMapping("/recipes/show/{id}")
     public String show(@PathVariable long id, Model vModel) {
+        // get the user form the session
+        // use the user repository to go for the user to the database -- findOne(user.getId())
+        // pass the user to the template
+        Object guest = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        User user;
+        if (guest instanceof String) {
+            user = new User();
+        } else {
+            user = usersRepository.findOne(((User) guest).getId()) ;
+        }
+
         vModel.addAttribute(recipeService.getFullRecipe(id));
+        vModel.addAttribute(user);
         return "recipes/show";
     }
 
