@@ -38,14 +38,26 @@
         <h3><a th:href="@{'/recipes/variation/'} + ${recipe.id}">Make a Variation!</a></h3>
     </div>
 
+
+    <div sec:authorize="isAuthenticated()">
+        <form th:action="@{'/stockpile/saveto'}" method="post" th:object="${recipe}">
+            <input type="hidden" th:value="${recipe.id}" name="recipeId"/>
+        <h3>Save to one or more of your stockpiles</h3>
+            <select name="stockpileToAddTo" class="custom-select" multiple="multiple">
+                <option th:each="stockpile : ${user.stockpiles}" th:value="${stockpile.id}" th:text="${stockpile.name}"></option>
+            </select>
+        <button class="btn btn-primary" type="submit">Save!</button>
+        </form>
+    </div>
+
+
     <div class='middle-wrapper'>
         <div class='like-wrapper'>
             <a class='like-button'>
-      <span class='like-icon'>
-        <div class='heart-animation-1'></div>
-        <div class='heart-animation-2'></div>
-      </span>
-                Love
+            <span class='like-icon'>
+            <div class='heart-animation-1'></div>
+            <div class='heart-animation-2'></div>
+            </span>Love
             </a>
         </div>
     </div>
