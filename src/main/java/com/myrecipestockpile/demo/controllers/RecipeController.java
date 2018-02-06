@@ -61,9 +61,12 @@ public class RecipeController {
                          @RequestParam(name = "instructions_text") String[] instructions,
                          @RequestParam(name = "ingredients") String[] ingredients,
                          @RequestParam(name = "quantity") String[] quantity,
+                         @RequestParam(name = "image") String image,
                          @ModelAttribute Recipe recipe) {
+        System.out.println(recipe.getImageUrl());
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         recipe.setUser(usersRepository.findOne(user.getId()));
+        recipe.setImageUrl(image);
         recipeService.createNewRecipe(recipe, instructions, ingredients, quantity);
         return "index";
     }

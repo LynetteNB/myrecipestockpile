@@ -65,7 +65,8 @@
 
 
     <input type="BUTTON" value="Upload Picture" id="uploadpicture" onclick="pickMark()"/>
-    <img src="" id="url"/>
+    <div id="imagePlaceholder"></div>
+    <!-- This input carries the image url to the controller side -->
     <input type="hidden" name="image" id="imageInput"/>
     <input type="submit"/>
 
@@ -75,31 +76,21 @@
 <script src="https://static.filestackapi.com/v3/filestack.js"></script>
 <div th:replace="fragments/scripts :: scripts"></div>
 <script>
-    //Instantiating dialog with Filestack
-    //        var client = filestack.init("AZvuYvrkS2GRaOBsg61tvz");
-    //        client.upload();
 
-//    $(document).ready(function () {
+    function pickMark() {
+        // Filestack API method 'pick()' that opens the file picker
+        const client = filestack.init("AZvuYvrkS2GRaOBsg61tvz");
+        client.pick({}).then(function (result) {
+            const fileUrl = result.filesUploaded[0].url;
 
-        function pickMark() {
-            console.log("Upload Picture");
-            //Filestack API method 'pick()' that opens the file picker
-//            client.pick({});
+            // This gives the input the value of the image url.
+            $('#imageInput').val(fileUrl);
 
-            const link = document.getElementById('url');
+            // This creates an img element for the user to see.
+            $('#imagePlaceholder').append('<img src="' + fileUrl + '" id="url"/>');
+        });
+    }
 
-//        $('#uploadpicture').click();
-            const client = filestack.init("AZvuYvrkS2GRaOBsg61tvz");
-            client.pick({}).then(function (result) {
-                const fileUrl = result.filesUploaded[0].url;
-//                link.href = fileUrl;
-//                link.innerHTML = fileUrl;
-                console.log(fileUrl);
-            $('#url').html('<img id="url" src="' + fileUrl + '"/>');
-                $('#imageInput').val(fileUrl);
-            });
-        }
-//    });
 </script>
 </body>
 </html>

@@ -39,6 +39,8 @@
     <h3><a th:href="@{'/recipes/variation/'} + ${recipe.id}">Make a Variation!</a></h3>
 </div>
 
+<img th:src="${recipe.imageUrl}" alt=""/>
+
 <div class='middle-wrapper'>
     <div class='like-wrapper'>
         <a class='like-button' th:href="${'/recipes/' + recipe.id + '/like'}">
