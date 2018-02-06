@@ -80,9 +80,11 @@ public class RecipeController {
                              @RequestParam(name = "instructions_text") String[] instructions,
                              @RequestParam(name = "ingredients") String[] ingredients,
                              @RequestParam(name = "quantity") String[] quantity,
+                             @RequestParam(name = "image") String image,
                              @ModelAttribute Recipe recipe) {
         User user = recipeService.getFullRecipe(recipe.getId()).getUser();
         recipe.setUser(user);
+        recipe.setImageUrl(image);
         recipeService.editRecipe(recipe, instructions, ingredients, quantity);
         return "redirect:/recipes/show/" + recipe.getId();
     }

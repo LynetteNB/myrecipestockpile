@@ -146,14 +146,17 @@
 
 
 <footer th:include="fragments/footer :: footer"></footer>
-<script src="https://static.filestackapi.com/v3/filestack.js"></script>
 <div th:replace="fragments/scripts :: scripts"></div>
 <script>
 
     function pickMark() {
         // Filestack API method 'pick()' that opens the file picker
         const client = filestack.init("AZvuYvrkS2GRaOBsg61tvz");
-        client.pick({}).then(function (result) {
+        client.pick({
+            fromSources:["local_file_system","imagesearch","facebook","instagram"],
+            transformations:{
+                crop:true}
+        }).then(function (result) {
             const fileUrl = result.filesUploaded[0].url;
 
             // This gives the input the value of the image url.
