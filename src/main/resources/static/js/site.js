@@ -113,4 +113,9 @@ $(document).ready(function () {
         }
     });
 
+    $('#save-to-stockpile').click(function () {
+        $('#multi_select').toggle();
+    });
+
+
 });
