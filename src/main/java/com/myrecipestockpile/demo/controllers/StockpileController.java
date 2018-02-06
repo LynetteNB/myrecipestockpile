@@ -1,7 +1,10 @@
 package com.myrecipestockpile.demo.controllers;
 
+import com.myrecipestockpile.demo.models.Recipe;
 import com.myrecipestockpile.demo.models.Stockpile;
 import com.myrecipestockpile.demo.models.User;
+import com.myrecipestockpile.demo.repositories.RecipeRepository;
+import com.myrecipestockpile.demo.repositories.StockpileRepository;
 import com.myrecipestockpile.demo.repositories.UsersRepository;
 import com.myrecipestockpile.demo.services.StockpileService;
 import com.myrecipestockpile.demo.services.UserService;
@@ -9,10 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Controller
 public class StockpileController {
@@ -20,11 +25,15 @@ public class StockpileController {
     private StockpileService stockpileService;
     private UsersRepository usersRepository;
     private UserService userService;
+    private RecipeRepository recipeRepository;
+    private StockpileRepository stockpileRepository;
 
-    public StockpileController(StockpileService stockpileService, UsersRepository usersRepository, UserService userService) {
+    public StockpileController(StockpileService stockpileService, UsersRepository usersRepository, UserService userService, RecipeRepository recipeRepository, StockpileRepository stockpileRepository) {
         this.stockpileService = stockpileService;
         this.usersRepository = usersRepository;
         this.userService = userService;
+        this.recipeRepository = recipeRepository;
+        this.stockpileRepository = stockpileRepository;
     }
 
     @GetMapping("/stockpile/{id}")
@@ -80,6 +89,35 @@ public class StockpileController {
     @PostMapping("stockpile/{id}/delete")
     public String delete(@PathVariable long id) {
         stockpileService.delete(id);
+        return "redirect:/";
+    }
+
+    @PostMapping("/stockpile/saveto")
+    public String addRecipeToStockpile(
+            @RequestParam(name = "stockpileToAddTo") List<Long> stockpileIds,
+            @RequestParam(name = "recipeId") Long recipeId) {
+
+
+        System.out.println(recipeId + " is the recipe id");
+        List<Recipe> recipes = new ArrayList<>();
+
+//        List<Stockpile> populatedStockpile = recipe.getStockpiles();
+        for (long stockpileId : stockpileIds) {
+            Stockpile sp = stockpileService.findOne(stockpileId);
+            recipes.add(recipeRepository.findOne(recipeId));
+            recipes.addAll(sp.getStockpileRecipes());
+            sp.setStockpileRecipes(recipes);
+            stockpileService.save(sp);
+            recipes.clear();
+
+//        System.out.println("stockpile id" + stockpileId);
+//            populatedStockpile.add(stockpileService.findOne(stockpileId));
+        }
+
+//        recipe.setStockpiles(populatedStockpile);
+////        recipeRepository.save(recipe);
+//        stockpileRepository.save(populatedStockpile);
+
         return "redirect:/";
     }
 
