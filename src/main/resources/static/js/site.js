@@ -1,8 +1,23 @@
 $(document).ready(function () {
 
+    // - Hearting A Recipe -
 
     $('a.like-button').on('click', function () {
         $(this).toggleClass('liked');
+        var recipeId = $('#recipeIdInfo').attr('data');
+        var userId = $('#userIdInfo').attr('data');
+        $.ajax("/heart-update", {
+            type: "POST",
+            data: {
+                userId: userId,
+                recipeId: recipeId,
+                _csrf: $('input[name=_csrf]').val()
+            }
+        }).done(function (recipe) {
+            console.log("done");
+            console.log(recipe)
+        });
+
     });
 
 

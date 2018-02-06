@@ -51,7 +51,9 @@ public class RecipeController {
         }
 
         vModel.addAttribute(recipeService.getFullRecipe(id));
-        vModel.addAttribute(user);
+//        if (user != null) {
+            vModel.addAttribute(user);
+//        }
         return "recipes/show";
     }
 
@@ -147,8 +149,18 @@ public class RecipeController {
     }
 
     @PostMapping("/heart-update")
-    public void updateHeartedStatus() {
+    public @ResponseBody Recipe processAJAXRequest(
+            @RequestParam("userId") long userId,
+            @RequestParam("recipeId") long recipeId   ) {
 
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser == null) {
+            return new Recipe();
+        } else if (userId != loggedInUser.getId()) {
+            return new Recipe();
+        } else {
+            userService.updateHeart(userId, recipeId);
+        }
+        return new Recipe();
     }
-
 }

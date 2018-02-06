@@ -38,6 +38,21 @@
         <h3><a th:href="@{'/recipes/variation/'} + ${recipe.id}">Make a Variation!</a></h3>
     </div>
 
+    <div sec:authorize="isAuthenticated()">
+        <!-- holds recipeId for like button ajax -->
+        <div th:data="${recipe.id}" id="recipeIdInfo" style="display: none"></div>
+        <div th:data="${#authentication.principal.id}" id="userIdInfo" style="display: none"></div>
+        <div class='middle-wrapper'>
+            <div class='like-wrapper'>
+                <a class='like-button'>
+            <span class='like-icon'>
+            <div class='heart-animation-1'></div>
+            <div class='heart-animation-2'></div>
+            </span>Love
+                </a>
+            </div>
+        </div>
+    </div>
 
     <div sec:authorize="isAuthenticated()">
         <form th:action="@{'/stockpile/saveto'}" method="post" th:object="${recipe}">
@@ -51,16 +66,6 @@
     </div>
 
 
-    <div class='middle-wrapper'>
-        <div class='like-wrapper'>
-            <a class='like-button'>
-            <span class='like-icon'>
-            <div class='heart-animation-1'></div>
-            <div class='heart-animation-2'></div>
-            </span>Love
-            </a>
-        </div>
-    </div>
 
     <footer th:include="fragments/footer :: footer"></footer>
     <div th:replace="fragments/scripts :: scripts"></div>
