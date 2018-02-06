@@ -19,14 +19,26 @@ body {
 .about-me-pic {
     display: block;
     width:50%;
-    height: auto;
+    height: 50%;
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px;
 }
 
+/*  Recipe Form  */
 
-/****Like Button****/
+.ingredientItem, .instructionItem {
+    margin-bottom: 10px;
+}
+
+#deleteForm {
+    margin-top: 15px;
+}
+
+
+
+/*  Like Button  */
+
 body {
     font-size: 16px;
 }
