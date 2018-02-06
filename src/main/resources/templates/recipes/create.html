@@ -60,30 +60,46 @@
         <input type="text" name="quantity"/>
     </label>
     <label>Make my recipe private?
-    <input th:field="*{privateRecipe}" type="checkbox" />
+        <input th:field="*{privateRecipe}" type="checkbox"/>
     </label>
 
-    <!--HIDDEN INPUT TYPE WHERE NAME OF IMG- TAKES VALUE OF URL THAT RETURNS FROM FILESTACK-->
-    <!--USE JQUERY TO UPDATE VALUE-->
-    <script>
-        //Instantiating dialog with Filestack
-        var client = filestack.init("AZvuYvrkS2GRaOBsg61tvz");
-        client.upload();
-        function pickMark() {
-            console.log("Upload Picture");
-        }
-
-        //Filestack API method 'pick()' that opens the file picker
-        client.pick({});
-    </script>
 
     <input type="BUTTON" value="Upload Picture" id="uploadpicture" onclick="pickMark()"/>
-
+    <img src="" id="url"/>
+    <input type="hidden" name="image" id="imageInput"/>
     <input type="submit"/>
 
 </form>
 
 <footer th:include="fragments/footer :: footer"></footer>
+<script src="https://static.filestackapi.com/v3/filestack.js"></script>
 <div th:replace="fragments/scripts :: scripts"></div>
+<script>
+    //Instantiating dialog with Filestack
+    //        var client = filestack.init("AZvuYvrkS2GRaOBsg61tvz");
+    //        client.upload();
+
+//    $(document).ready(function () {
+
+        function pickMark() {
+            console.log("Upload Picture");
+            //Filestack API method 'pick()' that opens the file picker
+//            client.pick({});
+
+            const link = document.getElementById('url');
+
+//        $('#uploadpicture').click();
+            const client = filestack.init("AZvuYvrkS2GRaOBsg61tvz");
+            client.pick({}).then(function (result) {
+                const fileUrl = result.filesUploaded[0].url;
+//                link.href = fileUrl;
+//                link.innerHTML = fileUrl;
+                console.log(fileUrl);
+            $('#url').html('<img id="url" src="' + fileUrl + '"/>');
+                $('#imageInput').val(fileUrl);
+            });
+        }
+//    });
+</script>
 </body>
 </html>
