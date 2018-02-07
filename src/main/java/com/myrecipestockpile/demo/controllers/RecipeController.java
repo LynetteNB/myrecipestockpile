@@ -54,6 +54,7 @@ public class RecipeController {
 //        if (user != null) {
             vModel.addAttribute(user);
             vModel.addAttribute("isHearted", userService.recipeIsLiked(user, recipe));
+            vModel.addAttribute("heartCount", recipeService.recipeHeartCount(recipe));
 //        }
         return "recipes/show";
     }

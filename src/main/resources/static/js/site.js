@@ -14,8 +14,22 @@ $(document).ready(function () {
                 _csrf: $('input[name=_csrf]').val()
             }
         }).done(function (recipe) {
-            console.log("done");
-            console.log(recipe)
+            // Update the visual heart number for better user experience
+            // Requires a unique Id on a heart span. Refactor to use on multi-recipe listing
+            var heartCount = $('#heartCount');
+            var currentCount = heartCount.text();
+            var newCount;
+            var increaseCount = $('#heart').hasClass('liked');
+            if (increaseCount) {
+                console.log("adding");
+                newCount = parseInt(currentCount) + 1;
+                heartCount.text(newCount);
+            } else {
+                console.log("subtracting");
+                newCount = parseInt(currentCount) - 1;
+                heartCount.text(newCount);
+            }
+
         });
 
     });

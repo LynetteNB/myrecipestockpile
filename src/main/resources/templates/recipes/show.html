@@ -45,17 +45,19 @@
         <!--<div th:data="${liked}"></div>-->
         <div class='middle-wrapper'>
             <div class='like-wrapper'>
-                <a class='like-button' th:if="!${isHearted}">
+                <a class='like-button' th:if="!${isHearted}" id="heart">
                     <span class='like-icon'>
                         <div class='heart-animation-1'></div>
                         <div class='heart-animation-2'></div>
-                    </span>Love
+                    </span>
+                    <span th:text="${heartCount}" id="heartCount"></span>
                 </a>
-                <a class='like-button liked' th:if="${isHearted}">
+                <a class='like-button liked' th:if="${isHearted}" id="heart">
                     <span class='like-icon'>
                         <div class='heart-animation-1'></div>
                         <div class='heart-animation-2'></div>
-                    </span>Love
+                    </span>
+                    <span th:text="${heartCount}" id="heartCount"></span>
                 </a>
             </div>
         </div>
