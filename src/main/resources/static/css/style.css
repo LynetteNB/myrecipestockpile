@@ -371,10 +371,3 @@ a {
         transform: translate(2px, -18px) rotate(-25deg);
     }
 }
-
-.recipe-image {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-    width: 150px;
-}

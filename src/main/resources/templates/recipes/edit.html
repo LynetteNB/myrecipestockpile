@@ -20,12 +20,10 @@
                     </div>
                 </div>
 
-
                 <!--*****-->
-
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <label for="uploadpicture">Add an image</label>
+                        <label for="uploadpicture">Add An Image To This Recipe</label>
                         <div class="col-sm-2">
                             <button type="button" class="btn btn-outline-danger" id="uploadpicture"
                                     onclick="pickMark()">Upload Picture
@@ -33,7 +31,10 @@
                         </div>
                     </div>
                 </div>
-                    <!--<input type="BUTTON" value="Upload Picture" id="uploadpicture" onclick="pickMark()"/>-->
+
+                <img th:src="${recipe.imageUrl}" alt="recipeimage" style="width:450px;height:350px;border-radius: 8px;"/>
+
+                <!--<input type="BUTTON" value="Upload Picture" id="uploadpicture" onclick="pickMark()"/>-->
                     <div id="imagePlaceholder"></div>
                     <!-- This input carries the image url to the controller side -->
                     <input type="hidden" name="image" id="imageInput"/>
@@ -213,11 +214,15 @@
         }).then(function (result) {
             const fileUrl = result.filesUploaded[0].url;
 
+//            ***Removing Image***
+//            const client = filestack.init("AZvuYvrkS2GRaOBsg61tvz");
+//            client.remove(handle, options);
+
             // This gives the input the value of the image url.
             $('#imageInput').val(fileUrl);
 
             // This creates an img element for the user to see.
-            $('#imagePlaceholder').append('<img src="' + fileUrl + '" id="url"/>');
+            $('#imagePlaceholder').append('<img src="' + fileUrl + '" id="url" />');
         });
     }
 

@@ -132,12 +132,18 @@
                     </div>
                 </div>
 
-                <input type="BUTTON" value="Upload Picture" id="uploadpicture" onclick="pickMark()"/>
-                <div id="imagePlaceholder"></div>
-                <!-- This input carries the image url to the controller side -->
-                <input type="hidden" name="image" id="imageInput"/>
-                <input type="submit"/>
+                <div class="col-sm-3">
+                    <label for="uploadpicture">Add An Image To This Recipe</label>
+                    <input type="BUTTON" value="Upload Image" class="btn-btn-outline-danger" id="uploadpicture"
+                           onclick="pickMark()"/>
+                </div>
+                <br/>
+                    <div id="imagePlaceholder"></div>
+                    <!-- This input carries the image url to the controller side -->
+                    <input type="hidden" name="image" id="imageInput"/>
 
+                <br/>
+                <!--<input type="submit"/>-->
                 <button type="submit" class="btn btn-primary">Create!</button>
             </div>
         </form>
@@ -163,7 +169,8 @@
             $('#imageInput').val(fileUrl);
 
             // This creates an img element for the user to see.
-            $('#imagePlaceholder').append('<img src="' + fileUrl + '" id="url"/>');
+            $('#imagePlaceholder').append('<img src="' + fileUrl +
+                '" id="url" style="width:450px;height:350px;border-radius: 8px;"/>');
         });
     }
 

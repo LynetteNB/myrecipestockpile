@@ -85,6 +85,7 @@ public class RecipeController {
         User user = recipeService.getFullRecipe(recipe.getId()).getUser();
         recipe.setUser(user);
         recipe.setImageUrl(image);
+        System.out.println(image);
         recipeService.editRecipe(recipe, instructions, ingredients, quantity);
         return "redirect:/recipes/show/" + recipe.getId();
     }
