@@ -97,11 +97,15 @@ public class StockpileController {
 //        List<Stockpile> populatedStockpile = recipe.getStockpiles();
         for (long stockpileId : stockpileIds) {
             Stockpile sp = stockpileService.findOne(stockpileId);
-            recipes.add(recipeRepository.findOne(recipeId));
-            recipes.addAll(sp.getStockpileRecipes());
-            sp.setStockpileRecipes(recipes);
-            stockpileService.save(sp);
-            recipes.clear();
+            Recipe recipe = recipeRepository.findOne(recipeId);
+            boolean stockpileAlreadyContainsRecipe = sp.getStockpileRecipes().contains(recipe);
+            if (!stockpileAlreadyContainsRecipe) {
+                recipes.add(recipeRepository.findOne(recipeId));
+                recipes.addAll(sp.getStockpileRecipes());
+                sp.setStockpileRecipes(recipes);
+                stockpileService.save(sp);
+                recipes.clear();
+            }
 
 //        System.out.println("stockpile id" + stockpileId);
 //            populatedStockpile.add(stockpileService.findOne(stockpileId));
@@ -111,7 +115,7 @@ public class StockpileController {
 ////        recipeRepository.save(recipe);
 //        stockpileRepository.save(populatedStockpile);
 
-        return "redirect:/";
+        return "redirect:/recipes/show/" + recipeId;
     }
 
 }
