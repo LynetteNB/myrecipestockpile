@@ -84,8 +84,16 @@ public class RecipeController {
                              @ModelAttribute Recipe recipe) {
         User user = recipeService.getFullRecipe(recipe.getId()).getUser();
         recipe.setUser(user);
-        recipe.setImageUrl(image);
-        System.out.println(image);
+
+        if (!image.equalsIgnoreCase("")) {
+            recipe.setImageUrl(image);
+        } else {
+            String img = recipeService.getFullRecipe(recipe.getId()).getImageUrl();
+            System.out.println(img + " is stored img");
+            recipe.setImageUrl(img);
+        }
+
+        System.out.println(image + "is parameter img");
         recipeService.editRecipe(recipe, instructions, ingredients, quantity);
         return "redirect:/recipes/show/" + recipe.getId();
     }
@@ -120,6 +128,7 @@ public class RecipeController {
                                         @RequestParam(name = "quantity") String[] quantity,
                                         @RequestParam(name = "image") String image,
                                         @ModelAttribute Recipe recipe) {
+        System.out.println(image + "this is the image url");
         Recipe parentRecipe = recipeRepository.findOne(recipe.getId());
         Recipe newVariant = new Recipe(
                 recipe.getTitle(),
@@ -131,7 +140,13 @@ public class RecipeController {
                 recipe.getUser(),
                 parentRecipe
         );
-        newVariant.setImageUrl(image);
+        if (!image.equalsIgnoreCase("")) {
+            newVariant.setImageUrl(image);
+        } else {
+            newVariant.setImageUrl(parentRecipe.getImageUrl());
+        }
+
+
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         newVariant.setUser(user);
 
