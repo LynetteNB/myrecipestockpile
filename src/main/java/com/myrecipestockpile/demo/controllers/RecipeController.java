@@ -220,11 +220,20 @@ public class RecipeController {
 
         }
         vModel.addAttribute("title", "Hearted Recipes");
-        return "/index";
+        return "/recipes/index";
     }
 
-
-
-//    @{'/stockpile/allMyHeartedRecipes/'} + ${user.username}"
-//    a th:href="@{'/stockpile/allMyRecipes/'} + ${user.username}"
+    @GetMapping("/stockpile/allMyRecipes/{username}")
+    public String viewAllUsersRecipes(@PathVariable String username, Model vModel) {
+        User user = usersRepository.findByUsername(username);
+        if (user.getId() == userService.loggedInUser().getId()) {
+            Iterable<Recipe> allRecipes = recipeRepository.findByUser(user);
+            vModel.addAttribute("recipes", allRecipes);
+        } else {
+            Iterable<Recipe> allPublicRecipes = recipeRepository.findByUserAndPrivateRecipe(user, false);
+            vModel.addAttribute("recipes", allPublicRecipes);
+        }
+        vModel.addAttribute("title", "All My Recipes");
+        return "/recipes/index";
+    }
 }
