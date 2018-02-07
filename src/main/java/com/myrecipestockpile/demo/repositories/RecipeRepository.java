@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface RecipeRepository extends CrudRepository<Recipe, Long> {
 
+    Iterable<Recipe> findAllByPrivateRecipe(boolean isPrivate);
+
     Recipe findByUser(User user);
     List<Recipe> findByDescriptionIsLikeOrTitleIsLike(String term, String term2);
 

@@ -31,7 +31,7 @@ public class RecipeController {
 
     @GetMapping("/recipes")
     public String allRecipes(Model vModel) {
-        Iterable<Recipe> allRecipes = recipeService.getAllRecipes();
+        Iterable<Recipe> allRecipes = recipeService.getAllPublicRecipes();
         vModel.addAttribute("recipes", allRecipes);
         return "/index";
     }
