@@ -42,6 +42,25 @@ body {
     margin-top: 15px;
 }
 
+#multi_select {
+    display: none;
+}
+
+
+
+/*  Like Button  */
+
+.ingredientItem, .instructionItem {
+    margin-bottom: 10px;
+}
+
+#deleteForm {
+    margin-top: 15px;
+}
+
+
+
+
 /*  Like Button  */
 
 body {
@@ -103,14 +122,12 @@ a {
     -ms-user-select: none;
     user-select: none;
 }
-
 .like-button.liked {
     color: #ff6e6f;
     border-color: currentColor;
     -webkit-filter: grayscale(0);
     filter: grayscale(0);
 }
-
 .like-button:hover {
     border-color: currentColor;
 }
@@ -132,7 +149,6 @@ a {
     -webkit-animation: heartPulse 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
     animation: heartPulse 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
-
 .liked .like-icon [class^="heart-animation-"] {
     background: url('data:image/svg+xml;utf8,<svg width="21" height="18" viewBox="0 0 21 18" xmlns="http://www.w3.org/2000/svg"><title>heart-colored</title><path d="M10.101 4.417S8.895.207 5.111.207c-4.465 0-10.967 6.846 5.082 17.592C25.237 7.03 19.665.202 15.501.202c-4.162 0-5.4 4.215-5.4 4.215z" fill="#FF6E6F" fill-rule="evenodd"/></svg>') no-repeat center;
     background-size: 100%;
@@ -144,7 +160,6 @@ a {
     height: 14px;
     opacity: 0;
 }
-
 .liked .like-icon [class^="heart-animation-"]::before, .liked .like-icon [class^="heart-animation-"]::after {
     content: '';
     background: inherit;
@@ -157,47 +172,39 @@ a {
     left: inherit;
     opacity: 0;
 }
-
 .liked .like-icon .heart-animation-1 {
     -webkit-animation: heartFloatMain-1 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
     animation: heartFloatMain-1 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
-
 .liked .like-icon .heart-animation-1::before, .liked .like-icon .heart-animation-1::after {
     width: 12px;
     height: 10px;
     visibility: hidden;
 }
-
 .liked .like-icon .heart-animation-1::before {
     opacity: .6;
     -webkit-animation: heartFloatSub-1 1s 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
     animation: heartFloatSub-1 1s 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
-
 .liked .like-icon .heart-animation-1::after {
     -webkit-animation: heartFloatSub-2 1s 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
     animation: heartFloatSub-2 1s 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
     opacity: .75;
 }
-
 .liked .like-icon .heart-animation-2 {
     -webkit-animation: heartFloatMain-2 1s 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
     animation: heartFloatMain-2 1s 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
-
 .liked .like-icon .heart-animation-2::before, .liked .like-icon .heart-animation-2::after {
     width: 10px;
     height: 8px;
     visibility: hidden;
 }
-
 .liked .like-icon .heart-animation-2::before {
     -webkit-animation: heartFloatSub-3 1s 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
     animation: heartFloatSub-3 1s 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
     opacity: .25;
 }
-
 .liked .like-icon .heart-animation-2::after {
     -webkit-animation: heartFloatSub-4 1s 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
     animation: heartFloatSub-4 1s 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
@@ -225,21 +232,18 @@ a {
         transform: scale(1.5);
     }
 }
-
 @-webkit-keyframes heartUnlike {
     50% {
         -webkit-transform: scale(0.75);
         transform: scale(0.75);
     }
 }
-
 @keyframes heartUnlike {
     50% {
         -webkit-transform: scale(0.75);
         transform: scale(0.75);
     }
 }
-
 @-webkit-keyframes heartFloatMain-1 {
     0% {
         opacity: 0;
@@ -252,7 +256,6 @@ a {
         transform: translate(0, -25px) rotate(-20deg);
     }
 }
-
 @keyframes heartFloatMain-1 {
     0% {
         opacity: 0;
@@ -265,7 +268,6 @@ a {
         transform: translate(0, -25px) rotate(-20deg);
     }
 }
-
 @-webkit-keyframes heartFloatMain-2 {
     0% {
         opacity: 0;
@@ -278,7 +280,6 @@ a {
         transform: translate(-10px, -38px) rotate(25deg) scale(1);
     }
 }
-
 @keyframes heartFloatMain-2 {
     0% {
         opacity: 0;
@@ -291,7 +292,6 @@ a {
         transform: translate(-10px, -38px) rotate(25deg) scale(1);
     }
 }
-
 @-webkit-keyframes heartFloatSub-1 {
     0% {
         visibility: hidden;
@@ -304,7 +304,6 @@ a {
         transform: translate(13px, -13px) rotate(30deg);
     }
 }
-
 @keyframes heartFloatSub-1 {
     0% {
         visibility: hidden;
@@ -317,7 +316,6 @@ a {
         transform: translate(13px, -13px) rotate(30deg);
     }
 }
-
 @-webkit-keyframes heartFloatSub-2 {
     0% {
         visibility: hidden;
@@ -330,7 +328,6 @@ a {
         transform: translate(18px, -10px) rotate(55deg);
     }
 }
-
 @keyframes heartFloatSub-2 {
     0% {
         visibility: hidden;
@@ -343,7 +340,6 @@ a {
         transform: translate(18px, -10px) rotate(55deg);
     }
 }
-
 @-webkit-keyframes heartFloatSub-3 {
     0% {
         visibility: hidden;
@@ -360,7 +356,6 @@ a {
         transform: translate(-50px, 0);
     }
 }
-
 @keyframes heartFloatSub-3 {
     0% {
         visibility: hidden;
@@ -377,7 +372,6 @@ a {
         transform: translate(-50px, 0);
     }
 }
-
 @-webkit-keyframes heartFloatSub-4 {
     0% {
         visibility: hidden;
@@ -390,7 +384,6 @@ a {
         transform: translate(2px, -18px) rotate(-25deg);
     }
 }
-
 @keyframes heartFloatSub-4 {
     0% {
         visibility: hidden;
@@ -402,7 +395,4 @@ a {
         -webkit-transform: translate(2px, -18px) rotate(-25deg);
         transform: translate(2px, -18px) rotate(-25deg);
     }
-}
-.jumbotron {
-    background-size: cover;
 }

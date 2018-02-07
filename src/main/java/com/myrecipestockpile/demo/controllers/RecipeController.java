@@ -39,7 +39,23 @@ public class RecipeController {
 
     @GetMapping("/recipes/show/{id}")
     public String show(@PathVariable long id, Model vModel) {
-        vModel.addAttribute(recipeService.getFullRecipe(id));
+        System.out.println("CONTROLLER RUNNING");
+        // get the user form the session
+        // use the user repository to go for the user to the database -- findOne(user.getId())
+        // pass the user to the template
+        Object guest = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Recipe recipe = recipeService.getFullRecipe(id);
+
+        User user;
+        if (guest instanceof String) {
+            user = new User();
+        } else {
+            user = usersRepository.findOne(((User) guest).getId());
+            vModel.addAttribute("isHearted", userService.recipeIsLiked(user, recipe));
+        }
+        vModel.addAttribute("heartCount", recipeService.recipeHeartCount(recipe));
+        vModel.addAttribute("recipe", recipe);
+        vModel.addAttribute("user", user);
         return "recipes/show";
     }
 
@@ -157,17 +173,20 @@ public class RecipeController {
         return "redirect:/recipes/show/" + id;
     }
 
-//    ***Hearted Recipes****
-    @GetMapping("/recipes/{id}/like")
-    public String heartedRecipes(@PathVariable long id,  Model vModel){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Recipe recipe = recipeRepository.findOne(id);
-        user = usersRepository.findOne(user.getId());
-        List<Recipe> heartedRecipes = user.getHeartedRecipes();
-        heartedRecipes.add(recipe);
-        user.setHeartedRecipes(heartedRecipes);
-        usersRepository.save(user);
-        return "redirect:/recipes";
-    }
+    @PostMapping("/heart-update")
+    public @ResponseBody
+    Recipe processAJAXRequest(
+            @RequestParam("userId") long userId,
+            @RequestParam("recipeId") long recipeId) {
 
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser == null) {
+            return new Recipe();
+        } else if (userId != loggedInUser.getId()) {
+            return new Recipe();
+        } else {
+            userService.updateHeart(userId, recipeId);
+        }
+        return new Recipe();
+    }
 }

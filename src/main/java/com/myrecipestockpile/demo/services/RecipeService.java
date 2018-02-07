@@ -152,7 +152,10 @@ public class RecipeService {
     //This method will delete a recipe by id
     public void deleteRecipe(Recipe recipe) {
         recipeRepository.delete(recipe.getId());
+    }
 
+    public long recipeHeartCount(Recipe recipe) {
+        return recipe.getHeartedUsers().size();
     }
 
 //    ***Hearted Recipe***

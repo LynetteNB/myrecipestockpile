@@ -36,6 +36,20 @@ public class Stockpile {
     public Stockpile() {
     }
 
+    public Stockpile(String name, boolean privateStockpile, User owner, List<Recipe> stockpileRecipes) {
+        this.name = name;
+        this.privateStockpile = privateStockpile;
+        this.owner = owner;
+        this.stockpileRecipes = stockpileRecipes;
+    }
+
+    public Stockpile(long id, String name, boolean privateStockpile, User owner, List<Recipe> stockpileRecipes) {
+        this.id = id;
+        this.name = name;
+        this.privateStockpile = privateStockpile;
+        this.owner = owner;
+        this.stockpileRecipes = stockpileRecipes;
+    }
 
     // -------------
 

@@ -1,8 +1,38 @@
 $(document).ready(function () {
 
+    // - Hearting A Recipe -
 
-    $('a.like-button').on('click', function () {
+    $('#heart').on('click', function () {
         $(this).toggleClass('liked');
+        var recipeId = $('#recipeIdInfo').attr('data');
+        var userId = $('#userIdInfo').attr('data');
+        $.ajax("/heart-update", {
+            type: "POST",
+            data: {
+                userId: userId,
+                recipeId: recipeId,
+                _csrf: $('input[name=_csrf]').val()
+            }
+        }).done(function (results) {
+            // Update the visual heart number for better user experience
+            // Requires a unique Id on a heart span. Refactor to use on multi-recipe listing
+            console.log(results);
+            var heartCount = $('#heartCount');
+            var currentCount = heartCount.text();
+            var newCount;
+            var increaseCount = $('#heart').hasClass('liked');
+            if (increaseCount) {
+                console.log("adding");
+                newCount = parseInt(currentCount) + 1;
+                heartCount.text(newCount);
+            } else {
+                console.log("subtracting");
+                newCount = parseInt(currentCount) - 1;
+                heartCount.text(newCount);
+            }
+
+        });
+
     });
 
 
@@ -113,16 +143,9 @@ $(document).ready(function () {
         }
     });
 
+    $('#save-to-stockpile').click(function () {
+        $('#multi_select').slideToggle();
+    });
 
-    // const link = document.getElementById('url');
-    // $('#uploadpicture').click(function () {
-    //     const client = filestack.init(AZvuYvrkS2GRaOBsg61tvz);
-    //     client.pick({}).then(function (result) {
-    //         const fileUrl = result.filesUploaded[0].url;
-    //         link.href = fileUrl;
-    //         link.innerHTML = fileUrl;
-    //         console.log(fileUrl);
-    //     });
-    // });
+
 });
-
