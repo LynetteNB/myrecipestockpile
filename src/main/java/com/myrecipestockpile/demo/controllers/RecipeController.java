@@ -137,7 +137,7 @@ public class RecipeController {
     @GetMapping("/recipes/search")
     public String search(@RequestParam(name = "term") String term, Model vModel) {
         term = "%" + term + "%";
-        vModel.addAttribute("recipes", recipeRepository.findByDescriptionIsLikeOrTitleIsLike(term, term));
+        vModel.addAttribute("recipes", recipeRepository.findByDescriptionIsLikeOrTitleIsLikeAndPrivateRecipe(term, term, false));
         return "recipes/results";
     }
 
