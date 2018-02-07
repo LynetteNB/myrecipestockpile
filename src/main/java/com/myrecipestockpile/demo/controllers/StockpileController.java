@@ -4,11 +4,8 @@ import com.myrecipestockpile.demo.models.Recipe;
 import com.myrecipestockpile.demo.models.Stockpile;
 import com.myrecipestockpile.demo.models.User;
 import com.myrecipestockpile.demo.repositories.RecipeRepository;
-import com.myrecipestockpile.demo.repositories.StockpileRepository;
-import com.myrecipestockpile.demo.repositories.UsersRepository;
 import com.myrecipestockpile.demo.services.StockpileService;
 import com.myrecipestockpile.demo.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,29 +14,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
-
 @Controller
 public class StockpileController {
 
     private StockpileService stockpileService;
-    private UsersRepository usersRepository;
     private UserService userService;
     private RecipeRepository recipeRepository;
-    private StockpileRepository stockpileRepository;
 
-    public StockpileController(StockpileService stockpileService, UsersRepository usersRepository, UserService userService, RecipeRepository recipeRepository, StockpileRepository stockpileRepository) {
+    public StockpileController(StockpileService stockpileService, UserService userService, RecipeRepository recipeRepository) {
         this.stockpileService = stockpileService;
-        this.usersRepository = usersRepository;
         this.userService = userService;
         this.recipeRepository = recipeRepository;
-        this.stockpileRepository = stockpileRepository;
     }
 
     @GetMapping("/stockpile/{id}")
     public String show(@PathVariable long id, Model vModel) {
         Stockpile stockpile = stockpileService.findOne(id);
+        Iterable<Recipe> recipes = stockpile.getStockpileRecipes();
         vModel.addAttribute("stockpile", stockpile);
+        vModel.addAttribute("recipes", recipes);
         return "stockpile/show";
     }
 
@@ -98,17 +91,21 @@ public class StockpileController {
             @RequestParam(name = "recipeId") Long recipeId) {
 
 
-        System.out.println(recipeId + " is the recipe id");
+//        System.out.println(recipeId + " is the recipe id");
         List<Recipe> recipes = new ArrayList<>();
 
 //        List<Stockpile> populatedStockpile = recipe.getStockpiles();
         for (long stockpileId : stockpileIds) {
             Stockpile sp = stockpileService.findOne(stockpileId);
-            recipes.add(recipeRepository.findOne(recipeId));
-            recipes.addAll(sp.getStockpileRecipes());
-            sp.setStockpileRecipes(recipes);
-            stockpileService.save(sp);
-            recipes.clear();
+            Recipe recipe = recipeRepository.findOne(recipeId);
+            boolean stockpileAlreadyContainsRecipe = sp.getStockpileRecipes().contains(recipe);
+            if (!stockpileAlreadyContainsRecipe) {
+                recipes.add(recipeRepository.findOne(recipeId));
+                recipes.addAll(sp.getStockpileRecipes());
+                sp.setStockpileRecipes(recipes);
+                stockpileService.save(sp);
+                recipes.clear();
+            }
 
 //        System.out.println("stockpile id" + stockpileId);
 //            populatedStockpile.add(stockpileService.findOne(stockpileId));
@@ -118,7 +115,7 @@ public class StockpileController {
 ////        recipeRepository.save(recipe);
 //        stockpileRepository.save(populatedStockpile);
 
-        return "redirect:/";
+        return "redirect:/recipes/show/" + recipeId;
     }
 
 }
