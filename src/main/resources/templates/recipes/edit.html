@@ -32,10 +32,11 @@
                     </div>
                 </div>
 
-                <img th:src="${recipe.imageUrl}" alt="recipeimage" style="width:450px;height:350px;border-radius: 8px;"/>
 
                 <!--<input type="BUTTON" value="Upload Picture" id="uploadpicture" onclick="pickMark()"/>-->
-                    <div id="imagePlaceholder"></div>
+                    <div id="imagePlaceholder">
+                        <img th:src="${recipe.imageUrl}" alt="recipeimage"/>
+                    </div>
                     <!-- This input carries the image url to the controller side -->
                     <input type="hidden" name="image" id="imageInput"/>
                 <!--<input type="submit"/>-->
@@ -222,6 +223,7 @@
             $('#imageInput').val(fileUrl);
 
             // This creates an img element for the user to see.
+            $('#imagePlaceholder').empty();
             $('#imagePlaceholder').append('<img src="' + fileUrl + '" id="url" />');
         });
     }

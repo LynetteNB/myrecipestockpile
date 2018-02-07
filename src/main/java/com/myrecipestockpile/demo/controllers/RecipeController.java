@@ -118,6 +118,7 @@ public class RecipeController {
                                         @RequestParam(name = "instructions_text") String[] instructions,
                                         @RequestParam(name = "ingredients") String[] ingredients,
                                         @RequestParam(name = "quantity") String[] quantity,
+                                        @RequestParam(name = "image") String image,
                                         @ModelAttribute Recipe recipe) {
         Recipe parentRecipe = recipeRepository.findOne(recipe.getId());
         Recipe newVariant = new Recipe(
@@ -130,6 +131,7 @@ public class RecipeController {
                 recipe.getUser(),
                 parentRecipe
         );
+        newVariant.setImageUrl(image);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         newVariant.setUser(user);
 

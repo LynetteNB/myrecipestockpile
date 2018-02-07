@@ -5,7 +5,14 @@
 
 <div th:replace="fragments/navbar :: mainNavbar"></div>
 
-<h1>This is our index page</h1>
+<!--<h1>This is our index page</h1>-->
+
+<div class="jumbotron">
+    <img src="/images/recipestockpile.jpg" class="mrsimage"/>
+    <hr class="my-4"/>
+    <h5 class="display-3"><b><i>A recipe is a story that ends with a good meal!</i></b></h5>
+
+</div>
 
 <div th:each="recipe : ${recipes}">
     <a th:href="@{'/recipes/show/'} + ${recipe.id}"><h3 th:text="${recipe.title}"></h3></a>

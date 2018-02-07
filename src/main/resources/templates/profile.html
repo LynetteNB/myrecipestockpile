@@ -10,7 +10,9 @@
 <!-- Make a recently added Recipe section -->
 <h2>Here are their most recent recipes:</h2>
 <div th:each="recipe : ${recipes}">
-    <a th:href="@{'/recipes/show/'} + ${recipe.id}"><h1 th:text="${recipe.title}"></h1></a>
+    <a th:href="@{'/recipes/show/'} + ${recipe.id}"><h3 th:text="${recipe.title}"></h3></a>
+    <img th:src="${recipe.imageUrl}" alt="" style="width:400px;height:300px;border-radius: 8px;border: 1px solid
+    black"/>
     <p th:text="${recipe.description}"></p>
     <p th:text="${recipe.user.username}"></p>
 </div>
