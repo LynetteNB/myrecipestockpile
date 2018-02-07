@@ -6,12 +6,15 @@
 <div th:replace="fragments/navbar :: mainNavbar"></div>
 
 <!--<h1>This is our index page</h1>-->
-
 <div class="jumbotron">
-    <img src="/images/recipestockpile.jpg" class="mrsimage"/>
-    <hr class="my-4"/>
-    <h5 class="display-3"><b><i>A recipe is a story that ends with a good meal!</i></b></h5>
-
+    <img src="/images/recipestockpile.jpg" alt="rollingpin" class="rollingpin"/>
+    <br/><br/>
+    <img src="/images/chicken.jpg" alt="chickenimage" class="jumbotron-image"/>
+    <blockquote class="blockquote text-center">
+        <p class="text-primary">A recipe is a story that ends with a good meal!</p>
+        <footer class="blockquote-footer"><cite title="Pat Conroy">Pat Conroy</cite></footer>
+    </blockquote>
+    <hr/>
 </div>
 
 <div th:each="recipe : ${recipes}">

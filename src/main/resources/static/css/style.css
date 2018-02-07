@@ -396,3 +396,22 @@ a {
         transform: translate(2px, -18px) rotate(-25deg);
     }
 }
+
+.jumbotron {
+    background-size: cover;
+    background-color: white;
+    text-align: center;
+    font-style: oblique;
+    /*font-weight: bold;*/
+}
+
+.jumbotron-image {
+    width: 800px;
+    height: 500px;
+}
+
+.rollingpin {
+    width: 700px;
+    height: 75px;
+}
+
