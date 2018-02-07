@@ -28,11 +28,17 @@ public class ProfileController {
         // If requested is null or empty
         if (username.equalsIgnoreCase("") || requestedUser == null) {
             return "redirect:/";
-        } else {
-            vModel.addAttribute("recipes", recipeService.showUsersFourMostRecent(requestedUser));
-            vModel.addAttribute("user", requestedUser);
-            return "profile";
         }
+
+        // Checking if user profile is that of the logged in user, to decide to show private recipes
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (requestedUser.getId() == user.getId()) {
+            vModel.addAttribute("recipes", recipeService.showUsersFourMostRecentPublicAndPrivate(requestedUser));
+        } else {
+            vModel.addAttribute("recipes", recipeService.showUsersFourMostRecentPublic(requestedUser));
+        }
+        vModel.addAttribute("user", requestedUser);
+        return "profile";
     }
 
     @GetMapping("/profile")

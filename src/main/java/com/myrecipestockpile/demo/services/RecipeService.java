@@ -34,11 +34,15 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
 
-    public Iterable<Recipe> getRecentSix() {
-        return recipeRepository.findFirst6ByOrderByDateCreatedDesc();
+    public Iterable<Recipe> getRecentAllSix() {
+        return recipeRepository.findFirst6ByPrivateRecipeOrderByDateCreated(false);
     }
 
-    public Iterable<Recipe> showUsersFourMostRecent(User user) {
+    public Iterable<Recipe> showUsersFourMostRecentPublic(User user) {
+        return recipeRepository.findFirst4ByUserAndPrivateRecipeOrderByDateCreated(user, false);
+    }
+
+    public Iterable<Recipe> showUsersFourMostRecentPublicAndPrivate(User user) {
         return recipeRepository.findFirst4ByUserOrderByDateCreated(user);
     }
 
