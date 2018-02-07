@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: main-head(Error)"></head>
+<body>
+
+<th:block th:switch="${error}">
+    <div th:case="'Not Found'">
+        <h1 class="text-center"><big>404!</big> The page you tried viewing is not found!</h1>
+    </div>
+    <div th:case="'Forbidden'">
+        <h1 class="text-center">Looks like you don't have permission to view this page.</h1>
+    </div>
+
+    <h3 class="text-center">You can click the back button to return to the previous page or click <a href="/">here</a> to navigate back to our Homepage</h3>
+</th:block>
+
+<footer th:include="fragments/footer :: footer"></footer>
+<div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>
