@@ -44,15 +44,26 @@ public class RecipeController {
         // use the user repository to go for the user to the database -- findOne(user.getId())
         // pass the user to the template
         Object guest = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Recipe recipe = recipeService.getFullRecipe(id);
-
         User user;
         if (guest instanceof String) {
             user = new User();
         } else {
             user = usersRepository.findOne(((User) guest).getId());
-            vModel.addAttribute("isHearted", userService.recipeIsLiked(user, recipe));
         }
+        Recipe recipe = recipeService.getFullRecipe(id);
+
+        // check if recipe is private and owned by user
+        if (recipe.isPrivateRecipe() && user == recipe.getUser()) {
+            vModel.addAttribute("isHearted", userService.recipeIsLiked(user, recipe));
+            vModel.addAttribute("heartCount", recipeService.recipeHeartCount(recipe));
+            vModel.addAttribute("recipe", recipe);
+            vModel.addAttribute("user", user);
+            return "recipes/show";
+        }
+        if (recipe.isPrivateRecipe()) {
+            return "redirect:/";
+        }
+        vModel.addAttribute("isHearted", userService.recipeIsLiked(user, recipe));
         vModel.addAttribute("heartCount", recipeService.recipeHeartCount(recipe));
         vModel.addAttribute("recipe", recipe);
         vModel.addAttribute("user", user);
