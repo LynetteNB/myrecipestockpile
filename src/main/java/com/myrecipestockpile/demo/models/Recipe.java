@@ -1,5 +1,7 @@
 package com.myrecipestockpile.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -38,27 +40,33 @@ public class Recipe {
 
     // Connects to users table, it represents it's owner.
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     // Connects to another recipe's id, it represents the recipe which this one is a variation of. If null, it has no parent recipe and is not a variation.
     @OneToOne
+    @JsonIgnore
     private Recipe parentRecipe;
 
     // Connects to recipe_ingredient table. It will hold a list of all the recipe ingredients connected to this recipe.
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<RecipeIngredient> recipeIngredients;
 
     // Connects to instructions table, to show which instructions belong to it. Instructions sorted by primary key will show proper order.
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    @JsonIgnore
     private List<Instruction> instructions;
 
 
     // Connects to stockpile table. The pivot table formed shows recipe/stockpile
     @ManyToMany(mappedBy = "stockpileRecipes")
+    @JsonIgnore
     private List<Stockpile> stockpiles;
 
     // Connects to recipes table. The pivot table formed shows user/recipe combinations to show which users have "hearted" which recipes.
     @ManyToMany(mappedBy = "heartedRecipes")
+    @JsonIgnore
     private List<User> heartedUsers;
 
 

@@ -1,67 +1,95 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/head :: main-head(showRecipe)"></head>
 <body>
-    <div th:replace="fragments/navbar :: mainNavbar"></div>
-    <h1>This page shows individual recipe</h1>
+<div th:replace="fragments/navbar :: mainNavbar"></div>
+<h1>This page shows individual recipe</h1>
 
 
-    <h1 th:text="${recipe.title}"></h1>
-    <h6>Owner: <span th:text="${recipe.user.username}"></span></h6>
-    <h5>Description: </h5>
-    <p th:text="${recipe.description}"></p>
-    <h5>Cook Time: </h5>
-    <p th:text="${recipe.cookTime}"></p>
-    <h5>Prep Time: </h5>
-    <p th:text="${recipe.prepTime}"></p>
-    <h5>Servings: </h5>
-    <p th:text="${recipe.servings}"></p>
-    <p>Is Private<span th:object="${privateRecipe}"></span></p>
+<h1 th:text="${recipe.title}"></h1>
+<h6>Owner: <span th:text="${recipe.user.username}"></span></h6>
+<h5>Description: </h5>
+<p th:text="${recipe.description}"></p>
+<h5>Cook Time: </h5>
+<p th:text="${recipe.cookTime}"></p>
+<h5>Prep Time: </h5>
+<p th:text="${recipe.prepTime}"></p>
+<h5>Servings: </h5>
+<p th:text="${recipe.servings}"></p>
+<p>Is Private<span th:object="${privateRecipe}"></span></p>
 
-    <!--//loop over the instruction and ingredients (nested)-->
-    <div th:each="instruction : ${recipe.instructions}">
-        <p th:text="${instruction.instruction}"></p>
+<!--//loop over the instruction and ingredients (nested)-->
+<div th:each="instruction : ${recipe.instructions}">
+    <p th:text="${instruction.instruction}"></p>
+</div>
+
+<div th:each="ingredient : ${recipe.recipeIngredients}">
+    <p th:text="${ingredient.quantity}"></p>
+    <p th:text="${ingredient.ingredient.ingredient}"></p>
+</div>
+
+<div sec:authorize="isAuthenticated()">
+    <div th:if="${#authentication.principal.id} == ${recipe.user.id}">
+        <h3><a th:href="@{'/recipes/edit/'} + ${recipe.id}">Edit This Recipe</a></h3>
     </div>
+</div>
 
-    <div th:each="ingredient : ${recipe.recipeIngredients}">
-        <p th:text="${ingredient.quantity}"></p>
-        <p th:text="${ingredient.ingredient.ingredient}"></p>
-    </div>
+<div sec:authorize="isAuthenticated()">
+    <h3><a th:href="@{'/recipes/variation/'} + ${recipe.id}">Make a Variation!</a></h3>
+</div>
 
-    <div sec:authorize="isAuthenticated()">
-        <div th:if="${#authentication.principal.id} == ${recipe.user.id}">
-            <h3><a th:href="@{'/recipes/edit/'} + ${recipe.id}">Edit This Recipe</a></h3>
-        </div>
-    </div>
-
-    <div sec:authorize="isAuthenticated()">
-        <h3><a th:href="@{'/recipes/variation/'} + ${recipe.id}">Make a Variation!</a></h3>
-    </div>
-
-    <div sec:authorize="isAuthenticated()">
-        <button class="btn btn-primary" id="save-to-stockpile">Save to a Stockpile</button>
-    </div>
-    <div sec:authorize="isAuthenticated()" id="multi_select">
-        <form th:action="@{'/stockpile/saveto'}" method="post" th:object="${recipe}">
-            <input type="hidden" th:value="${recipe.id}" name="recipeId"/>
-            <select name="stockpileToAddTo" class="custom-select" multiple="multiple">
-                <option th:each="stockpile : ${user.stockpiles}" th:value="${stockpile.id}" th:text="${stockpile.name}"></option>
-            </select>
-        <button class="btn btn-primary" type="submit">Save!</button>
-        </form>
-    </div>
-
-
+<div sec:authorize="isAuthenticated()">
+    <!-- holds recipeId for like button ajax -->
+    <div th:data="${recipe.id}" id="recipeIdInfo" style="display: none"></div>
+    <div th:data="${#authentication.principal.id}" id="userIdInfo" style="display: none"></div>
+    <!--<div th:data="${liked}"></div>-->
     <div class='middle-wrapper'>
         <div class='like-wrapper'>
-            <a class='like-button'>
-            <span class='like-icon'>
-            <div class='heart-animation-1'></div>
-            <div class='heart-animation-2'></div>
-            </span>Love
+            <a class='like-button' th:if="!${isHearted}" id="heart">
+                    <span class='like-icon'>
+                        <div class='heart-animation-1'></div>
+                        <div class='heart-animation-2'></div>
+                    </span>
+                <span th:text="${heartCount}" id="heartCount"></span>
+            </a>
+            <a class='like-button liked' th:if="${isHearted}" id="heart">
+                    <span class='like-icon'>
+                        <div class='heart-animation-1'></div>
+                        <div class='heart-animation-2'></div>
+                    </span>
+                <span th:text="${heartCount}" id="heartCount"></span>
             </a>
         </div>
     </div>
+    <button class="btn btn-primary" id="save-to-stockpile">Save to a Stockpile</button>
+</div>
+<div sec:authorize="isAuthenticated()" id="multi_select">
+    <form th:action="@{'/stockpile/saveto'}" method="post" th:object="${recipe}">
+        <input type="hidden" th:value="${recipe.id}" name="recipeId"/>
+        <select name="stockpileToAddTo" class="custom-select" multiple="multiple">
+            <option th:each="stockpile : ${user.stockpiles}"
+                    th:value="${stockpile.id}"
+                    th:text="${stockpile.name}"></option>
+        </select>
+        <button class="btn btn-primary" type="submit">Save!</button>
+    </form>
+</div>
+
+<div sec:authorize="!isAuthenticated()">
+    <div class='middle-wrapper'>
+        <div class='like-wrapper'>
+            <a class='like-button'>
+                    <span class='like-icon'>
+                        <div class='heart-animation-1'></div>
+                        <div class='heart-animation-2'></div>
+                    </span>
+                <span th:text="${heartCount}" id="heartCount"></span>
+            </a>
+        </div>
+    </div>
+</div>
 
     <footer th:include="fragments/footer :: footer"></footer>
     <div th:replace="fragments/scripts :: scripts"></div>
