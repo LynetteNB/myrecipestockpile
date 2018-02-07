@@ -38,6 +38,9 @@ public class Recipe {
     @Column(nullable = false)
     private boolean privateRecipe = false;
 
+    @Column
+    private String imageUrl;
+
     // Connects to users table, it represents it's owner.
     @ManyToOne
     @JsonIgnore
@@ -235,4 +238,14 @@ public class Recipe {
     public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
     }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl( String imageUrl ) {
+        this.imageUrl = imageUrl;
+    }
 }
+
+// STRING THAT KEEPS URL THAT COMES BACK FROM FILESTACK

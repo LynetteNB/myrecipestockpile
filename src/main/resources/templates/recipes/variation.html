@@ -18,6 +18,30 @@
                         <input class="form-control" id="title" th:field="*{title}"/>
                     </div>
                 </div>
+
+
+                <!--*****-->
+                <div id="imagePlaceholder">
+                    <img th:src="${recipe.imageUrl}" alt="recipeimage"/>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label for="uploadpicture">Add a New Image</label>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-outline-danger" id="uploadpicture"
+                                    onclick="pickMark()">Upload Picture
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- This input carries the image url to the controller side -->
+                <input type="hidden" name="image" id="imageInput"/>
+                <br/>
+
+                <!--*****-->
+
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label for="description">Description</label>
@@ -156,5 +180,23 @@
 
 <footer th:include="fragments/footer :: footer"></footer>
 <div th:replace="fragments/scripts :: scripts"></div>
+<script>
+
+    function pickMark() {
+        // Filestack API method 'pick()' that opens the file picker
+        const client = filestack.init("AZvuYvrkS2GRaOBsg61tvz");
+        client.pick({}).then(function (result) {
+            const fileUrl = result.filesUploaded[0].url;
+
+            // This gives the input the value of the image url.
+            $('#imageInput').val(fileUrl);
+
+            // This creates an img element for the user to see.
+            $('#imagePlaceholder').empty();
+            $('#imagePlaceholder').append('<img src="' + fileUrl + '" id="url"/>');
+        });
+    }
+
+</script>
 </body>
 </html>
