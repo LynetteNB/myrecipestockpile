@@ -44,18 +44,17 @@ public class RecipeController {
         // pass the user to the template
         Object guest = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Recipe recipe = recipeService.getFullRecipe(id);
-        vModel.addAttribute(recipe);
 
-//        User user;
+        User user;
         if (guest instanceof String) {
-//            user = new User();
+            user = new User();
         } else {
-            User confirmedUser = (User) guest;
-            User user = usersRepository.findOne(confirmedUser.getId()) ;
-            vModel.addAttribute(user);
+            user = usersRepository.findOne(((User) guest).getId());
             vModel.addAttribute("isHearted", userService.recipeIsLiked(user, recipe));
         }
-            vModel.addAttribute("heartCount", recipeService.recipeHeartCount(recipe));
+        vModel.addAttribute("heartCount", recipeService.recipeHeartCount(recipe));
+        vModel.addAttribute("recipe", recipe);
+        vModel.addAttribute("user", user);
         return "recipes/show";
     }
 
@@ -151,9 +150,10 @@ public class RecipeController {
     }
 
     @PostMapping("/heart-update")
-    public @ResponseBody Recipe processAJAXRequest(
+    public @ResponseBody
+    Recipe processAJAXRequest(
             @RequestParam("userId") long userId,
-            @RequestParam("recipeId") long recipeId   ) {
+            @RequestParam("recipeId") long recipeId) {
 
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser == null) {
