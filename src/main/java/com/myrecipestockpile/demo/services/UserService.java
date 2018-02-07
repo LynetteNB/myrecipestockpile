@@ -51,24 +51,18 @@ public class UserService {
         recipes.add(recipe);
         User user = usersRepository.findOne(userId);
 
-        // This will return user if the user/recipe pair exists on the hearted_recipes table
-        // Or it will return 'null' if there the pair doesn't exist
-        User userOrNullUser = usersRepository.findByHeartedRecipes(recipes);
+        boolean isLiked = user.getHeartedRecipes().contains(recipe);
 
-        if (userOrNullUser != null) {
+        if (isLiked) {
             List<Recipe> heartedRecipes = user.getHeartedRecipes();
-            System.out.println(heartedRecipes.size() + " before delete");
             heartedRecipes.remove(recipe);
             user.setHeartedRecipes(heartedRecipes);
             usersRepository.save(user);
-            System.out.println(heartedRecipes.size() + " after delete");
         } else {
         recipes.addAll(user.getHeartedRecipes());
         user.setHeartedRecipes(recipes);
         usersRepository.save(user);
         recipes.clear();
-            System.out.println("save");
-
         }
     }
 

@@ -63,6 +63,20 @@
         </div>
     </div>
 
+    <div sec:authorize="!isAuthenticated()">
+    <div class='middle-wrapper'>
+        <div class='like-wrapper'>
+            <a class='like-button'>
+                    <span class='like-icon'>
+                        <div class='heart-animation-1'></div>
+                        <div class='heart-animation-2'></div>
+                    </span>
+                <span th:text="${heartCount}" id="heartCount"></span>
+            </a>
+        </div>
+    </div>
+    </div>
+
     <div sec:authorize="isAuthenticated()">
         <form th:action="@{'/stockpile/saveto'}" method="post" th:object="${recipe}">
             <input type="hidden" th:value="${recipe.id}" name="recipeId"/>

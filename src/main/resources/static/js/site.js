@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     // - Hearting A Recipe -
 
-    $('a.like-button').on('click', function () {
+    $('#heart').on('click', function () {
         $(this).toggleClass('liked');
         var recipeId = $('#recipeIdInfo').attr('data');
         var userId = $('#userIdInfo').attr('data');
@@ -13,9 +13,10 @@ $(document).ready(function () {
                 recipeId: recipeId,
                 _csrf: $('input[name=_csrf]').val()
             }
-        }).done(function (recipe) {
+        }).done(function (results) {
             // Update the visual heart number for better user experience
             // Requires a unique Id on a heart span. Refactor to use on multi-recipe listing
+            console.log(results);
             var heartCount = $('#heartCount');
             var currentCount = heartCount.text();
             var newCount;
