@@ -42,13 +42,20 @@
         <!-- holds recipeId for like button ajax -->
         <div th:data="${recipe.id}" id="recipeIdInfo" style="display: none"></div>
         <div th:data="${#authentication.principal.id}" id="userIdInfo" style="display: none"></div>
+        <!--<div th:data="${liked}"></div>-->
         <div class='middle-wrapper'>
             <div class='like-wrapper'>
-                <a class='like-button'>
-            <span class='like-icon'>
-            <div class='heart-animation-1'></div>
-            <div class='heart-animation-2'></div>
-            </span>Love
+                <a class='like-button' th:if="!${isHearted}">
+                    <span class='like-icon'>
+                        <div class='heart-animation-1'></div>
+                        <div class='heart-animation-2'></div>
+                    </span>Love
+                </a>
+                <a class='like-button liked' th:if="${isHearted}">
+                    <span class='like-icon'>
+                        <div class='heart-animation-1'></div>
+                        <div class='heart-animation-2'></div>
+                    </span>Love
                 </a>
             </div>
         </div>

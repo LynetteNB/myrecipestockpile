@@ -71,4 +71,8 @@ public class UserService {
 
         }
     }
+
+    public boolean recipeIsLiked(User user, Recipe recipe) {
+        return user.getHeartedRecipes().contains(recipe);
+    }
 }

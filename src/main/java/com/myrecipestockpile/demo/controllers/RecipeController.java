@@ -49,10 +49,11 @@ public class RecipeController {
         } else {
             user = usersRepository.findOne(((User) guest).getId()) ;
         }
-
-        vModel.addAttribute(recipeService.getFullRecipe(id));
+        Recipe recipe = recipeService.getFullRecipe(id);
+        vModel.addAttribute(recipe);
 //        if (user != null) {
             vModel.addAttribute(user);
+            vModel.addAttribute("isHearted", userService.recipeIsLiked(user, recipe));
 //        }
         return "recipes/show";
     }
