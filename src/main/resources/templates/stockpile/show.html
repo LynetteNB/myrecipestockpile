@@ -8,6 +8,12 @@
 <h1 th:text="${stockpile.name}"></h1>
 <h4>Owner: <a th:href="@{'/profile/'} + ${stockpile.owner.username}" th:text="${stockpile.owner.username}"></a></h4>
 
+<div th:each="recipe : ${recipes}">
+    <a th:href="@{'/recipes/show/'} + ${recipe.id}"><h1 th:text="${recipe.title}"></h1></a>
+    <p th:text="${recipe.description}"></p>
+    <p th:text="${recipe.user.username}"></p>
+</div>
+
 <a th:href="${'/stockpile/'} + ${id} + ${'/edit'}">Edit This Stockpile</a>
 
 <footer th:include="fragments/footer :: footer"></footer>
