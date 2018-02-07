@@ -27,6 +27,14 @@
 
 <h2>here you will see you list of stockpile</h2>
 
+<div>
+    <h3>Stockpile: <a th:href="@{'/stockpile/allMyRecipes/'} + ${user.username}">All My Recipes</a></h3>
+</div>
+
+<div>
+    <h3>Stockpile: <a th:href="@{'/stockpile/allMyHeartedRecipes/'} + ${user.username}">Hearted Recipes</a></h3>
+</div>
+
 <div th:each="stockpile : ${user.stockpiles}">
     <hr/>
     <h3>Stockpile: <a th:href="@{'/stockpile/'} + ${stockpile.id}"><span th:text="${stockpile.name}"></span></a></h3>

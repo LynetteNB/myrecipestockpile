@@ -1,6 +1,7 @@
 package com.myrecipestockpile.demo.controllers;
 
 import com.myrecipestockpile.demo.models.Recipe;
+import com.myrecipestockpile.demo.models.Stockpile;
 import com.myrecipestockpile.demo.models.User;
 import com.myrecipestockpile.demo.repositories.RecipeRepository;
 import com.myrecipestockpile.demo.repositories.UsersRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -200,4 +202,29 @@ public class RecipeController {
         }
         return new Recipe();
     }
+
+    @GetMapping("/stockpile/allMyHeartedRecipes/{username}")
+    public String viewUsersHeartedRecipes(@PathVariable String username, Model vModel) {
+        User user = usersRepository.findByUsername(username);
+        List<Recipe> heartedRecipes = user.getHeartedRecipes();
+        if (user.getId() == userService.loggedInUser().getId()) {
+            vModel.addAttribute("recipes", heartedRecipes);
+        } else {
+            List<Recipe> publicHeartedRecipes = new ArrayList<>();
+            for (Recipe recipe : heartedRecipes) {
+                if (!recipe.isPrivateRecipe()) {
+                    publicHeartedRecipes.add(recipe);
+                }
+            }
+            vModel.addAttribute("recipes", publicHeartedRecipes);
+
+        }
+        vModel.addAttribute("title", "Hearted Recipes");
+        return "/index";
+    }
+
+
+
+//    @{'/stockpile/allMyHeartedRecipes/'} + ${user.username}"
+//    a th:href="@{'/stockpile/allMyRecipes/'} + ${user.username}"
 }
