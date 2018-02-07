@@ -162,5 +162,9 @@ public class RecipeService {
         return recipe.getHeartedUsers().size();
     }
 
+//    ***Hearted Recipe***
+    public void heartedRecipes(Recipe heartedRecipes) {
+        recipeRepository.save(heartedRecipes);
+    }
 
 }

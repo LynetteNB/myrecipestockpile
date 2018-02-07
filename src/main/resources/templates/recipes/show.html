@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/head :: main-head(showRecipe)"></head>
 <body>
@@ -9,6 +8,7 @@
 
 
 <h1 th:text="${recipe.title}"></h1>
+<img th:src="${recipe.imageUrl}" alt="recipeimage" style="width:600px;height:500px;border-radius: 8px;"/>
 <h6>Owner: <span th:text="${recipe.user.username}"></span></h6>
 <h5>Description: </h5>
 <p th:text="${recipe.description}"></p>
@@ -91,7 +91,7 @@
     </div>
 </div>
 
-    <footer th:include="fragments/footer :: footer"></footer>
-    <div th:replace="fragments/scripts :: scripts"></div>
+<footer th:include="fragments/footer :: footer"></footer>
+<div th:replace="fragments/scripts :: scripts"></div>
 </body>
 </html>
