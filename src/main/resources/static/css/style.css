@@ -46,6 +46,15 @@ body {
     display: none;
 }
 
+#buttons {
+    text-align: center;
+    margin-top: 2%;
+}
+
+#prep-cook-serving {
+    text-align: center;
+}
+
 
 
 /*  Like Button  */
