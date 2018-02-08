@@ -2,27 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head :: main-head(All-Recipes)"></head>
 <body>
-
 <div th:replace="fragments/navbar :: mainNavbar"></div>
 
 <!--<h1>This is our index page</h1>-->
-<div class="jumbotron">
-    <img src="/images/recipestockpile.jpg" alt="rollingpin" class="rollingpin"/>
-    <br/><br/>
-    <img src="/images/chicken.jpg" alt="chickenimage" class="jumbotron-image"/>
-    <blockquote class="blockquote text-center">
-        <p class="text-primary">A recipe is a story that ends with a good meal!</p>
-        <footer class="blockquote-footer"><cite title="Pat Conroy">Pat Conroy</cite></footer>
-    </blockquote>
-    <hr/>
-</div>
+<div class="row">
+        <div class="jumbotron">
+            <img src="/images/recipestockpile.jpg" alt="rollingpin" class="rollingpin"/>
+            <br/><br/>
+            <img src="/images/chicken.jpg" alt="chickenimage" class="jumbotron-image"/>
+            <blockquote class="blockquote text-center">
+                <p class="text-primary">A recipe is a story that ends with a good meal!</p>
+                <footer class="blockquote-footer"><cite title="Pat Conroy">Pat Conroy</cite></footer>
+            </blockquote>
+            <hr/>
+        </div>
+    </div>
 
-<div th:each="recipe : ${recipes}">
+<div class="row">
+<div class="col-md-4" th:each="recipe : ${recipes}">
     <a th:href="@{'/recipes/show/'} + ${recipe.id}"><h3 th:text="${recipe.title}"></h3></a>
     <img th:src="${recipe.imageUrl}" alt="" style="width:400px;height:300px;border-radius: 8px;border: 1px solid
     black"/>
     <p th:text="${recipe.description}"></p>
     <p th:text="${recipe.user.username}"></p>
+</div>
 </div>
 
 <footer th:include="fragments/footer :: footer"></footer>
