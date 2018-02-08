@@ -17,6 +17,7 @@ body {
 .card {
     margin-top: 20px;
     margin-bottom: 20px;
+    /*border-color: #777;*/
 }
 
 .card-block {
@@ -27,14 +28,9 @@ body {
     padding: 6px;
 }
 
-/*.card-block .card-text {*/
-    /*color: #000;*/
-/*}*/
-
-/*.card-block .card-text:active {*/
-    /*color: #000;*/
-    /*text-decoration: none;*/
-/*}*/
+.card-heart-button {
+    float: right;
+}
 
 /*  -----------------  */
 

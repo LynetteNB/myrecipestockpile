@@ -16,23 +16,52 @@ $(document).ready(function () {
         }).done(function (results) {
             // Update the visual heart number for better user experience
             // Requires a unique Id on a heart span. Refactor to use on multi-recipe listing
-            console.log(results);
             var heartCount = $('#heartCount');
             var currentCount = heartCount.text();
             var newCount;
             var increaseCount = $('#heart').hasClass('liked');
             if (increaseCount) {
-                console.log("adding");
                 newCount = parseInt(currentCount) + 1;
                 heartCount.text(newCount);
             } else {
-                console.log("subtracting");
                 newCount = parseInt(currentCount) - 1;
                 heartCount.text(newCount);
             }
 
         });
 
+    });
+
+    // hearting recipes on multi-recipe page
+
+    var cardHearts = $('.card-hearts');
+    cardHearts.each(function (index) {
+        $(this).attr('id', 'heart' + index);
+        $(this).click(function () {
+            $(this).toggleClass('liked');
+            var recipeId = $(this).attr('data');
+            var userId = $('#userIdInfo').attr('data');
+            $.ajax("/heart-update", {
+                type: "POST",
+                data: {
+                    userId: userId,
+                    recipeId: recipeId,
+                    _csrf: $('input[name=_csrf]').val()
+                }
+            }).done(function (results) {
+            });
+            var heartCount = $(this).find('.heartCount').first();
+            var currentCount = heartCount.text();
+            var newCount;
+            var increaseCount = $(this).hasClass('liked');
+            if (increaseCount) {
+                newCount = parseInt(currentCount) + 1;
+                heartCount.text(newCount);
+            } else {
+                newCount = parseInt(currentCount) - 1;
+                heartCount.text(newCount);
+            }
+        });
     });
 
 
@@ -69,7 +98,6 @@ $(document).ready(function () {
     // Refreshed the click listeners on the delete buttons
     function remakeIngredientIdsAndListeners() {
         $('.ingredientItem').each(function (index) {
-            console.log(index + 'is the index');
             var idx = 'ingId' + index;
             $(this).attr('id', idx);
         });
@@ -116,7 +144,6 @@ $(document).ready(function () {
     // Refreshed the click listeners on the delete buttons
     function remakeInstructionIdsAndListeners() {
         $('.instructionItem').each(function (index) {
-            console.log(index + 'is the index');
             var idx = 'instructId' + index;
             $(this).attr('id', idx);
         });

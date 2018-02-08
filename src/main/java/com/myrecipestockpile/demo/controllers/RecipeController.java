@@ -54,6 +54,8 @@ public class RecipeController {
         }
         Recipe recipe = recipeService.getFullRecipe(id);
 
+        System.out.println(recipe.getHeartedUsers().size());
+
         // check if recipe is private and owned by user
         if (recipe.isPrivateRecipe() && user == recipe.getUser()) {
             vModel.addAttribute("isHearted", userService.recipeIsLiked(user, recipe));
@@ -65,7 +67,10 @@ public class RecipeController {
         if (recipe.isPrivateRecipe()) {
             return "redirect:/";
         }
-        vModel.addAttribute("isHearted", userService.recipeIsLiked(user, recipe));
+        if (userService.isLoggedIn()) {
+            // this can't be applied if not logged in
+            vModel.addAttribute("isHearted", userService.recipeIsLiked(user, recipe));
+        }
         vModel.addAttribute("heartCount", recipeService.recipeHeartCount(recipe));
         vModel.addAttribute("recipe", recipe);
         vModel.addAttribute("user", user);
@@ -187,20 +192,19 @@ public class RecipeController {
     }
 
     @PostMapping("/heart-update")
-    public @ResponseBody
-    Recipe processAJAXRequest(
+    public @ResponseBody long processAJAXRequest(
             @RequestParam("userId") long userId,
             @RequestParam("recipeId") long recipeId) {
-
+        System.out.println("recipe id = " + recipeId + " | " + "user id = " + userId);
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser == null) {
-            return new Recipe();
+            return 0-1;
         } else if (userId != loggedInUser.getId()) {
-            return new Recipe();
+            return 0-1;
         } else {
             userService.updateHeart(userId, recipeId);
         }
-        return new Recipe();
+        return recipeService.getFullRecipe(recipeId).getHeartedUsers().size();
     }
 
     @GetMapping("/stockpile/allMyHeartedRecipes/{username}")
