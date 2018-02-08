@@ -38,9 +38,25 @@ body {
     margin-bottom: 10px;
 }
 
-.jumbotron {
+.container {
     margin: 5rem;
     padding-top: 20px;
+}
+
+#recipe-page-card {
+    padding: 5px;
+}
+
+#recipe-pic {
+    margin-bottom: 15px;
+}
+
+#recipe_title, #recipe_owner, #recipe_description {
+    text-align: center;
+}
+
+.my-4 {
+    margin-top: 0 !important;
 }
 
 #deleteForm {

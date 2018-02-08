@@ -6,7 +6,7 @@
 <div th:replace="fragments/navbar :: mainNavbar"></div>
 
 <!--Start of Container-->
-<div class="jumbotron">
+<div class="container">
     <!--Card-->
     <!--<div class="card card-inverse">-->
         <!--<img class="card-img" th:src="${recipe.imageUrl}" alt="recipeimage" style="width:600px;height:500px;border-radius: 8px;"/>-->
@@ -17,10 +17,12 @@
         <!--</div>-->
     <!--</div>-->
     <!--End of Card-->
-    <h1 class="display-3" th:text="${recipe.title}"></h1><span><small>recipe by <span th:text="${recipe.user.username}"></span></small></span>
-    <p class="lead" th:text="${recipe.description}"></p>
-    <img th:src="${recipe.imageUrl}" alt="recipeimage" style="width:600px;height:500px;border-radius: 8px;"/>
-    <hr class="my-4"/>
+    <div class="card" id="recipe-page-card">
+    <h1 id="recipe_title" class="display-3" th:text="${recipe.title}"></h1>
+    <small id="recipe_owner">recipe by <span id="recipe_owner" th:text="${recipe.user.username}"></span></small>
+    <p id="recipe_description" class="lead" th:text="${recipe.description}"></p>
+    <img th:src="${recipe.imageUrl}" alt="recipeimage" id="recipe-pic" class="card-img"/>
+    <!--<hr class="my-4"/>-->
     <div class="row" id="prep-cook-serving">
         <div class="col-md-4 col-sm-12">
             <p><b>prep time: </b><span th:text="${recipe.prepTime + ' ' + 'minutes'}"></span></p>
@@ -75,7 +77,7 @@
             </div>
             <!--</div>-->
             <!--<div sec:authorize="isAuthenticated()">-->
-            <a class="btn btn-primary" th:href="@{'/recipes/variation/'} + ${recipe.id}">Make a Variation!</a>
+            <a class="btn btn-primary" th:href="@{'/recipes/variation/'} + ${recipe.id}">Make a Variation</a>
             <!--</div>-->
         </div>
     </div>
@@ -103,6 +105,7 @@
                 </a>
             </div>
         </div>
+    </div>
     </div>
 </div>
 <!--End of Container-->
