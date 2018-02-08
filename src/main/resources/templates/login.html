@@ -5,23 +5,41 @@
 
 <div th:replace="fragments/navbar :: mainNavbar"></div>
 
-<h1>Log In</h1>
+<div class="container">
 
-<div th:if="${param.error}">
-    Invalid Username and Password.
+    <h1>Log In</h1>
+
+    <div th:if="${param.error}">
+        Invalid Username and Password.
+    </div>
+
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-sm-8 offset-2 col-md-6 offset-md-3 col-lg">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        </div>
+    </div>
+
+
+
+
+
+    <form th:action="@{/login}" method="post">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text"/>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password"/>
+        <input type="submit" value="Log In"/>
+    </form>
+
 </div>
-
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-
-<form th:action="@{/login}" method="post">
-    <label for="username">Username</label>
-    <input id="username" name="username" type="text" />
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password" />
-    <input type="submit" value="Log In" />
-</form>
 
 <footer th:include="fragments/footer :: footer"></footer>
 <div th:replace="fragments/scripts :: scripts"></div>
