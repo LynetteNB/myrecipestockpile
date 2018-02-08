@@ -3,21 +3,26 @@
 <head th:replace="fragments/head :: main-head(Error)"></head>
 <body>
 
-    <div class="text-center">
-        <h1>It's not you, it's us.</h1>
-        <p>Something on our end went wrong when you sent your request. We are aware of the problem and are working on it so it doesn't happen again.</p>
-        <p>You can click the back button to return to the previous page or click <a href="/">here</a> to navigate back to our <a href="/">Homepage</a></p>
-    </div>
-    <hr/>
+<div class="container">
 
-    <div>
-        <p class="text-center">This is Steve. Steve is a very smart guy, and he happens to be on our dev team. Thus, we have chosen him to take responsibility for this hiccup. Why? Well, we trust that he can take care of the problem quickly, and he won't hold it against us that we made him the "fall guy" (even though we didn't tell him). Please, don't be mad at Steve. Send him an email to let him know what happened!</p>
-        <img src="/images/steve_profile.jpeg" class="about-me-pic"/>
         <div class="text-center">
-            <!--<p>Summary about me</p>-->
-            <a href="mailto:stephencisler@gmail.com"><p><div class="fa fa-envelope fa-md icon"></div>stephencisler@gmail.com</p></a>
+            <h1>It's not you, it's us.</h1>
+            <p>Something on our end went wrong when you sent your request. We are aware of the problem and are working on it so it doesn't happen again.</p>
+            <p>You can click the back button to return to the previous page or click <a href="/">here</a> to navigate back to our <a href="/">Homepage</a></p>
         </div>
-    </div>
+        <hr/>
+
+        <div>
+            <p class="text-center">This is Steve. Steve is a very smart guy, and he happens to be on our dev team. Thus, we have chosen him to take responsibility for this hiccup. Why? Well, we trust that he can take care of the problem quickly, and he won't hold it against us that we made him the "fall guy" (even though we didn't tell him). Please, don't be mad at Steve. Send him an email to let him know what happened!</p>
+            <img src="/images/steve_profile.jpeg" class="about-me-pic"/>
+            <div class="text-center">
+                <!--<p>Summary about me</p>-->
+                <a href="mailto:stephencisler@gmail.com"><p><div class="fa fa-envelope fa-md icon"></div>stephencisler@gmail.com</p></a>
+            </div>
+        </div>
+
+</div>
+
 
     <footer th:include="fragments/footer :: footer"></footer>
     <div th:replace="fragments/scripts :: scripts"></div>

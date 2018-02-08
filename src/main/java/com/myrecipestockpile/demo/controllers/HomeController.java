@@ -23,7 +23,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model vModel) {
-        vModel.addAttribute("recipes", recipeService.getRecentSix());
+        vModel.addAttribute("recipes", recipeService.getRecentAllSix());
 
         return "index";
     }

@@ -79,6 +79,9 @@ public class Recipe {
         dateCreated = new Date();
     }
 
+    @Transient
+    private boolean hearted;  // Not for table. Used for boolean 'hearted' check on html
+
     // ------------------------------------------
     // Constructors
     // ------------------------------------------
@@ -246,6 +249,16 @@ public class Recipe {
     public void setImageUrl( String imageUrl ) {
         this.imageUrl = imageUrl;
     }
+
+    public boolean isHearted() {
+        return hearted;
+    }
+
+    public void setHearted(boolean hearted) {
+        this.hearted = hearted;
+    }
 }
+
+
 
 // STRING THAT KEEPS URL THAT COMES BACK FROM FILESTACK
