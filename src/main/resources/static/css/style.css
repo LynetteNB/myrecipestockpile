@@ -45,6 +45,8 @@ body {
 
 #recipe-page-card {
     padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #recipe-pic {
