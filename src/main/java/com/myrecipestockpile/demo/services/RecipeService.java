@@ -30,7 +30,7 @@ public class RecipeService {
 //    --------------------------- Empty method skeletons. Bodies will be added in next update.
 
     // Find all recipes.
-    public Iterable<Recipe> getAllPublicRecipes() {
+    public List<Recipe> getAllPublicRecipes() {
         return recipeRepository.findAllByPrivateRecipe(false);
     }
 
