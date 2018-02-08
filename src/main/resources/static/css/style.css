@@ -38,6 +38,11 @@ body {
     margin-bottom: 10px;
 }
 
+.jumbotron {
+    margin: 5rem;
+    padding-top: 20px;
+}
+
 #deleteForm {
     margin-top: 15px;
 }

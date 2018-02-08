@@ -17,8 +17,7 @@
         <!--</div>-->
     <!--</div>-->
     <!--End of Card-->
-    <h1 class="display-3" th:text="${recipe.title}"></h1><span><small>recipe by <span
-        th:text="${recipe.user.username}"></span></small></span>
+    <h1 class="display-3" th:text="${recipe.title}"></h1><span><small>recipe by <span th:text="${recipe.user.username}"></span></small></span>
     <p class="lead" th:text="${recipe.description}"></p>
     <img th:src="${recipe.imageUrl}" alt="recipeimage" style="width:600px;height:500px;border-radius: 8px;"/>
     <hr class="my-4"/>
