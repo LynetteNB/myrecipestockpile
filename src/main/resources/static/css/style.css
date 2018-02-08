@@ -28,6 +28,10 @@ body {
     border-radius: 10px;
 }
 
+#loginBtn {
+    width: 100%;
+}
+
 #imagePlaceholder img {
     width: 450px;
     height: 350px;
