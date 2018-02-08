@@ -7,6 +7,12 @@ html {
 
 body {
     margin-bottom: 60px; /* Margin bottom by footer height */
+    min-height: 100%;
+}
+
+.createAccount {
+    margin: 0;
+    text-align: center;
 }
 
 .createStockpileBtn1:active {
@@ -47,6 +53,7 @@ body {
 }
 
 .footer {
+    position: absolute;
     bottom: 0;
     width: 100%;
     height: 60px; /* Set the fixed height of the footer here */
@@ -61,6 +68,10 @@ body {
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px;
+}
+
+#loginBtn {
+    width: 100%;
 }
 
 #imagePlaceholder img {
@@ -83,8 +94,6 @@ body {
     display: none;
 }
 
-
-
 /*  Like Button  */
 
 .ingredientItem, .instructionItem {
@@ -94,9 +103,6 @@ body {
 #deleteForm {
     margin-top: 15px;
 }
-
-
-
 
 /*  Like Button  */
 
