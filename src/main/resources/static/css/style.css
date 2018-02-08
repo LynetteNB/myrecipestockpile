@@ -38,10 +38,10 @@ body {
     margin-bottom: 10px;
 }
 
-.container {
-    margin: 5rem;
-    padding-top: 20px;
-}
+/*.container {*/
+    /*margin: 5rem;*/
+    /*padding-top: 20px;*/
+/*}*/
 
 #recipe-page-card {
     padding: 5px;
@@ -65,6 +65,7 @@ body {
 
 #multi_select {
     display: none;
+    text-align: center;
 }
 
 #buttons {

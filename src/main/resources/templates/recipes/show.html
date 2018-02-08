@@ -19,7 +19,7 @@
     <!--End of Card-->
     <div class="card" id="recipe-page-card">
     <h1 id="recipe_title" class="display-3" th:text="${recipe.title}"></h1>
-    <small id="recipe_owner">recipe by <span id="recipe_owner" th:text="${recipe.user.username}"></span></small>
+        <small id="recipe_owner">recipe by <a th:href="@{'/profile/'} + ${recipe.user.username}"><span th:text="${recipe.user.username}"></span></a></small>
     <p id="recipe_description" class="lead" th:text="${recipe.description}"></p>
     <img th:src="${recipe.imageUrl}" alt="recipeimage" id="recipe-pic" class="card-img"/>
     <!--<hr class="my-4"/>-->
@@ -68,17 +68,19 @@
                 </a>
             </div>
         </div>
-        <div sec:authorize="isAuthenticated()" class="middle-wrapper btn-group" id="buttons">
-            <button class="btn btn-primary" id="save-to-stockpile">Save to a Stockpile</button>
-            <!--<div sec:authorize="isAuthenticated()">-->
-            <div th:if="${#authentication.principal.id} == ${recipe.user.id}">
-                <a th:if="${#authentication.principal.id} == ${recipe.user.id}" class="btn btn-primary"
-                   th:href="@{'/recipes/edit/'} + ${recipe.id}">Edit This Recipe</a>
+        <div class="row">
+            <div sec:authorize="isAuthenticated()" class="middle-wrapper col-xs-8" id="buttons">
+                <button class="btn btn-primary" id="save-to-stockpile">Save to a Stockpile</button>
+                <!--<div sec:authorize="isAuthenticated()">-->
+                <div th:if="${#authentication.principal.id} == ${recipe.user.id}">
+                    <a th:if="${#authentication.principal.id} == ${recipe.user.id}" class="btn btn-primary"
+                       th:href="@{'/recipes/edit/'} + ${recipe.id}">Edit This Recipe</a>
+                </div>
+                <!--</div>-->
+                <!--<div sec:authorize="isAuthenticated()">-->
+                <a class="btn btn-primary" th:href="@{'/recipes/variation/'} + ${recipe.id}">Make a Variation</a>
+                <!--</div>-->
             </div>
-            <!--</div>-->
-            <!--<div sec:authorize="isAuthenticated()">-->
-            <a class="btn btn-primary" th:href="@{'/recipes/variation/'} + ${recipe.id}">Make a Variation</a>
-            <!--</div>-->
         </div>
     </div>
     <div sec:authorize="isAuthenticated()" id="multi_select">
