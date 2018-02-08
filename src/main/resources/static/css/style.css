@@ -10,6 +10,11 @@ body {
     min-height: 100%;
 }
 
+.createAccount {
+    margin: 0;
+    text-align: center;
+}
+
 .createStockpileBtn1:active {
     color: white;
 }
@@ -89,8 +94,6 @@ body {
     display: none;
 }
 
-
-
 /*  Like Button  */
 
 .ingredientItem, .instructionItem {
@@ -100,9 +103,6 @@ body {
 #deleteForm {
     margin-top: 15px;
 }
-
-
-
 
 /*  Like Button  */
 
