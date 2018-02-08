@@ -9,6 +9,35 @@ body {
     margin-bottom: 60px; /* Margin bottom by footer height */
 }
 
+/* Recipe Card Styling */
+.card-text:last-child {
+    margin-bottom: 10px;
+}
+
+.card {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.card-block {
+    margin-top: 5px;
+}
+
+.card-text {
+    padding: 6px;
+}
+
+/*.card-block .card-text {*/
+    /*color: #000;*/
+/*}*/
+
+/*.card-block .card-text:active {*/
+    /*color: #000;*/
+    /*text-decoration: none;*/
+/*}*/
+
+/*  -----------------  */
+
 .footer {
     bottom: 0;
     width: 100%;
