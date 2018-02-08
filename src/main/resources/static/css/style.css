@@ -9,6 +9,14 @@ body {
     margin-bottom: 60px; /* Margin bottom by footer height */
 }
 
+.createStockpileBtn1:active {
+    color: white;
+}
+
+.createStockpileBtn1Holder {
+    margin: auto;
+}
+
 /* Recipe Card Styling */
 .card-text:last-child {
     margin-bottom: 10px;
@@ -33,6 +41,10 @@ body {
 }
 
 /*  -----------------  */
+
+.profileHead {
+    font-size: 4em;
+}
 
 .footer {
     bottom: 0;

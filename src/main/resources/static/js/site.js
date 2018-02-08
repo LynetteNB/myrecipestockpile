@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    // create stockpile button on profile page
+
     // - Hearting A Recipe -
 
     $('#heart').on('click', function () {

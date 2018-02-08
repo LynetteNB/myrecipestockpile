@@ -21,7 +21,7 @@ public interface RecipeRepository extends CrudRepository<Recipe, Long> {
     List<Recipe> findFirst6ByPrivateRecipeOrderByDateCreated(boolean isPrivate);
 
     //  Version for Public and Private recipes
-    List<Recipe> findFirst4ByUserOrderByDateCreated(User user);
+    List<Recipe> findFirst4ByUserOrderByDateCreatedDesc(User user);
     // Users 4 most recent recipes publicly visible.
-    List<Recipe> findFirst4ByUserAndPrivateRecipeOrderByDateCreated(User user, boolean isPrivate);
+    List<Recipe> findFirst4ByUserAndPrivateRecipeOrderByDateCreatedDesc(User user, boolean isPrivate);
 }
