@@ -24,6 +24,43 @@ h3 {
     text-align: center;
 }
 
+.createStockpileBtn1:active {
+    color: white;
+}
+
+.createStockpileBtn1Holder {
+    margin: auto;
+}
+
+/* Recipe Card Styling */
+.card-text:last-child {
+    margin-bottom: 10px;
+}
+
+.card {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /*border-color: #777;*/
+}
+
+.card-block {
+    margin-top: 5px;
+}
+
+.card-text {
+    padding: 6px;
+}
+
+.card-heart-button {
+    float: right;
+}
+
+/*  -----------------  */
+
+.profileHead {
+    font-size: 4em;
+}
+
 .footer {
     bottom: 0;
     width: 100%;

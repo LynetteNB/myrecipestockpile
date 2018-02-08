@@ -30,16 +30,20 @@ public class RecipeService {
 //    --------------------------- Empty method skeletons. Bodies will be added in next update.
 
     // Find all recipes.
-    public Iterable<Recipe> getAllRecipes() {
-        return recipeRepository.findAll();
+    public List<Recipe> getAllPublicRecipes() {
+        return recipeRepository.findAllByPrivateRecipe(false);
     }
 
-    public Iterable<Recipe> getRecentSix() {
-        return recipeRepository.findFirst6ByOrderByDateCreatedDesc();
+    public Iterable<Recipe> getRecentAllSix() {
+        return recipeRepository.findFirst6ByPrivateRecipeOrderByDateCreated(false);
     }
 
-    public Iterable<Recipe> showUsersFourMostRecent(User user) {
-        return recipeRepository.findFirst4ByUserOrderByDateCreated(user);
+    public List<Recipe> showUsersFourMostRecentPublic(User user) {
+        return recipeRepository.findFirst4ByUserAndPrivateRecipeOrderByDateCreatedDesc(user, false);
+    }
+
+    public List<Recipe> showUsersFourMostRecentPublicAndPrivate(User user) {
+        return recipeRepository.findFirst4ByUserOrderByDateCreatedDesc(user);
     }
 
 

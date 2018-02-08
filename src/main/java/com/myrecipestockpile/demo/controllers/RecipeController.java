@@ -1,6 +1,7 @@
 package com.myrecipestockpile.demo.controllers;
 
 import com.myrecipestockpile.demo.models.Recipe;
+import com.myrecipestockpile.demo.models.Stockpile;
 import com.myrecipestockpile.demo.models.User;
 import com.myrecipestockpile.demo.repositories.RecipeRepository;
 import com.myrecipestockpile.demo.repositories.UsersRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,7 +33,16 @@ public class RecipeController {
 
     @GetMapping("/recipes")
     public String allRecipes(Model vModel) {
-        Iterable<Recipe> allRecipes = recipeService.getAllRecipes();
+        User user = userService.loggedInUser();
+        List<Recipe> usersHeartedRecipes = user.getHeartedRecipes();
+        List<Recipe> allRecipes = recipeService.getAllPublicRecipes();
+        for (Recipe recipe : allRecipes) {
+            if (usersHeartedRecipes.contains(recipe)) {
+                recipe.setHearted(true);
+            } else {
+                recipe.setHearted(false);
+            }
+        }
         vModel.addAttribute("recipes", allRecipes);
         return "/index";
     }
@@ -44,13 +55,29 @@ public class RecipeController {
         // use the user repository to go for the user to the database -- findOne(user.getId())
         // pass the user to the template
         Object guest = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Recipe recipe = recipeService.getFullRecipe(id);
-
         User user;
         if (guest instanceof String) {
             user = new User();
         } else {
             user = usersRepository.findOne(((User) guest).getId());
+        }
+        Recipe recipe = recipeService.getFullRecipe(id);
+
+        System.out.println(recipe.getHeartedUsers().size());
+
+        // check if recipe is private and owned by user
+        if (recipe.isPrivateRecipe() && user == recipe.getUser()) {
+            vModel.addAttribute("isHearted", userService.recipeIsLiked(user, recipe));
+            vModel.addAttribute("heartCount", recipeService.recipeHeartCount(recipe));
+            vModel.addAttribute("recipe", recipe);
+            vModel.addAttribute("user", user);
+            return "recipes/show";
+        }
+        if (recipe.isPrivateRecipe()) {
+            return "redirect:/";
+        }
+        if (userService.isLoggedIn()) {
+            // this can't be applied if not logged in
             vModel.addAttribute("isHearted", userService.recipeIsLiked(user, recipe));
         }
         vModel.addAttribute("heartCount", recipeService.recipeHeartCount(recipe));
@@ -126,7 +153,7 @@ public class RecipeController {
     @GetMapping("/recipes/search")
     public String search(@RequestParam(name = "term") String term, Model vModel) {
         term = "%" + term + "%";
-        vModel.addAttribute("recipes", recipeRepository.findByDescriptionIsLikeOrTitleIsLike(term, term));
+        vModel.addAttribute("recipes", recipeRepository.findByDescriptionIsLikeAndPrivateRecipeOrTitleIsLikeAndPrivateRecipe(term, false, term, false));
         return "recipes/results";
     }
 
@@ -174,19 +201,52 @@ public class RecipeController {
     }
 
     @PostMapping("/heart-update")
-    public @ResponseBody
-    Recipe processAJAXRequest(
+    public @ResponseBody long processAJAXRequest(
             @RequestParam("userId") long userId,
             @RequestParam("recipeId") long recipeId) {
-
+        System.out.println("recipe id = " + recipeId + " | " + "user id = " + userId);
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser == null) {
-            return new Recipe();
+            return 0-1;
         } else if (userId != loggedInUser.getId()) {
-            return new Recipe();
+            return 0-1;
         } else {
             userService.updateHeart(userId, recipeId);
         }
-        return new Recipe();
+        return recipeService.getFullRecipe(recipeId).getHeartedUsers().size();
+    }
+
+    @GetMapping("/stockpile/allMyHeartedRecipes/{username}")
+    public String viewUsersHeartedRecipes(@PathVariable String username, Model vModel) {
+        User user = usersRepository.findByUsername(username);
+        List<Recipe> heartedRecipes = user.getHeartedRecipes();
+        if (user.getId() == userService.loggedInUser().getId()) {
+            vModel.addAttribute("recipes", heartedRecipes);
+        } else {
+            List<Recipe> publicHeartedRecipes = new ArrayList<>();
+            for (Recipe recipe : heartedRecipes) {
+                if (!recipe.isPrivateRecipe()) {
+                    publicHeartedRecipes.add(recipe);
+                }
+            }
+            vModel.addAttribute("recipes", publicHeartedRecipes);
+
+        }
+        vModel.addAttribute("title", "Hearted Recipes");
+        return "/recipes/index";
+    }
+
+    @GetMapping("/stockpile/allMyRecipes/{username}")
+    public String viewAllUsersRecipes(@PathVariable String username, Model vModel) {
+        User user = usersRepository.findByUsername(username);
+        if (user.getId() == userService.loggedInUser().getId()) {
+            Iterable<Recipe> allRecipes = recipeRepository.findByUser(user);
+            vModel.addAttribute("recipes", allRecipes);
+        } else {
+            Iterable<Recipe> allPublicRecipes = recipeRepository.findByUserAndPrivateRecipe(user, false);
+            vModel.addAttribute("recipes", allPublicRecipes);
+        }
+        vModel.addAttribute("title", "All My Recipes");
+        return "/recipes/index";
     }
 }
