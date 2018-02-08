@@ -49,6 +49,7 @@ $(document).ready(function () {
                     _csrf: $('input[name=_csrf]').val()
                 }
             }).done(function (results) {
+                console.log('sent')
             });
             var heartCount = $(this).find('.heartCount').first();
             var currentCount = heartCount.text();
