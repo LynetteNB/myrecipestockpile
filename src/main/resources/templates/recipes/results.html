@@ -13,7 +13,7 @@
         <div sec:authorize="isAuthenticated()">
         <div th:data="${#authentication.principal.id}" id="userIdInfo"></div>
         </div>
-        <div class="col-md-6 col-lg-3" th:each="recipe : ${recipes}">
+        <div class="col-md-6 col-lg-6 col-xl-4" th:each="recipe : ${recipes}">
             <div class="card">
                 <a th:href="@{'/recipes/show/'} + ${recipe.id}">
                     <img class="card-img-top" th:src="${recipe.imageUrl}" alt="Recipe Picture"/>
