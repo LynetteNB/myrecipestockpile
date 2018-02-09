@@ -1,26 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/head :: main-head(All-Recipes)"></head>
 <body>
 <div th:replace="fragments/navbar :: mainNavbar"></div>
 
 <!--<h1>This is our index page</h1>-->
-<div class="row">
-        <div class="jumbotron">
-            <img src="/images/recipestockpile.jpg" alt="rollingpin" class="rollingpin"/>
-            <br/><br/>
-            <img src="/images/chicken.jpg" alt="chickenimage" class="jumbotron-image"/>
-            <blockquote class="blockquote text-center">
+<div class="container-full-bg">
+    <div class="jumbotron">
+        <div class="container">
+            <!--<img src="/images/recipestockpile.jpg" alt="rollingpin" class="rollingpin"/>-->
+            <!--<br/><br/>-->
+            <!--<img src="/images/chicken.jpg" alt="chickenimage" class="jumbotron-image"/>-->
+            <blockquote class="blockquote text-center page-quote">
                 <p class="text-primary">A recipe is a story that ends with a good meal!</p>
                 <footer class="blockquote-footer"><cite title="Pat Conroy">Pat Conroy</cite></footer>
             </blockquote>
             <hr/>
         </div>
     </div>
+</div>
+
+<br/>
+<br/>
+<br/>
 
 <div class="row">
-    <h3 class="text-center col-12">Viewing All Recipes</h3>
-    <div th:data="${#authentication.principal.id}" id="userIdInfo"></div>
+    <div sec:authorize="isAuthenticated()">
+        <div th:data="${#authentication.principal.id}" id="userIdInfo"></div>
+    </div>
     <div class="col-md-6 col-xl-3" th:each="recipe : ${recipes}">
         <div class="card">
             <a th:href="@{'/recipes/show/'} + ${recipe.id}">

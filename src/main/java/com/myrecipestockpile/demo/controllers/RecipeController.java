@@ -33,7 +33,7 @@ public class RecipeController {
 
     @GetMapping("/recipes")
     public String allRecipes(Model vModel) {
-        User user = userService.loggedInUser();
+        User user = usersRepository.findOne(userService.loggedInUser().getId());
         List<Recipe> usersHeartedRecipes = user.getHeartedRecipes();
         List<Recipe> allRecipes = recipeService.getAllPublicRecipes();
         for (Recipe recipe : allRecipes) {
