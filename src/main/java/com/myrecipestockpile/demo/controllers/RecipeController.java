@@ -33,7 +33,16 @@ public class RecipeController {
 
     @GetMapping("/recipes")
     public String allRecipes(Model vModel) {
-        Iterable<Recipe> allRecipes = recipeService.getAllPublicRecipes();
+        User user = usersRepository.findOne(userService.loggedInUser().getId());
+        List<Recipe> usersHeartedRecipes = user.getHeartedRecipes();
+        List<Recipe> allRecipes = recipeService.getAllPublicRecipes();
+        for (Recipe recipe : allRecipes) {
+            if (usersHeartedRecipes.contains(recipe)) {
+                recipe.setHearted(true);
+            } else {
+                recipe.setHearted(false);
+            }
+        }
         vModel.addAttribute("recipes", allRecipes);
         return "/index";
     }

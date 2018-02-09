@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface RecipeRepository extends CrudRepository<Recipe, Long> {
 
-    Iterable<Recipe> findAllByPrivateRecipe(boolean isPrivate);
+    List<Recipe> findAllByPrivateRecipe(boolean isPrivate);
 
     Iterable<Recipe> findByUserAndPrivateRecipe(User user, boolean isPrivate);
     Iterable<Recipe> findByUser(User user);
