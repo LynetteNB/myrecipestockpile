@@ -22,7 +22,16 @@ h3 {
 .title {
     padding-top: 20px;
     text-align: center;
-    min-height: 100%;
+    /*min-height: 100;*/
+}
+
+.text-primary {
+    font-size: 30px;
+    color: white;
+}
+
+.blockquote-footer{
+    font-size: 20px;
 }
 
 .createAccount {
@@ -106,6 +115,7 @@ h3 {
 .text-center {
     margin-left: 10px;
     margin-right: 50px;
+    margin-top: 30px;
 }
 
 #imagePlaceholder img {
@@ -114,23 +124,20 @@ h3 {
     border-radius: 8px;
 }
 
-.jumbotron {
-    height: 500px;
+.d-block, .img-fluid {
+    height: 400px;
     width: 100%;
-    background-image: url("/images/chicken.jpg");
-    background-size: cover;
-    /*background-position: center;*/
-    /*text-align: center;*/
-    /*font-style: oblique;*/
+    background-size: 400px;
     padding-top: 25px;
     padding-bottom: 10px;
+    /*image-resolution: 10px;*/
 }
 
 .page-quote {
-    margin-top: 450px;
+    margin-top: 2px;
 }
 
-.blockquote, .blockquote, .text-center{
+.blockquote, .blockquote, .text-center {
     padding-top: 5px;
     border-top: 5px;
     font-weight: bold;
