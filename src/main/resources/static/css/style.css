@@ -127,6 +127,7 @@ h3 {
 .d-block, .img-fluid {
     height: 400px;
     width: 100%;
+    max-width: 100%;
     background-size: 400px;
     padding-top: 25px;
     padding-bottom: 10px;
@@ -536,6 +537,3 @@ a {
         transform: translate(2px, -18px) rotate(-25deg);
     }
 }
-
-
-

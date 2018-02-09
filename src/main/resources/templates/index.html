@@ -2,14 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/head :: main-head(All-Recipes)"></head>
 <body>
+
 <div th:replace="fragments/navbar :: mainNavbar"></div>
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </ol>
     <div class="carousel-inner" role="listbox">
         <div class="carousel-item active">
             <img class="d-block img-fluid" src="/images/jumbo0.jpg" alt="First slide"/>
@@ -32,25 +28,13 @@
 </div>
 
 <!--<h1>This is our index page</h1>-->
-<!--<div class="container-full-bg">-->
-    <!--<div class="jumbotron">-->
-        <!--<div class="container">-->
-            <!--<img src="/images/recipestockpile.jpg" alt="rollingpin" class="rollingpin"/>-->
-            <!--<br/><br/>-->
-            <!--<img src="/images/jumbo1.jpg" alt="chickenimage" class="jumbotron-image"/>-->
-        <div>
-            <blockquote class="blockquote text-center page-quote">
-                <p class="text-primary">"A recipe is a story that ends with a good meal."</p>
-                <footer class="blockquote-footer"><cite title="Pat Conroy">Pat Conroy</cite></footer>
-            </blockquote>
-            <hr/>
-        </div>
-    <!--</div>-->
-<!--</div>-->
-<br/>
-<br/>
-<br/>
-<br/>
+
+<div class="jumbotron">
+    <img src="/images/recipestockpile.jpg" class="mrsimage"/>
+    <hr class="my-4"/>
+    <h5 class="display-3"><b><i>A recipe is a story that ends with a good meal!</i></b></h5>
+
+</div>
 
 <div class="row">
     <div sec:authorize="isAuthenticated()">
