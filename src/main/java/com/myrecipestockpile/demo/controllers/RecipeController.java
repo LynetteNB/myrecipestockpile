@@ -33,8 +33,15 @@ public class RecipeController {
 
     @GetMapping("/recipes")
     public String allRecipes(Model vModel) {
-        User user = usersRepository.findOne(userService.loggedInUser().getId());
-        List<Recipe> usersHeartedRecipes = user.getHeartedRecipes();
+        User user;
+            List<Recipe> usersHeartedRecipes;
+        if (userService.isLoggedIn()) {
+            user = usersRepository.findOne(userService.loggedInUser().getId());
+            usersHeartedRecipes = user.getHeartedRecipes();
+        } else {
+            usersHeartedRecipes = new ArrayList<>();
+            usersHeartedRecipes.add(new Recipe());
+        }
         List<Recipe> allRecipes = recipeService.getAllPublicRecipes();
         for (Recipe recipe : allRecipes) {
             if (usersHeartedRecipes.contains(recipe)) {
