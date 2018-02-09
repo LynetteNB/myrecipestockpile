@@ -18,6 +18,18 @@ h3 {
     padding-top: 40px;
 }
 
+.container {
+    min-height: 100vh;
+}
+
+.siteLogo {
+    height: 40px;
+    width: auto;
+}
+
+#logout-btn {
+    margin-top: 3px !important;
+}
 
 .title {
     padding-top: 20px;

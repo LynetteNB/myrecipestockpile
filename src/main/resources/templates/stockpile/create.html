@@ -5,19 +5,35 @@
 
 <div th:replace="fragments/navbar :: mainNavbar"></div>
 
-<h1>Create a Stockpile</h1>
+<div class="container">
+    <div class="row">
+        <h1 class="text-center col-12">Create a Stockpile</h1>
+        <div class="col-12 col-sm-8 offset-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 card">
+            <form th:action="@{/stockpile/create}" method="post" th:object="${stockpile}">
+                <div class="row card-body">
+                    <div class="col-12">
 
-<form th:action="@{/stockpile/create}" method="post" th:object="${stockpile}">
-    <label>Name:
-        <input id="title" th:field="*{name}"/>
-    </label>
-    <br/>
-    <label>Do you want this stockpile to be private (only visible to you)?
-        <input type="checkbox" th:field="*{privateStockpile}"/>
-    </label>
-    <br/>
-    <input type="submit"/>
-</form>
+                        <div class="form-group">
+                            <label for="title">Stockpile Name</label>
+                            <input id="title" th:field="*{name}"/>
+                        </div>
+                    </div>
+                    <div class="col-12">
+
+                        <div class="form-group">
+                            <label>Do you want this stockpile to be private (only visible to you)?
+                                <input type="checkbox" th:field="*{privateStockpile}"/>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary" id="loginBtn">Save Stockpile</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <footer th:include="fragments/footer :: footer"></footer>
 <div th:replace="fragments/scripts :: scripts"></div>
