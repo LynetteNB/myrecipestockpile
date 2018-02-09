@@ -5,23 +5,45 @@
 
 <div th:replace="fragments/navbar :: mainNavbar"></div>
 
-    <h1>Create an account</h1>
+<div class="container">
 
-    <form th:action="@{/sign-up}" method="POST" th:object="${user}">
-        <label for="username">Username</label>
-        <input id="username" th:field="*{username}" />
-
-        <label for="email">Email</label>
-        <input id="email" th:field="*{email}" />
-
-        <label for="password">Password</label>
-        <input id="password" type="password" th:field="*{password}" />
-
-        <input value="Sign me up!" type="submit" />
-    </form>
+    <h1 class="text-center col-12">Sign Up!</h1>
+    <div class="col-12 col-sm-8 offset-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 card">
+        <form th:action="@{/sign-up}" method="POST" th:object="${user}">
+            <div class="row card-body">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" th:field="*{username}"/>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="text" class="form-control" id="email" th:field="*{email}"/>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" th:field="*{password}"/>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary" id="loginBtn">Sign Me Up!</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-12 col-sm-8 offset-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 card">
+        <div class="card-body">
+            <h4 class="text-center">Already A Member?</h4>
+            <p class="createAccount"><a href="/login" class="text-center">Go login.</a></p>
+        </div>
+    </div>
 
     <footer th:include="fragments/footer :: footer"></footer>
     <div th:replace="fragments/scripts :: scripts"></div>
-
+</div>
 </body>
 </html>

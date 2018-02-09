@@ -22,6 +22,12 @@ h3 {
 .title {
     padding-top: 20px;
     text-align: center;
+    min-height: 100%;
+}
+
+.createAccount {
+    margin: 0;
+    text-align: center;
 }
 
 .createStockpileBtn1:active {
@@ -93,6 +99,10 @@ h3 {
     border-radius: 10px;
 }
 
+#loginBtn {
+    width: 100%;
+}
+
 .text-center {
     margin-left: 10px;
     margin-right: 50px;
@@ -133,15 +143,46 @@ h3 {
     margin-bottom: 10px;
 }
 
+/*.container {*/
+    /*margin: 5rem;*/
+    /*padding-top: 20px;*/
+/*}*/
+
+#recipe-page-card {
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#recipe-pic {
+    margin-bottom: 15px;
+}
+
+#recipe_title, #recipe_owner, #recipe_description {
+    text-align: center;
+}
+
+.my-4 {
+    margin-top: 0 !important;
+}
+
 #deleteForm {
     margin-top: 15px;
 }
 
 #multi_select {
     display: none;
+    text-align: center;
 }
 
+#buttons {
+    text-align: center;
+    margin-top: 2%;
+}
 
+#prep-cook-serving {
+    text-align: center;
+}
 
 /*  Like Button  */
 
@@ -152,9 +193,6 @@ h3 {
 #deleteForm {
     margin-top: 15px;
 }
-
-
-
 
 /*  Like Button  */
 
