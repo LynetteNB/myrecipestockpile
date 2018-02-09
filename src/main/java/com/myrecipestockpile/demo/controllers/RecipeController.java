@@ -159,8 +159,29 @@ public class RecipeController {
 
     @GetMapping("/recipes/search")
     public String search(@RequestParam(name = "term") String term, Model vModel) {
+        String termOG = term;
         term = "%" + term + "%";
-        vModel.addAttribute("recipes", recipeRepository.findByDescriptionIsLikeAndPrivateRecipeOrTitleIsLikeAndPrivateRecipe(term, false, term, false));
+
+        List<Recipe> results = recipeRepository.findByDescriptionIsLikeAndPrivateRecipeOrTitleIsLikeAndPrivateRecipe(term, false, term, false);
+
+        User user;
+        List<Recipe> usersHeartedRecipes;
+        if (userService.isLoggedIn()) {
+            user = usersRepository.findOne(userService.loggedInUser().getId());
+            usersHeartedRecipes = user.getHeartedRecipes();
+        } else {
+            usersHeartedRecipes = new ArrayList<>();
+            usersHeartedRecipes.add(new Recipe());
+        }
+        for (Recipe recipe : results) {
+            if (usersHeartedRecipes.contains(recipe)) {
+                recipe.setHearted(true);
+            } else {
+                recipe.setHearted(false);
+            }
+        }
+        vModel.addAttribute("searchTerm", termOG);
+        vModel.addAttribute("recipes", results);
         return "recipes/results";
     }
 
