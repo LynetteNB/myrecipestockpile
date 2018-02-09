@@ -110,9 +110,13 @@ public class RecipeController {
         System.out.println(recipe.getImageUrl());
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         recipe.setUser(usersRepository.findOne(user.getId()));
-        recipe.setImageUrl(image);
+        if (image.isEmpty()) {
+            recipe.setImageUrl("/images/logo.png");
+        } else {
+            recipe.setImageUrl(image);
+        }
         recipeService.createNewRecipe(recipe, instructions, ingredients, quantity);
-        return "index";
+        return "redirect:/profile";
     }
 
     @GetMapping("/recipes/edit/{id}")
