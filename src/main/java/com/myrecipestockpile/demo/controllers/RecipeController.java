@@ -249,6 +249,9 @@ public class RecipeController {
         User user = usersRepository.findByUsername(username);
         List<Recipe> heartedRecipes = user.getHeartedRecipes();
         if (user.getId() == userService.loggedInUser().getId()) {
+            for (Recipe recipe : heartedRecipes) {
+                recipe.setHearted(true);
+            }
             vModel.addAttribute("recipes", heartedRecipes);
         } else {
             List<Recipe> publicHeartedRecipes = new ArrayList<>();
@@ -257,9 +260,19 @@ public class RecipeController {
                     publicHeartedRecipes.add(recipe);
                 }
             }
+            User currentUser = usersRepository.findOne(userService.loggedInUser().getId());
+            List<Recipe> currentHearts = currentUser.getHeartedRecipes();
+            for (Recipe recipe : publicHeartedRecipes) {
+                if (currentHearts.contains(recipe)) {
+                    recipe.setHearted(true);
+                } else {
+                    recipe.setHearted(false);
+                }
+            }
             vModel.addAttribute("recipes", publicHeartedRecipes);
 
         }
+        vModel.addAttribute("user", user);
         vModel.addAttribute("title", "Hearted Recipes");
         return "/recipes/index";
     }
@@ -267,14 +280,31 @@ public class RecipeController {
     @GetMapping("/stockpile/allMyRecipes/{username}")
     public String viewAllUsersRecipes(@PathVariable String username, Model vModel) {
         User user = usersRepository.findByUsername(username);
+        User loggedInUser = usersRepository.findOne(userService.loggedInUser().getId());
+        List<Recipe> currentHearts = loggedInUser.getHeartedRecipes();
         if (user.getId() == userService.loggedInUser().getId()) {
-            Iterable<Recipe> allRecipes = recipeRepository.findByUser(user);
+            List<Recipe> allRecipes = recipeRepository.findByUser(user);
+            for (Recipe recipe : allRecipes) {
+                if (currentHearts.contains(recipe)) {
+                    recipe.setHearted(true);
+                } else {
+                    recipe.setHearted(false);
+                }
+            }
             vModel.addAttribute("recipes", allRecipes);
         } else {
-            Iterable<Recipe> allPublicRecipes = recipeRepository.findByUserAndPrivateRecipe(user, false);
+            List<Recipe> allPublicRecipes = recipeRepository.findByUserAndPrivateRecipe(user, false);
+            for (Recipe recipe : allPublicRecipes) {
+                if (currentHearts.contains(recipe)) {
+                    recipe.setHearted(true);
+                } else {
+                    recipe.setHearted(false);
+                }
+            }
             vModel.addAttribute("recipes", allPublicRecipes);
         }
         vModel.addAttribute("title", "All My Recipes");
+        vModel.addAttribute("user", user);
         return "/recipes/index";
     }
 }
