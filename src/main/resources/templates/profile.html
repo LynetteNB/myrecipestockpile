@@ -88,11 +88,11 @@
         </div>
     </div>
 
-    <div sec:authorize="isAuthenticated()">
-        <div th:if="${#authentication.principal.id} == ${user.id}">
-            <h3><a th:href="@{'/stockpile/new'}">New Stockpile</a></h3>
-        </div>
-    </div>
+    <!--<div sec:authorize="isAuthenticated()">-->
+        <!--<div th:if="${#authentication.principal.id} == ${user.id}">-->
+            <!--<h3><a th:href="@{'/stockpile/new'}">New Stockpile</a></h3>-->
+        <!--</div>-->
+    <!--</div>-->
     <hr/>
 
     <!-- stockpile section -->
@@ -109,23 +109,23 @@
                     <a th:href="@{'/stockpile/allMyHeartedRecipes/'} + ${user.username}">Hearted Recipes</a>
                     <span class="badge badge-primary badge-pill" th:text="${#lists.size(user.heartedRecipes)}"></span>
                 </li>
-                <div th:if="!${#lists.isEmpty(user.stockpiles)}">
-                <li class="list-group-item d-flex justify-content-between align-items-center"
+                <!--<div th:if="!${#lists.isEmpty(user.stockpiles)}">-->
+                <div th:if="!${#lists.isEmpty(user.stockpiles)}"
                     th:each="stockpile : ${user.stockpiles}">
-                    <div th:if="${#authentication.principal.id} == ${user.id}">
+                    <li th:if="${#authentication.principal.id} == ${user.id}" class="list-group-item d-flex justify-content-between align-items-center">
                         <a th:href="@{'/stockpile/'} + ${stockpile.id}"><span th:text="${stockpile.name}"></span></a>
                         <span class="badge badge-primary badge-pill"
                               th:text="${#lists.size(stockpile.stockpileRecipes)}"></span>
-                    </div>
-                    <div th:if="!${#authentication.principal.id} == ${user.id}">
+                    </li>
+                    <li th:if="!${#authentication.principal.id} == ${user.id}" class="list-group-item d-flex justify-content-between align-items-center">
                         <div th:if="!${stockpile.privateStockpile}">
                             <a th:href="@{'/stockpile/'} + ${stockpile.id}"><span th:text="${stockpile.name}"></span></a>
                             <span class="badge badge-primary badge-pill"
                                   th:text="${#lists.size(stockpile.stockpileRecipes)}"></span>
                         </div>
-                    </div>
-                </li>
+                    </li>
                 </div>
+                <!--</div>-->
                 <div th:if="${#authentication.principal.id} == ${user.id}">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div class="createStockpileBtn1Holder">

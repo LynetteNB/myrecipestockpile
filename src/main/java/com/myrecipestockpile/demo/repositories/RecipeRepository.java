@@ -11,8 +11,8 @@ public interface RecipeRepository extends CrudRepository<Recipe, Long> {
 
     List<Recipe> findAllByPrivateRecipe(boolean isPrivate);
 
-    Iterable<Recipe> findByUserAndPrivateRecipe(User user, boolean isPrivate);
-    Iterable<Recipe> findByUser(User user);
+    List<Recipe> findByUserAndPrivateRecipe(User user, boolean isPrivate);
+    List<Recipe> findByUser(User user);
 
 //    List<Recipe> findByDescriptionIsLikeOrTitleIsLike(String term, String term2);
     List<Recipe> findByDescriptionIsLikeAndPrivateRecipeOrTitleIsLikeAndPrivateRecipe(String term, boolean isPrivate1, String term2, boolean isPrivate2);

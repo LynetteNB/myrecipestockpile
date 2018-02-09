@@ -4,6 +4,7 @@ import com.myrecipestockpile.demo.models.Recipe;
 import com.myrecipestockpile.demo.models.Stockpile;
 import com.myrecipestockpile.demo.models.User;
 import com.myrecipestockpile.demo.repositories.RecipeRepository;
+import com.myrecipestockpile.demo.repositories.UsersRepository;
 import com.myrecipestockpile.demo.services.StockpileService;
 import com.myrecipestockpile.demo.services.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,19 +21,64 @@ public class StockpileController {
     private StockpileService stockpileService;
     private UserService userService;
     private RecipeRepository recipeRepository;
+    private UsersRepository usersRepository;
 
-    public StockpileController(StockpileService stockpileService, UserService userService, RecipeRepository recipeRepository) {
+    public StockpileController(StockpileService stockpileService, UserService userService, RecipeRepository recipeRepository, UsersRepository usersRepository) {
         this.stockpileService = stockpileService;
         this.userService = userService;
         this.recipeRepository = recipeRepository;
+        this.usersRepository = usersRepository;
     }
 
     @GetMapping("/stockpile/{id}")
     public String show(@PathVariable long id, Model vModel) {
         Stockpile stockpile = stockpileService.findOne(id);
-        Iterable<Recipe> recipes = stockpile.getStockpileRecipes();
+        List<Recipe> recipes = stockpile.getStockpileRecipes();
+
+        // Checking if user profile is that of the logged in user, to decide to show private recipes
+        User user = usersRepository.findOne(userService.loggedInUser().getId());
+        List<Recipe> usersHR = user.getHeartedRecipes();
+
+        List<Recipe> finalRecipes = new ArrayList<>();
+
+        // filters out private ones
+//        for (Recipe recipe : recipes) {
+//            if (!recipe.isPrivateRecipe()) {
+//                finalRecipes.add(recipe);
+//            }
+//        }
+        // This conditional evaluates 2 thing:
+        // 1) whether this stockpile belongs to the logged in user - thus grabbing private recipes or not
+        // 2) then if the user has previously liked any of the recipes being loaded
+        if (stockpile.getOwner() == user) {
+            for (Recipe recipe : recipes) {
+                if (usersHR.contains(recipe)) {
+                    recipe.setHearted(true);
+                } else {
+                    recipe.setHearted(false);
+                }
+            }
+            vModel.addAttribute("recipes", recipes);
+        } else {
+            // filters out private ones
+            for (Recipe recipe : recipes) {
+                if (!recipe.isPrivateRecipe()) {
+                    finalRecipes.add(recipe);
+                }
+            }
+            for (Recipe recipe : finalRecipes) {
+                if (usersHR.contains(recipe)) {
+                    recipe.setHearted(true);
+                } else {
+                    recipe.setHearted(false);
+                }
+            }
+            vModel.addAttribute("recipes", finalRecipes);
+        }
+//        vModel.addAttribute("user", requestedUser);
+
         vModel.addAttribute("stockpile", stockpile);
-        vModel.addAttribute("recipes", recipes);
+//        vModel.addAttribute("recipes", recipes);
         return "stockpile/show";
     }
 
