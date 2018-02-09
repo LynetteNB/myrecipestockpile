@@ -177,5 +177,9 @@ $(document).ready(function () {
         $('#multi_select').slideToggle();
     });
 
+    $('.carousel').carousel({
+        interval: 3000
+    });
+
 
 });
