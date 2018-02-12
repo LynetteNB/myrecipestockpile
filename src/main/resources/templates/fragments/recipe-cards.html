@@ -49,17 +49,15 @@
                     </div>
                 </div>
             </div>
-            <div sec:authorize="!isAuthenticated()">
-                <div class="card-heart-button">
-                    <div class='middle-wrapper'>
-                        <div class='like-wrapper'>
-                            <a class='like-button'>
+            <div sec:authorize="!isAuthenticated()" class="card-heart-button">
+                <div class='middle-wrapper'>
+                    <div class='like-wrapper'>
+                        <a class='like-button'>
                     <span class='like-icon'>
                         <div class='heart-animation-1'></div>
                         <div class='heart-animation-2'></div>
                     </span><span th:text="${#lists.size(recipe.heartedUsers)}"></span>
-                            </a>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>

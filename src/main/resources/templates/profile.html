@@ -34,7 +34,12 @@
     <div class="row">
         <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
             <h1 class="text-center"><span th:text="${user.username}"></span>'s</h1>
-            <h3 class="text-center">Recipe Stockpiles</h3>
+            <h3 class="text-center stockpile-heading">Recipe Stockpiles</h3>
+            <div th:if="${#authentication.principal.id} == ${user.id}">
+                <p class="text-center">Stockpiles are a great way to organize recipes.<br/>Create a new Stockpile. Find
+                                       a recipe. Save it to that Stockpile.<br/>Visit that Stockpile to see the whole
+                                       collection.</p>
+            </div>
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a th:href="@{'/stockpile/allMyRecipes/'} + ${user.username}">All My Recipes</a>
