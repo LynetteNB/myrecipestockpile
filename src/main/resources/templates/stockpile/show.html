@@ -1,23 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/head :: main-head(Stockpile)"></head>
 <body>
 
 <div th:replace="fragments/navbar :: mainNavbar"></div>
 
-<div class="container">
-
-
-
-
-
-
-
+<div class="container" id="too-small">
 
     <div class="row">
         <div class="text-center col-12">
             <h1 th:text="${stockpile.name}"></h1>
-            <h4>Owner: <a th:href="@{'/profile/'} + ${stockpile.owner.username}" th:text="${stockpile.owner.username}"></a></h4>
+            <h4>Owner: <a th:href="@{'/profile/'} + ${stockpile.owner.username}"
+                          th:text="${stockpile.owner.username}"></a></h4>
             <a th:href="${'/stockpile/'} + ${id} + ${'/edit'}">Edit This Stockpile</a>
 
         </div>
@@ -42,8 +37,9 @@
                     </li>
                 </ul>
                 <div class="card-footer text-muted">By:
-                    <a th:href="@{'/profile/'} + ${recipe.user.username}"><span th:text="${recipe.user.username}"></span></a>
-                                                    <!--heart-->
+                    <a th:href="@{'/profile/'} + ${recipe.user.username}"><span
+                            th:text="${recipe.user.username}"></span></a>
+                    <!--heart-->
                     <div sec:authorize="isAuthenticated()" class="card-heart-button">
                         <div th:data="${recipe.id}" id="recipeIdInfo" style="display: none"></div>
                         <div class='middle-wrapper'>
@@ -88,16 +84,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-<!--<div th:each="recipe : ${recipes}">-->
-    <!--<a th:href="@{'/recipes/show/'} + ${recipe.id}"><h1 th:text="${recipe.title}"></h1></a>-->
-    <!--<p th:text="${recipe.description}"></p>-->
-    <!--<p th:text="${recipe.user.username}"></p>-->
-<!--</div>-->
-
 </div>
 
 <footer th:include="fragments/footer :: footer"></footer>
