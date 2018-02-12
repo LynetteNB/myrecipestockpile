@@ -128,7 +128,7 @@ public class StockpileController {
     @PostMapping("stockpile/{id}/delete")
     public String delete(@PathVariable long id) {
         stockpileService.delete(id);
-        return "redirect:/";
+        return "redirect:/profile";
     }
 
     @PostMapping("/stockpile/saveto")
@@ -137,10 +137,8 @@ public class StockpileController {
             @RequestParam(name = "recipeId") Long recipeId) {
 
 
-//        System.out.println(recipeId + " is the recipe id");
         List<Recipe> recipes = new ArrayList<>();
 
-//        List<Stockpile> populatedStockpile = recipe.getStockpiles();
         for (long stockpileId : stockpileIds) {
             Stockpile sp = stockpileService.findOne(stockpileId);
             Recipe recipe = recipeRepository.findOne(recipeId);
@@ -153,13 +151,8 @@ public class StockpileController {
                 recipes.clear();
             }
 
-//        System.out.println("stockpile id" + stockpileId);
-//            populatedStockpile.add(stockpileService.findOne(stockpileId));
         }
 
-//        recipe.setStockpiles(populatedStockpile);
-////        recipeRepository.save(recipe);
-//        stockpileRepository.save(populatedStockpile);
 
         return "redirect:/recipes/show/" + recipeId;
     }
