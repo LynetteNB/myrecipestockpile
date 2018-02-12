@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments/head :: main-head(All-Recipes)"></head>
+<head th:replace="fragments/head :: main-head(@{'My Recipe Stockpile'})"></head>
 <body>
 
 <div th:replace="fragments/navbar :: mainNavbar"></div>
@@ -50,7 +50,7 @@
     <div class="row">
     <div th:replace="fragments/recipe-cards :: cards"></div>
     </div>
-
+    </div>
 </div>
 
 

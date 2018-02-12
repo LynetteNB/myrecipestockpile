@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments/head :: main-head(showRecipe)"></head>
+<head th:replace="fragments/head :: main-head(${recipe.title} + @{' - My Recipe Stockpile'})"></head>
 <body>
 <div th:replace="fragments/navbar :: mainNavbar"></div>
 

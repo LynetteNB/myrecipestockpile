@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments/head :: main-head(Profile)"></head>
+<head th:replace="fragments/head :: main-head(${user.username} + @{'\'s Profile - My Recipe Stockpile'})"></head>
 <body>
 
 <div th:replace="fragments/navbar :: mainNavbar"></div>

@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments/head :: main-head(All-Recipes)"></head>
+<head th:replace="fragments/head :: main-head(@{'Search Results - My Recipe Stockpile'})"></head>
 
 <body>
 <div th:replace="fragments/navbar :: mainNavbar"></div>
@@ -18,69 +18,6 @@
 
         <div th:replace="fragments/recipe-cards :: cards"></div>
 
-        <!-- START OF CARDS -->
-        <!--<div class="col-md-6 col-lg-6 col-xl-4" th:each="recipe : ${recipes}">-->
-            <!--<div class="card">-->
-                <!--<div class="thumbnail">-->
-                    <!--<a th:href="@{'/recipes/show/'} + ${recipe.id}">-->
-                        <!--<img class="card-img-top" th:src="${recipe.imageUrl}" alt="Recipe Picture"/>-->
-                    <!--</a>-->
-                <!--</div>-->
-                <!--<div class="card-block card-block-height">-->
-                    <!--<a th:href="@{'/recipes/show/'} + ${recipe.id}">-->
-                        <!--<h4 class="card-title text-center" th:text="${recipe.title}"></h4>-->
-                    <!--</a>-->
-                    <!--<p class="card-text" th:text="${recipe.description}"></p>-->
-                <!--</div>-->
-                <!--<ul class="list-group list-group-flush">-->
-                    <!--<li class="list-group-item text-center">-->
-                        <!--<span>Prep: <span th:text="${recipe.prepTime}"></span> min.&nbsp;&nbsp;</span>&#8212;&nbsp;-->
-                        <!--<span>Cook: <span th:text="${recipe.cookTime}"></span> min.</span>-->
-                    <!--</li>-->
-                <!--</ul>-->
-                <!--<div class="card-footer text-muted"><p class="inline-p">By:-->
-                    <!--<a th:href="@{'/profile/'} + ${recipe.user.username}"><span th:text="${recipe.user.username}"></span></a>-->
-                <!--</p>-->
-
-                    <!--&lt;!&ndash;heart&ndash;&gt;-->
-                    <!--<div sec:authorize="isAuthenticated()" class="card-heart-button">-->
-                        <!--<div th:data="${recipe.id}" id="recipeIdInfo" style="display: none"></div>-->
-                        <!--<div class='middle-wrapper'>-->
-                            <!--<div class='like-wrapper'>-->
-                                <!--<a class='like-button card-hearts' th:if="!${recipe.hearted}" th:data="${recipe.id}">-->
-                    <!--<span class='like-icon'>-->
-                        <!--<div class='heart-animation-1'></div>-->
-                        <!--<div class='heart-animation-2'></div>-->
-                    <!--</span><span th:text="${#lists.size(recipe.heartedUsers)}"-->
-                                 <!--class="heartCount"></span></a><a class='like-button liked card-hearts'-->
-                                                                  <!--th:if="${recipe.hearted}"-->
-                                                                  <!--th:data="${recipe.id}">-->
-                    <!--<span class='like-icon'>-->
-                        <!--<div class='heart-animation-1'></div>-->
-                        <!--<div class='heart-animation-2'></div>-->
-                    <!--</span><span th:text="${#lists.size(recipe.heartedUsers)}" class="heartCount"></span>-->
-                            <!--</a>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div sec:authorize="!isAuthenticated()">-->
-                        <!--<div class="card-heart-button">-->
-                            <!--<div class='middle-wrapper'>-->
-                                <!--<div class='like-wrapper'>-->
-                                    <!--<a class='like-button'>-->
-                    <!--<span class='like-icon'>-->
-                        <!--<div class='heart-animation-1'></div>-->
-                        <!--<div class='heart-animation-2'></div>-->
-                    <!--</span><span th:text="${#lists.size(recipe.heartedUsers)}"></span>-->
-                                    <!--</a>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!-- END OF CARDS-->
 
     </div>
 

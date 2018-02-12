@@ -294,6 +294,11 @@ a {
     cursor: pointer;
 }
 
+.google-translate {
+    display: inline-block;
+    max-height: 14px;
+}
+
 .middle-wrapper {
     display: -webkit-box;
     display: -ms-flexbox;
