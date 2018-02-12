@@ -7,13 +7,6 @@
 
 <div class="container">
 
-
-
-
-
-
-
-
     <div class="row">
         <div class="text-center col-12">
             <h1 th:text="${stockpile.name}"></h1>
@@ -24,79 +17,10 @@
         <div sec:authorize="isAuthenticated()">
             <div th:data="${#authentication.principal.id}" id="userIdInfo"></div>
         </div>
-        <div class="col-md-6 col-lg-6 col-xl-4" th:each="recipe : ${recipes}">
-            <div class="card">
-                <a th:href="@{'/recipes/show/'} + ${recipe.id}">
-                    <img class="card-img-top" th:src="${recipe.imageUrl}" alt="Recipe Picture"/>
-                </a>
-                <div class="card-block">
-                    <a th:href="@{'/recipes/show/'} + ${recipe.id}">
-                        <h4 class="card-title text-center" th:text="${recipe.title}"></h4>
-                    </a>
-                    <p class="card-text" th:text="${recipe.description}"></p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item text-center">
-                        <span>Prep: <span th:text="${recipe.prepTime}"></span> min.&nbsp;&nbsp;</span>&#8212;&nbsp;
-                        <span>Cook: <span th:text="${recipe.cookTime}"></span> min.</span>
-                    </li>
-                </ul>
-                <div class="card-footer text-muted">By:
-                    <a th:href="@{'/profile/'} + ${recipe.user.username}"><span th:text="${recipe.user.username}"></span></a>
-                                                    <!--heart-->
-                    <div sec:authorize="isAuthenticated()" class="card-heart-button">
-                        <div th:data="${recipe.id}" id="recipeIdInfo" style="display: none"></div>
-                        <div class='middle-wrapper'>
-                            <div class='like-wrapper'>
-                                <a class='like-button card-hearts' th:if="!${recipe.hearted}" th:data="${recipe.id}">
-                    <span class='like-icon'>
-                        <div class='heart-animation-1'></div>
-                        <div class='heart-animation-2'></div>
-                    </span>
-                                    <span th:text="${#lists.size(recipe.heartedUsers)}" class="heartCount"></span>
-                                </a>
-                                <div></div>
-                                <a class='like-button liked card-hearts'
-                                   th:if="${recipe.hearted}"
-                                   th:data="${recipe.id}">
-                    <span class='like-icon'>
-                        <div class='heart-animation-1'></div>
-                        <div class='heart-animation-2'></div>
-                    </span>
-                                    <span th:text="${#lists.size(recipe.heartedUsers)}" class="heartCount"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div sec:authorize="!isAuthenticated()">
-                        <div class="card-heart-button">
-                            <div class='middle-wrapper'>
-                                <div class='like-wrapper'>
-                                    <a class='like-button'>
-                    <span class='like-icon'>
-                        <div class='heart-animation-1'></div>
-                        <div class='heart-animation-2'></div>
-                    </span>
-                                        <span th:text="${#lists.size(recipe.heartedUsers)}"></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div th:replace="fragments/recipe-cards :: cards"></div>
+
     </div>
-
-
-
-
-<!--<div th:each="recipe : ${recipes}">-->
-    <!--<a th:href="@{'/recipes/show/'} + ${recipe.id}"><h1 th:text="${recipe.title}"></h1></a>-->
-    <!--<p th:text="${recipe.description}"></p>-->
-    <!--<p th:text="${recipe.user.username}"></p>-->
-<!--</div>-->
 
 </div>
 

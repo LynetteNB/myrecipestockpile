@@ -59,7 +59,8 @@ h3 {
     margin: auto;
 }
 
-/* Recipe Card Styling */
+/* ---- Recipe Card Styling ---- */
+
 .card-text:last-child {
     margin-bottom: 10px;
 }
@@ -74,6 +75,13 @@ h3 {
     margin-top: 5px;
 }
 
+
+.card-block-height {
+    min-height: 150px;
+    max-height: 150px;
+    overflow: auto;
+}
+
 .card-text {
     padding: 6px;
 }
@@ -82,22 +90,29 @@ h3 {
     float: right;
 }
 
-/* card column experiment */
-.card-columns {
-    @include media-breakpoint-only(sm) {
-        column-count: 1;
-    }
-    @include media-breakpoint-only(md) {
-        column-count: 1;
-    }
-    @include media-breakpoint-only(lg) {
-        column-count: 3;
-    }
-    @include media-breakpoint-only(xl) {
-        column-count: 4;
-    }
+.inline-p {
+    display: inline-block;
+    margin: 0;
+    padding-top: 10px;
 }
 
+.thumbnail {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background-color: #000;
+}
+.thumbnail img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: auto;
+    width: 100%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
 
 
 
