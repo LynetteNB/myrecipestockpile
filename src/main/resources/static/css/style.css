@@ -37,6 +37,13 @@ h3 {
     /*min-height: 100;*/
 }
 
+#rollingpin {
+    text-align: center;
+    max-width: 52%;
+    display: block;
+    margin: auto;
+}
+
 .text-primary {
     font-size: 30px;
     color: white;
@@ -158,10 +165,11 @@ h3 {
     width: 100%;
 }
 
-.text-center {
-    /*margin-left: 10px;*/
-    /*margin-right: 50px;*/
-    /*margin-top: 30px;*/
+.quote-text-center {
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 50px;
+    margin-top: 30px;
 }
 
 #imagePlaceholder img {
@@ -170,20 +178,49 @@ h3 {
     border-radius: 8px;
 }
 
-.d-block, .img-fluid {
-    height: 400px;
-    width: 100%;
-    background-size: 400px;
-    padding-top: 25px;
-    padding-bottom: 10px;
-    /*image-resolution: 10px;*/
+/*.d-block, .img-fluid {*/
+    /*height: 400px;*/
+    /*width: 100%;*/
+    /*max-width: 100%;*/
+    /*background-size: 400px;*/
+    /*padding-top: 25px;*/
+    /*padding-bottom: 10px;*/
+    /*!*image-resolution: 10px;*!*/
+/*}*/
+/*.carousel {*/
+    /*max-height: 200px;*/
+/*}*/
+
+.carousel-inner {
+    /* adjust max height to control size */
+    max-height: 650px;
+    min-width: 100%;
+    overflow: hidden;
+}
+
+.carousel-item {
+    height: 32rem;
+}
+
+.carousel-item > img {
+    /*display: block;*/
+    /*height: auto;*/
+    /*max-width: 100%;*/
+    /*line-height: 1;*/
+    /*width: 100%;*/
+    /*min-height: 300px;*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 32rem;
 }
 
 .page-quote {
     margin-top: 2px;
 }
 
-.blockquote, .blockquote, .text-center {
+.blockquote, .blockquote, .quote-text-center {
     padding-top: 5px;
     border-top: 5px;
     font-weight: bold;
@@ -582,6 +619,3 @@ a {
         transform: translate(2px, -18px) rotate(-25deg);
     }
 }
-
-
-
