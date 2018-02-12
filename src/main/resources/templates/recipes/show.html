@@ -59,48 +59,50 @@
                     </a>
                 </div>
             </div>
-            <div class="row">
-                <div sec:authorize="isAuthenticated()" class="middle-wrapper col-xs-8" id="buttons">
-                    <button class="btn btn-primary" id="save-to-stockpile">Save to a Stockpile</button>
-                    <!--<div sec:authorize="isAuthenticated()">-->
-                    <div th:if="${#authentication.principal.id} == ${recipe.user.id}">
-                        <a th:if="${#authentication.principal.id} == ${recipe.user.id}" class="btn btn-primary"
-                           th:href="@{'/recipes/edit/'} + ${recipe.id}">Edit This Recipe</a>
-                    </div>
-                    <!--</div>-->
-                    <!--<div sec:authorize="isAuthenticated()">-->
-                    <a class="btn btn-primary" th:href="@{'/recipes/variation/'} + ${recipe.id}">Make a Variation</a>
-                    <!--</div>-->
+            <div class="row" sec:authorize="isAuthenticated()" id="buttons">
+                <!--<div sec:authorize="isAuthenticated()" class="middle-wrapper col-xs-8" id="buttons">-->
+                <div class="col-xs-12 col-md-4">
+                    <button class="btn btn-primary recipe-edit-buttons" id="save-to-stockpile">Save to a Stockpile</button>
                 </div>
+                <!--<div sec:authorize="isAuthenticated()">-->
+                <div class="col-xs-12 col-md-4" th:if="${#authentication.principal.id} == ${recipe.user.id}">
+                    <a th:if="${#authentication.principal.id} == ${recipe.user.id}" class="btn btn-primary recipe-edit-buttons"
+                       th:href="@{'/recipes/edit/'} + ${recipe.id}">Edit This Recipe</a>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <a class="btn btn-primary recipe-edit-buttons" th:href="@{'/recipes/variation/'} + ${recipe.id}">Make a Variation</a>
+                </div>
+                <!--</div>-->
             </div>
         </div>
-        <div sec:authorize="isAuthenticated()" id="multi_select">
-            <form th:action="@{'/stockpile/saveto'}" method="post" th:object="${recipe}">
-                <input type="hidden" th:value="${recipe.id}" name="recipeId"/>
-                <select name="stockpileToAddTo" class="custom-select" multiple="multiple">
-                    <option th:each="stockpile : ${user.stockpiles}"
-                            th:value="${stockpile.id}"
-                            th:text="${stockpile.name}"></option>
-                </select>
-                <button class="btn btn-primary" type="submit">Save!</button>
-            </form>
-        </div>
+    </div>
+    <div sec:authorize="isAuthenticated()" id="multi_select">
+        <form th:action="@{'/stockpile/saveto'}" method="post" th:object="${recipe}">
+            <input type="hidden" th:value="${recipe.id}" name="recipeId"/>
+            <select name="stockpileToAddTo" class="custom-select" multiple="multiple">
+                <option th:each="stockpile : ${user.stockpiles}"
+                        th:value="${stockpile.id}"
+                        th:text="${stockpile.name}"></option>
+            </select>
+            <button class="btn btn-primary" type="submit">Save!</button>
+        </form>
+    </div>
 
-        <div sec:authorize="!isAuthenticated()">
-            <div class='middle-wrapper'>
-                <div class='like-wrapper'>
-                    <a class='like-button'>
+    <div sec:authorize="!isAuthenticated()">
+        <div class='middle-wrapper'>
+            <div class='like-wrapper'>
+                <a class='like-button'>
                     <span class='like-icon'>
                         <div class='heart-animation-1'></div>
                         <div class='heart-animation-2'></div>
                     </span>
-                        <span th:text="${heartCount}" id="heartCount"></span>
-                    </a>
-                </div>
+                    <span th:text="${heartCount}" id="heartCount"></span>
+                </a>
             </div>
         </div>
     </div>
 </div>
+<!--</div>-->
 <!--End of Container-->
 
 <footer th:include="fragments/footer :: footer"></footer>

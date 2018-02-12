@@ -298,6 +298,11 @@ h3 {
     margin-top: 2%;
 }
 
+.recipe-edit-buttons {
+    width: 100%;
+    margin-top: 2%;
+}
+
 #prep-cook-serving {
     text-align: center;
 }
