@@ -34,16 +34,16 @@ public class RecipeService {
         return recipeRepository.findAllByPrivateRecipe(false);
     }
 
-    public Iterable<Recipe> getRecentAllSix() {
-        return recipeRepository.findFirst6ByPrivateRecipeOrderByDateCreated(false);
+    public List<Recipe> getRecentAllSix() {
+        return recipeRepository.findFirst6ByPrivateRecipeOrderByDateCreatedDesc(false);
     }
 
-    public List<Recipe> showUsersFourMostRecentPublic(User user) {
-        return recipeRepository.findFirst4ByUserAndPrivateRecipeOrderByDateCreatedDesc(user, false);
+    public List<Recipe> showUsersThreeMostRecentPublic(User user) {
+        return recipeRepository.findFirst3ByUserAndPrivateRecipeOrderByDateCreatedDesc(user, false);
     }
 
-    public List<Recipe> showUsersFourMostRecentPublicAndPrivate(User user) {
-        return recipeRepository.findFirst4ByUserOrderByDateCreatedDesc(user);
+    public List<Recipe> showUsersThreeMostRecentPublicAndPrivate(User user) {
+        return recipeRepository.findFirst3ByUserOrderByDateCreatedDesc(user);
     }
 
 

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments/head :: main-head(All-Recipes)"></head>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/head :: main-head(@{'My Recipe Stockpile'})"></head>
 <body>
 
 <div th:replace="fragments/navbar :: mainNavbar"></div>
@@ -37,87 +39,36 @@
     <hr/>
 </div>
 
-<div class="container">
+<div class="container" id="home-page-container">
 <div class="row">
-    <div class="col-12">
+    <div class="col-12 roller-div">
         <img src="/images/recipestockpile_roller.png" alt="rollingpin" id="rollingpin" class="cImg"/>
+    </div>
+    <div class="col-sm-12 col-md-4 text-center">
+        <h1>Organize</h1>
+        <p>Keep all you recipes organized with out stockpile tool. No need to look through a dozen books and boxes to find the one you want.</p>
+    </div>
+    <div class="col-sm-12 col-md-4 text-center">
+        <h1>Share</h1>
+        <p>Let the world enjoy the those creations you love. We believe sharing is the best way to show appreciation. But don't worry, you can always keep your treasured ones safe with our privacy settings.</p>
+    </div>
+    <div class="col-sm-12 col-md-4 text-center">
+        <h1>Discover</h1>
+        <p>Search through our site, build from the collective stockpiles of our members, to find new treats and variations on familiar ones. Let your stockpile never stop growing.</p>
+    </div>
+    <div class="col-12 text-center">
+        <br/>
+        <h2>Most Recent Additions From The Community</h2>
     </div>
     <div sec:authorize="isAuthenticated()">
         <div th:data="${#authentication.principal.id}" id="userIdInfo"></div>
     </div>
-    <div class="col-md-6 col-lg-6 col-xl-4" th:each="recipe : ${recipes}">
-        <div class="card">
-            <a th:href="@{'/recipes/show/'} + ${recipe.id}">
-                <img class="card-img-top" th:src="${recipe.imageUrl}" alt="Recipe Picture"/>
-            </a>
-            <div class="card-block">
-                <a th:href="@{'/recipes/show/'} + ${recipe.id}">
-                    <h4 class="card-title text-center" th:text="${recipe.title}"></h4>
-                </a>
-                <p class="card-text" th:text="${recipe.description}"></p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item text-center">
-                    <span>Prep: <span th:text="${recipe.prepTime}"></span> min.&nbsp;&nbsp;</span>&#8212;&nbsp;
-                    <span>Cook: <span th:text="${recipe.cookTime}"></span> min.</span>
-                </li>
-            </ul>
-            <div class="card-footer text-muted">By:
-                <a th:href="@{'/profile/'} + ${recipe.user.username}"><span th:text="${recipe.user.username}"></span></a>
-                <!--heart-->
-                <div sec:authorize="isAuthenticated()" class="card-heart-button">
-                    <div th:data="${recipe.id}" id="recipeIdInfo" style="display: none"></div>
-                    <div class='middle-wrapper'>
-                        <div class='like-wrapper'>
-                            <a class='like-button card-hearts' th:if="!${recipe.hearted}" th:data="${recipe.id}">
-                    <span class='like-icon'>
-                        <div class='heart-animation-1'></div>
-                        <div class='heart-animation-2'></div>
-                    </span>
-                                <span th:text="${#lists.size(recipe.heartedUsers)}" class="heartCount"></span>
-                            </a>
-                            <div></div>
-                            <a class='like-button liked card-hearts'
-                               th:if="${recipe.hearted}"
-                               th:data="${recipe.id}">
-                    <span class='like-icon'>
-                        <div class='heart-animation-1'></div>
-                        <div class='heart-animation-2'></div>
-                    </span>
-                                <span th:text="${#lists.size(recipe.heartedUsers)}" class="heartCount"></span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div sec:authorize="!isAuthenticated()">
-                    <div class="card-heart-button">
-                        <div class='middle-wrapper'>
-                            <div class='like-wrapper'>
-                                <a class='like-button'>
-                    <span class='like-icon'>
-                        <div class='heart-animation-1'></div>
-                        <div class='heart-animation-2'></div>
-                    </span>
-                                    <span th:text="${#lists.size(recipe.heartedUsers)}"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!--<div class="row">-->
+    <div th:replace="fragments/recipe-cards :: cards"></div>
     </div>
-</div>
+    <!--</div>-->
 </div>
 
-<!--<div th:each="recipe : ${recipes}">-->
-    <!--<a th:href="@{'/recipes/show/'} + ${recipe.id}"><h3 th:text="${recipe.title}"></h3></a>-->
-    <!--<img th:src="${recipe.imageUrl}" alt="" style="width:400px;height:300px;border-radius: 8px;border: 1px solid-->
-    <!--black"/>-->
-    <!--<p th:text="${recipe.description}"></p>-->
-    <!--<p th:text="${recipe.user.username}"></p>-->
-<!--</div>-->
 
 <footer th:include="fragments/footer :: footer"></footer>
 <div th:replace="fragments/scripts :: scripts"></div>

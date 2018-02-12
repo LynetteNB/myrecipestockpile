@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:replace="fragments/head :: main-head(Profile)"></head>
+<head th:replace="fragments/head :: main-head(${user.username} + @{'\'s Profile - My Recipe Stockpile'})"></head>
 <body>
 
 <div th:replace="fragments/navbar :: mainNavbar"></div>
@@ -23,83 +23,23 @@
     <div class="row">
         <h3 class="text-center col-12">Most Recent Recipes</h3>
         <div th:data="${#authentication.principal.id}" id="userIdInfo"></div>
-        <div class="col-md-6 col-xl-3" th:each="recipe : ${recipes}">
-            <div class="card">
-                <a th:href="@{'/recipes/show/'} + ${recipe.id}">
-                    <img class="card-img-top" th:src="${recipe.imageUrl}" alt="Recipe Picture"/>
-                </a>
-                <div class="card-block">
-                    <a th:href="@{'/recipes/show/'} + ${recipe.id}">
-                        <h4 class="card-title text-center" th:text="${recipe.title}"></h4>
-                    </a>
-                    <p class="card-text" th:text="${recipe.description}"></p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item text-center">
-                        <span>Prep: <span th:text="${recipe.prepTime}"></span> min.&nbsp;&nbsp;</span>&#8212;&nbsp;
-                        <span>Cook: <span th:text="${recipe.cookTime}"></span> min.</span>
-                    </li>
-                </ul>
-                <div class="card-footer text-muted">By:
-                    <a th:href="@{'/profile/'} + ${recipe.user.username}"><span th:text="${recipe.user.username}"></span></a>
-                                                    <!--heart-->
-                    <div sec:authorize="isAuthenticated()" class="card-heart-button">
-                        <div th:data="${recipe.id}" id="recipeIdInfo" style="display: none"></div>
-                        <div class='middle-wrapper'>
-                            <div class='like-wrapper'>
-                                <a class='like-button card-hearts' th:if="!${recipe.hearted}" th:data="${recipe.id}">
-                    <span class='like-icon'>
-                        <div class='heart-animation-1'></div>
-                        <div class='heart-animation-2'></div>
-                    </span>
-                                    <span th:text="${#lists.size(recipe.heartedUsers)}" class="heartCount"></span>
-                                </a>
-                                <div></div>
-                                <a class='like-button liked card-hearts'
-                                   th:if="${recipe.hearted}"
-                                   th:data="${recipe.id}">
-                    <span class='like-icon'>
-                        <div class='heart-animation-1'></div>
-                        <div class='heart-animation-2'></div>
-                    </span>
-                                    <span th:text="${#lists.size(recipe.heartedUsers)}" class="heartCount"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div sec:authorize="!isAuthenticated()">
-                        <div class="card-heart-button">
-                            <div class='middle-wrapper'>
-                                <div class='like-wrapper'>
-                                    <a class='like-button'>
-                    <span class='like-icon'>
-                        <div class='heart-animation-1'></div>
-                        <div class='heart-animation-2'></div>
-                    </span>
-                                        <span th:text="${#lists.size(recipe.heartedUsers)}"></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div th:replace="fragments/recipe-cards :: cards"></div>
+
+
     </div>
-
-    <!--<div sec:authorize="isAuthenticated()">-->
-        <!--<div th:if="${#authentication.principal.id} == ${user.id}">-->
-            <!--<h3><a th:href="@{'/stockpile/new'}">New Stockpile</a></h3>-->
-        <!--</div>-->
-    <!--</div>-->
     <hr/>
 
     <!-- stockpile section -->
     <div class="row">
         <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
             <h1 class="text-center"><span th:text="${user.username}"></span>'s</h1>
-            <h3 class="text-center">Recipe Stockpiles</h3>
+            <h3 class="text-center stockpile-heading">Recipe Stockpiles</h3>
+            <div th:if="${#authentication.principal.id} == ${user.id}">
+                <p class="text-center">Stockpiles are a great way to organize recipes.<br/>Create a new Stockpile. Find
+                                       a recipe. Save it to that Stockpile.<br/>Visit that Stockpile to see the whole
+                                       collection.</p>
+            </div>
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a th:href="@{'/stockpile/allMyRecipes/'} + ${user.username}">All My Recipes</a>
@@ -111,13 +51,15 @@
                 </li>
                 <!--<div th:if="!${#lists.isEmpty(user.stockpiles)}">-->
                 <div th:if="!${#lists.isEmpty(user.stockpiles)}"
-                    th:each="stockpile : ${user.stockpiles}">
-                    <li th:if="${#authentication.principal.id} == ${user.id}" class="list-group-item d-flex justify-content-between align-items-center">
+                     th:each="stockpile : ${user.stockpiles}">
+                    <li th:if="${#authentication.principal.id} == ${user.id}"
+                        class="list-group-item d-flex justify-content-between align-items-center">
                         <a th:href="@{'/stockpile/'} + ${stockpile.id}"><span th:text="${stockpile.name}"></span></a>
                         <span class="badge badge-primary badge-pill"
                               th:text="${#lists.size(stockpile.stockpileRecipes)}"></span>
                     </li>
-                    <li th:if="!${#authentication.principal.id} == ${user.id}" class="list-group-item d-flex justify-content-between align-items-center">
+                    <li th:if="!${#authentication.principal.id} == ${user.id}"
+                        class="list-group-item d-flex justify-content-between align-items-center">
                         <div th:if="!${stockpile.privateStockpile}">
                             <a th:href="@{'/stockpile/'} + ${stockpile.id}"><span th:text="${stockpile.name}"></span></a>
                             <span class="badge badge-primary badge-pill"

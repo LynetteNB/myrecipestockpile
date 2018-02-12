@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: main-head(create)">
+<head th:replace="fragments/head :: main-head(@{'Create Recipe - My Recipe Stockpile'})">
 </head>
 <body>
 <div th:replace="fragments/navbar :: mainNavbar"></div>
@@ -134,8 +134,9 @@
 
                 <div class="col-sm-3">
                     <label for="uploadpicture">Add An Image To This Recipe</label>
-                    <input type="BUTTON" value="Upload Image" class="btn-btn-outline-danger" id="uploadpicture"
-                           onclick="pickMark()"/>
+                    <button type="button" class="btn btn-outline-danger" id="uploadpicture" onclick="pickMark()">Upload Image</button>
+                    <!--<input type="BUTTON" value="Upload Image" class="btn-btn-outline-danger" id="uploadpicture"-->
+                           <!--onclick="pickMark()"/>-->
                 </div>
                 <br/>
                     <div id="imagePlaceholder"></div>

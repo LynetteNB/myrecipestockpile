@@ -45,7 +45,7 @@ public class ProfileController {
         // 1) whether this profile belongs to the logged in user - thus grabbing private recipes or not
         // 2) then if the user has previously liked any of the recipes being loaded
         if (requestedUser.getId() == user.getId()) {
-            profileRecipes = recipeService.showUsersFourMostRecentPublicAndPrivate(requestedUser);
+            profileRecipes = recipeService.showUsersThreeMostRecentPublicAndPrivate(requestedUser);
             for (Recipe recipe : profileRecipes) {
                 if (usersHR.contains(recipe)) {
                     recipe.setHearted(true);
@@ -55,7 +55,7 @@ public class ProfileController {
             }
             vModel.addAttribute("recipes", profileRecipes);
         } else {
-            profileRecipes = recipeService.showUsersFourMostRecentPublic(requestedUser);
+            profileRecipes = recipeService.showUsersThreeMostRecentPublic(requestedUser);
             for (Recipe recipe : profileRecipes) {
                 if (usersHR.contains(recipe)) {
                     recipe.setHearted(true);
