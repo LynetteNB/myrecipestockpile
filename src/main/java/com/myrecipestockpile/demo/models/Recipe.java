@@ -63,7 +63,7 @@ public class Recipe {
 
 
     // Connects to stockpile table. The pivot table formed shows recipe/stockpile
-    @ManyToMany(mappedBy = "stockpileRecipes")
+    @ManyToMany(mappedBy = "stockpileRecipes", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Stockpile> stockpiles;
 

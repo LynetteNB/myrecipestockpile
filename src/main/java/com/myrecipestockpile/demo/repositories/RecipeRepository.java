@@ -3,6 +3,8 @@ package com.myrecipestockpile.demo.repositories;
 import com.myrecipestockpile.demo.models.Recipe;
 import com.myrecipestockpile.demo.models.User;
 import com.sun.org.apache.regexp.internal.RE;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -24,4 +26,8 @@ public interface RecipeRepository extends CrudRepository<Recipe, Long> {
     List<Recipe> findFirst3ByUserOrderByDateCreatedDesc(User user);
     // Users 4 most recent recipes publicly visible.
     List<Recipe> findFirst3ByUserAndPrivateRecipeOrderByDateCreatedDesc(User user, boolean isPrivate);
+
+    @Modifying
+    @Query(nativeQuery = true, value = "DELETE FROM hearted_recipes WHERE recipe_id = ?1")
+    void deleteHeartedUsers(long id);
 }

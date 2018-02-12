@@ -21,7 +21,7 @@ public class User {
     private String password;
 
     // Connects to recipes table, to show which user owns a recipe.
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     private List<Recipe> recipes;
 
     // Connects to stockpiles table, to show which user owns a stockpile.
@@ -29,7 +29,7 @@ public class User {
     private List<Stockpile> stockpiles;
 
     // Connects to recipes table. The pivot table formed shows user/recipe combinations to show which users have "hearted" which recipes.
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "hearted_recipes",
             joinColumns = {@JoinColumn(name = "user_id")},

@@ -7,6 +7,7 @@ import com.myrecipestockpile.demo.repositories.RecipeInstructionsRepository;
 import com.myrecipestockpile.demo.repositories.RecipeRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -154,7 +155,9 @@ public class RecipeService {
     }
 
     //This method will delete a recipe by id
+    @Transactional
     public void deleteRecipe(Recipe recipe) {
+        recipeRepository.deleteHeartedUsers(recipe.getId());
         recipeRepository.delete(recipe.getId());
     }
 

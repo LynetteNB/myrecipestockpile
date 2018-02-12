@@ -154,8 +154,8 @@ public class RecipeController {
 
 
     @PostMapping("/recipes/delete")
-    public String delete(Model vModel,
-                         @ModelAttribute Recipe recipe) {
+    public String delete(@RequestParam("id") long id) {
+        Recipe recipe = recipeRepository.findOne(id);
         recipeService.deleteRecipe(recipe);
         return "redirect:/";
     }
