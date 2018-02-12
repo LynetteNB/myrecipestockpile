@@ -51,7 +51,7 @@ public class RecipeController {
             }
         }
         vModel.addAttribute("recipes", allRecipes);
-        return "/index";
+        return "/recipes/index";
     }
 
 
@@ -111,7 +111,7 @@ public class RecipeController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         recipe.setUser(usersRepository.findOne(user.getId()));
         if (image.isEmpty()) {
-            recipe.setImageUrl("/images/logo.png");
+            recipe.setImageUrl("/images/default-recipe-img.jpg");
         } else {
             recipe.setImageUrl(image);
         }

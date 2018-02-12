@@ -18,10 +18,10 @@ public interface RecipeRepository extends CrudRepository<Recipe, Long> {
     List<Recipe> findByDescriptionIsLikeAndPrivateRecipeOrTitleIsLikeAndPrivateRecipe(String term, boolean isPrivate1, String term2, boolean isPrivate2);
 
     // To get a list of 6 publicly visible recipes
-    List<Recipe> findFirst6ByPrivateRecipeOrderByDateCreated(boolean isPrivate);
+    List<Recipe> findFirst6ByPrivateRecipeOrderByDateCreatedDesc(boolean isPrivate);
 
     //  Version for Public and Private recipes
-    List<Recipe> findFirst4ByUserOrderByDateCreatedDesc(User user);
+    List<Recipe> findFirst3ByUserOrderByDateCreatedDesc(User user);
     // Users 4 most recent recipes publicly visible.
-    List<Recipe> findFirst4ByUserAndPrivateRecipeOrderByDateCreatedDesc(User user, boolean isPrivate);
+    List<Recipe> findFirst3ByUserAndPrivateRecipeOrderByDateCreatedDesc(User user, boolean isPrivate);
 }

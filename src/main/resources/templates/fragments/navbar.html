@@ -25,9 +25,9 @@
             <li sec:authorize="isAuthenticated()">
                 <a class="nav-link" href="/profile" th:text="${#authentication.principal.username}"></a>
             </li>
-            <li>
-                <a class="nav-link" href="/recipes">See all Recipes</a>
-            </li>
+            <!--<li>-->
+                <!--<a class="nav-link" href="/recipes">See all Recipes</a>-->
+            <!--</li>-->
             <li sec:authorize="!isAuthenticated()">
                 <a class="nav-link" href="/login">Login</a>
             </li>
