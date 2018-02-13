@@ -681,3 +681,8 @@ a {
         transform: translate(2px, -18px) rotate(-25deg);
     }
 }
+
+.goog-te-gadget-simple {
+    background-color: transparent !important;
+    border-style: none !important;
+}
