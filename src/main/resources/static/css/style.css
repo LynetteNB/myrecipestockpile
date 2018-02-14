@@ -708,11 +708,17 @@ a {
         margin-right: 75px;
         padding-top: 50px;
     }
+    .login-page-message {
+        padding-top: 60px;
+    }
     #login {
         margin-left: 46px;
     }
     #register {
         padding-top: 50px;
+    }
+    .register-form {
+        margin-left: 0;
     }
 }
 
