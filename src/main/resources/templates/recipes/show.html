@@ -6,7 +6,7 @@
 <div th:replace="fragments/navbar :: mainNavbar"></div>
 
 <!--Start of Container-->
-<div class="container">
+<div class="container mobile-container">
     <div class="card" id="recipe-page-card">
         <h1 id="recipe_title" class="display-3" th:text="${recipe.title}"></h1>
         <small id="recipe_owner">recipe by <a th:href="@{'/profile/'} + ${recipe.user.username}"><span

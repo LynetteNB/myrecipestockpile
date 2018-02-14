@@ -5,10 +5,10 @@
 
 <div th:replace="fragments/navbar :: mainNavbar"></div>
 
-<div class="container" id="too-small">
+<div class="container mobile-container" id="too-small">
     <div class="row">
         <h1 class="text-center col-12">Edit your Stockpile</h1>
-        <div class="col-12 col-sm-8 offset-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 card">
+        <div class="col-12 col-sm-8 offset-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 card mobile-register-login-and-stockpile-form">
             <div class="row card-body">
                 <form th:action="@{/stockpile/edit}" method="post" th:object="${stockpile}">
                     <div class="col-12">

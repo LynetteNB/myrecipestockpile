@@ -701,24 +701,30 @@ a {
         margin-right: 10px;
         padding-top: 60px;
     }
-    /*.container {*/
-        /*padding-top: 75%;*/
-    /*}*/
+    .mobile-container {
+        padding-top: 70px;
+    }
     #login-card {
-        margin-right: 75px;
+        /*margin-right: 75px;*/
         padding-top: 50px;
     }
     .login-page-message {
         padding-top: 60px;
     }
-    #login {
-        margin-left: 46px;
-    }
+    /*#login {*/
+        /*margin-left: 46px;*/
+    /*}*/
     #register {
         padding-top: 50px;
     }
-    .register-form {
+    .mobile-register-login-and-stockpile-form {
         margin-left: 0;
+    }
+    #error-pic {
+        max-width: 100% !important;
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 5px;
     }
 }
 
