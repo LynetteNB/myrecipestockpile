@@ -7,8 +7,8 @@
 
 <div class="container" id="too-small">
 
-    <h1 class="text-center col-12">Sign Up!</h1>
-    <div class="col-12 col-sm-8 offset-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 card">
+    <h1 class="text-center col-12" id="register">Sign Up!</h1>
+    <div class="col-12 col-sm-8 offset-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 card mobile-register-login-and-stockpile-form">
         <form th:action="@{/sign-up}" method="POST" th:object="${user}">
             <div class="row card-body">
                 <div class="col-12">
@@ -35,7 +35,7 @@
             </div>
         </form>
     </div>
-    <div class="col-12 col-sm-8 offset-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 card">
+    <div class="col-12 col-sm-8 offset-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 card mobile-register-login-and-stockpile-form">
         <div class="card-body">
             <h4 class="text-center">Already A Member?</h4>
             <p class="createAccount"><a href="/login" class="text-center">Go login.</a></p>
